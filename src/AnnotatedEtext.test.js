@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { shallow,mount } from 'enzyme';
 import AnnotatedEtext from './AnnotatedEtext';
-import AnnotatedEtextContainer from '../containers/AnnotatedEtextContainer';
+import AnnotatedEtextContainer from './AnnotatedEtextContainer';
 import { createMockStore } from 'redux-test-utils';
 
 const shallowWithStore = (component, store) => {

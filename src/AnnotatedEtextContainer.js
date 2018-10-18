@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import AnnotatedEtext from '../components/AnnotatedEtext';
+import AnnotatedEtext from './AnnotatedEtext';
 
 //import store from "../index.js";
 
