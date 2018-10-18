@@ -1,0 +1,9 @@
+{
+  "name": "annotated-etext-react",
+  "version": "1.0.0",
+  "description": "React component for annotated Etext",
+  "main": "index.js",
+  "repository": "git@github.com:BuddhistDigitalResourceCenter/annotated-etext-react.git",
+  "author": "berger-n <quai.ledrurollin@gmail.com>",
+  "license": "MIT"
+}
