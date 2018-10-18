@@ -1,6 +1,6 @@
 {
-   "presets": [ "env", "react" ],
+   "presets": [ "env", "react", "stage-0", "es2015" ],
    "plugins": [
-      "transform-flow-strip-types",
+      "transform-flow-strip-types","transform-object-rest-spread"
    ]
 }

@@ -42,9 +42,10 @@ export default class AnnotatedEtext extends Component<Props,State> {
    */
 
    render() {
-      let ret = <div id="annotatedEtext">
-                  {this.props.chunks && this.props.chunks.map(c => (<div>{c.value}</div>))}
-                </div> ;
+      let ret =
+         <div id="annotatedEtext">
+            {this.props.chunks && this.props.chunks.map(c => (<div>{c.value}</div>))}
+         </div> ;
       return ret ;
    }
 }
