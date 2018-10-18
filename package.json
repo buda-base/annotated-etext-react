@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "React component for annotated Etext",
   "main": "index.js",
-  "files": [ "src/*" ],
   "repository": "git@github.com:BuddhistDigitalResourceCenter/annotated-etext-react.git",
   "author": "berger-n <quai.ledrurollin@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "flow-bin": "^0.83.0"
+  }
 }
