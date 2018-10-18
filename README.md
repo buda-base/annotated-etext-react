@@ -1,4 +1,5 @@
 # annotated-etext-react
+
 export code with `babel` before pushing to repo:
 
 ```yarn run babel src/ -d lib```
@@ -6,3 +7,7 @@ export code with `babel` before pushing to repo:
 import into `react` as usual:
 
 ```import AnnotatedEtextContainer from 'annotated-etext-react';```
+
+## Copyright and License
+
+Copyright (c) 2018 Buddhist Digital Resource Center, distributed under the [MIT License](LICENSE).
