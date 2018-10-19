@@ -1,3 +1,4 @@
+//@flow
 import { combineReducers } from 'redux';
 import uiReducer, { UIState } from './ui/reducers';
 import dataReducer, { DataState } from './data/reducers';

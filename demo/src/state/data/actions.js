@@ -4,9 +4,10 @@ import type { Action } from '../actions';
 
 export const TYPES = {};
 
-TYPES.helloWorldData = 'HELLO_WORLD_DATA';
-export const helloWorldData = (): Action => {
+TYPES.gotChunks = 'GOT_CHUNKS';
+export const gotChunks = (res:[]): Action => {
    return {
-      type : TYPES.helloWorldData
+      type : TYPES.gotChunks,
+      payload:res
    }
 }

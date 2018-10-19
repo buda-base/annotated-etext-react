@@ -1,9 +1,10 @@
-
+// @flow
 import { call, put, takeLatest, select, all } from 'redux-saga/effects';
+import {store} from '../../index';
 import { INITIATE_APP } from '../actions';
 import * as dataActions from '../data/actions';
 import * as uiActions from '../ui/actions';
-
+import _ from 'lodash' ;
 
 
 async function initiateApp() {
@@ -13,8 +14,9 @@ async function initiateApp() {
       let text = JSON.parse(await demo.text())
       console.log("demo",text)
 
-      // to be continued...
-      //store.dispatch(dataActions.gotChunks(text))
+      let chunks = text["@graph"].filter(e => e.chunkContents)
+      chunks = _.orderBy(chunks,["seqNum"],["ASC"])
+      store.dispatch(dataActions.gotChunks(chunks))
 
    }
    catch(e) {

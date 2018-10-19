@@ -14,8 +14,6 @@ export const helloWorldUI = (state: UIState, action: Action) => {
 }
 reducers[actions.TYPES.helloWorldUI] = helloWorldUI;
 
-console.log("coucou",createReducer)
-
 // UI Reducer
 const reducer = createReducer(DEFAULT_STATE, reducers);
 export default reducer;
