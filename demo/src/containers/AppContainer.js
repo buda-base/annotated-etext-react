@@ -8,8 +8,8 @@ const mapStateToProps = (state, ownProps) => {
     let props = { ...ownProps }
     let chunks = state.data.chunks
     let IRI = state.data.IRI
-    let loaded = state.data.loaded
-    props = { ...props, chunks, IRI, loaded}
+    let next = state.data.next
+    props = { ...props, chunks, IRI, next}
     return props ;
 }
 

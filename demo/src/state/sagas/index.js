@@ -37,7 +37,7 @@ async function getChunks(iri:string,n:number) {
 
    }
    catch(e) {
-     console.error('getChunks error: %o', e,iri,n);
+     //console.error('getChunks error: %o', e,iri,n);
      store.dispatch(data.noChunk())
    }
 }

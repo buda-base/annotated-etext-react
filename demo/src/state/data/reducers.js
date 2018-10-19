@@ -6,7 +6,6 @@ import * as actions from './actions';
 export type DataState = {
    IRI?:[],
    chunks? : [],
-   loaded?:boolean,
    next:number
 }
 
@@ -22,12 +21,15 @@ export const getChunks = (state: DataState, action: Action) => {
 reducers[actions.TYPES.getChunks] = getChunks;
 
 export const gotChunks = (state: DataState, action: Action) => {
-    return { ...state, IRI:action.meta, chunks:action.payload }
+   let chunks = state.chunks
+   if(chunks) chunks = chunks.concat(action.payload)
+   else chunks = action.payload
+   return { ...state, IRI:action.meta, chunks }
 }
 reducers[actions.TYPES.gotChunks] = gotChunks;
 
 export const noChunk = (state: DataState, action: Action) => {
-    return { ...state, loaded : true }
+   return { ...state, loaded : true }
 }
 reducers[actions.TYPES.noChunk] = noChunk;
 
