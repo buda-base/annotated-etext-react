@@ -1,5 +1,5 @@
 // @flow
-import { createAction } from 'redux-actions';
+//import { createAction } from 'redux-actions';
 import type { Action } from '../actions';
 
 export const TYPES = {};

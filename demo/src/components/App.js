@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import AnnotatedEtextContainer from '../lib/AnnotatedEtextContainer';
+import InfiniteScroll from 'react-infinite-scroller';
 import './App.css';
 
 type Props = {
-   chunks? : []
+   IRI?:string,
+   chunks? : [],
+   onGetChunks : (iri:string,n:number) => void
 }
 
 type State = {
 }
 
-class App extends Component<Props> {
+class App extends Component<Props,State> {
 
    constructor(props:Props)
    {
@@ -24,7 +27,10 @@ class App extends Component<Props> {
 
       return (
          <div className="App">
-            <AnnotatedEtextContainer chunks={chunks} />
+            <InfiniteScroll hasMore={!this.props.loaded} pageStart={0}
+               loadMore={(e) => { if(chunks.length !== this.props.next) this.props.onGetChunks(this.props.IRI,chunks.length) } } >
+                  <AnnotatedEtextContainer chunks={chunks} />
+            </InfiniteScroll>
          </div>
       );
    }

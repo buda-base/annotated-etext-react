@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import AppContainer from './containers/AppContainer';
 import * as serviceWorker from './serviceWorker';
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './state/reducers';
 import {initiateApp} from './state/actions' ;
@@ -50,4 +50,4 @@ ReactDOM.render(
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
-store.dispatch(initiateApp())
+store.dispatch(initiateApp("bdr:UTDEMO_01"))

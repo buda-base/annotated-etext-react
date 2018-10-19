@@ -8,9 +8,10 @@ export type Action = {
 }
 
 export const INITIATE_APP = 'INITIATE_APP';
-export const initiateApp = (): Action => {
+export const initiateApp = (iri:string): Action => {
     return {
-        type: INITIATE_APP
+        type: INITIATE_APP,
+        payload:iri
     }
 }
 
