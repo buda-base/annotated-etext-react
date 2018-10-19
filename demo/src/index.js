@@ -7,6 +7,11 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './state/reducers';
 import {initiateApp} from './state/actions' ;
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from './state/sagas'
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 
 const logger = store => next => action => {
   console.group(action.type)
@@ -17,11 +22,23 @@ const logger = store => next => action => {
   return result
 }
 
-let store;
+const sagaMiddleware = createSagaMiddleware();
+export let store = {} ;
+if (process.env.NODE_ENV !== 'production') {
+   store = createStore(
+      rootReducer,
+      composeWithDevTools(
+         applyMiddleware(thunk,sagaMiddleware,logger)
+      )
+    );
+} else {
     store = createStore(
         rootReducer,
-        applyMiddleware(logger)
+        applyMiddleware(thunk,sagaMiddleware)
     );
+}
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>

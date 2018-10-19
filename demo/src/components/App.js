@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AnnotatedEtextContainer chunks={[{"value":"Hello World"}]} />
+        <AnnotatedEtextContainer chunks={[{"value":"༄༅། །འདུལ་བ་ཀ་བཞུགས་སོ། །"}]} />
       </div>
     );
   }
