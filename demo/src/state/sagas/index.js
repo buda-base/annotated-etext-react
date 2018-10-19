@@ -5,14 +5,14 @@ import { INITIATE_APP } from '../actions';
 import * as data from '../data/actions';
 //import * as uiActions from '../ui/actions';
 import _ from 'lodash' ;
-
+import {demodata} from '../../data/data0';
 
 function initiateApp(iri:string) {
    try {
       store.dispatch(data.getChunks(iri,1))
    }
    catch(e) {
-     console.error('igetChunksnitiateApp error: %o', e);
+     console.error('initiateApp error: %o', e);
    }
 }
 
@@ -26,10 +26,12 @@ export function* watchInitiateApp() {
 async function getChunks(iri:string,n:number) {
 
    try {
-
+      /*
       let demo = await window.fetch("http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+encodeURIComponent(iri)+"&I_SEQ="+n,{ method: "GET" })
       let text = JSON.parse(await demo.text())
-      console.log("demo",text)
+      */
+      let text = demodata[iri][n]
+      console.log("demo",text,iri,n,demodata)
 
       let chunks = text["@graph"].filter(e => e.chunkContents)
       chunks = _.orderBy(chunks,["seqNum"],["ASC"])
