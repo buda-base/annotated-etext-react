@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "React component for annotated Etext",
   "main": "index.js",
-  "files":[ "lib/*", "index.js" ],
+  "files": [
+    "lib/*",
+    "index.js"
+  ],
   "repository": "git@github.com:BuddhistDigitalResourceCenter/annotated-etext-react.git",
   "author": "berger-n <quai.ledrurollin@gmail.com>",
   "license": "MIT",
@@ -12,6 +15,7 @@
     "babel-jest": "^23.6.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "jest-css-modules": "^1.1.0",
+    "rangy": "^1.3.0",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
