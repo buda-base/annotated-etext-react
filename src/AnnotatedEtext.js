@@ -105,6 +105,7 @@ export default class AnnotatedEtext extends Component<Props,State> {
 
       console.log("selec ",startChar,endChar,fromChunk,toChunk,selec)
 
+      selec.collapseToStart()
    }
 
    render() {
