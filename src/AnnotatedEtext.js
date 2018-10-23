@@ -10,6 +10,7 @@ type Props = {
 }
 
 type State = {
+   annotations:[]
 }
 
 export default class AnnotatedEtext extends Component<Props,State> {
@@ -18,7 +19,7 @@ export default class AnnotatedEtext extends Component<Props,State> {
    {
       super(props);
 
-      this.state = {}
+      this.state = { annotations:[] }
    }
    /*
    componentWillMount()
@@ -60,15 +61,21 @@ export default class AnnotatedEtext extends Component<Props,State> {
          let val = endChar
          endChar = startChar
          startChar = val;
+         // fixes issue with start/end when selection from/to is between two rows
+         if(fromChunk.noFrom || toChunk.noTo) endChar -- ;
+
       }
 
-      // TODO fix issue with start/end when selection from/to is between two rows 
+      this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
 
       console.log("selec ",startChar,endChar,fromChunk,toChunk,selec)
 
    }
 
    render() {
+
+      console.log("render",this.props,this.state)
+
       let ret =
          <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) }>
             {this.props.chunks && this.props.chunks.map((c,i) => (
