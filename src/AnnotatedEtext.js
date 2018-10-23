@@ -10,7 +10,9 @@ type Props = {
 }
 
 type State = {
-   annotations:[]
+   annotations:[],
+   chunks?:[],
+   numAnno?:number
 }
 
 export default class AnnotatedEtext extends Component<Props,State> {
@@ -42,8 +44,36 @@ export default class AnnotatedEtext extends Component<Props,State> {
    {
    }
    */
+   static getDerivedStateFromProps(props:Props,state:State)
+   {
+      console.log("getDSfP",props,state)
+      let annoChunks = []
+      if(props.chunks && (!state.chunks || state.annotations.length !== state.numAnno
+                           || props.chunks.length !== state.chunks.length ))
+      {
+         for(let elem of props.chunks)
+         {
+            let chunk = { ...elem }
+            for(let anno of state.annotations)
+            {
+               if((anno.startChar >= chunk.start && anno.startChar <= chunk.end)
+                  ||(anno.endChar >= chunk.start && anno.endChar <= chunk.end)
+                  ||(chunk.start >= anno.startChar && chunk.end <= anno.endChar))
+               {
+                  if(!chunk.annoList) chunk["annoList"] = []
+                  chunk.annoList.push(anno)
+               }
+            }
 
-   onMouseUp(e)
+            annoChunks.push(chunk)
+         }
+         return { ...state, chunks:annoChunks, numAnno:state.annotations.length }
+      }
+      else return { ...state  }
+   }
+
+
+   onMouseUp(e:Event)
    {
       let selec = rangy.getSelection()
 
@@ -63,14 +93,15 @@ export default class AnnotatedEtext extends Component<Props,State> {
          endChar = startChar
          startChar = val;
          // when selection starts after end of row backwards
-         if(Number(toChunk.start) + toChunk.offset == toChunk.end) startChar ++
+         if(toChunk.offset + toChunk.start == toChunk.end) startChar ++
       }
       // when selection starts after end of row
-      else if(Number(fromChunk.start) + fromChunk.offset == fromChunk.end) startChar ++
+      else if(fromChunk.offset + fromChunk.start == fromChunk.end) startChar ++
       // when selection ends between two rows
       if(toChunk.noTo) endChar -- ;
 
-      this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
+      if(startChar !== endChar)
+         this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
 
       console.log("selec ",startChar,endChar,fromChunk,toChunk,selec)
 
@@ -82,8 +113,14 @@ export default class AnnotatedEtext extends Component<Props,State> {
 
       let ret =
          <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) }>
-            {this.props.chunks && this.props.chunks.map((c,i) => (
-               <div key={i} data-seq={c.seq} data-start={c.start} data-end={c.end}>{c.value}</div>
+            {this.state.chunks && this.state.chunks.map((c,i) => (
+               <div>
+                  { c.annoList && c.annoList.map(a => (<div className='anno'>
+                     <span>{c.value.substring(0,a.startChar-c.start)}</span>
+                     <span className="color">{c.value.substring(a.startChar-c.start,a.endChar-c.start)}</span>
+                  </div>) ) }
+                  <div className="text" key={i} data-seq={c.seq} data-start={c.start} data-end={c.end}>{c.value}</div>
+               </div>
             ))}
          </div> ;
       return ret ;

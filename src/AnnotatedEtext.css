@@ -1,3 +1,10 @@
 
-#annotatedEtext { padding:15px;}
-#annotatedEtext div { font-size:25px;line-height:40px;margin:5px 0; text-align:left; }
+#annotatedEtext { padding:15px; font-size:0;}
+#annotatedEtext > div { position:relative; pointer-events:none;}
+#annotatedEtext > div > div { font-size:25px;line-height:45px;margin:5px 0; text-align:left; pointer-events:auto;}
+#annotatedEtext > div > div.text { z-index:1; position:relative; }
+#annotatedEtext > div > div.anno { color:transparent; position:absolute; margin-top:0;pointer-events:none; }
+#annotatedEtext > div > div.anno > span { pointer-events:none; z-index:0; display:inline-block; }
+#annotatedEtext > div > div.anno > span.color { background-color:rgba(128,255,0,0.35); }
+/* #annotatedEtext > div > div.anno:nth-child(2) > span.color { background-color:rgba(0,255,128,0.35); } */
+/* #annotatedEtext > div > div.anno:nth-child(3) > span.color { background-color:rgba(0,128,255,0.35); } */
