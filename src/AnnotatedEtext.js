@@ -61,10 +61,9 @@ export default class AnnotatedEtext extends Component<Props,State> {
          let val = endChar
          endChar = startChar
          startChar = val;
-         // fixes issue with start/end when selection from/to is between two rows
-         if(fromChunk.noFrom || toChunk.noTo) endChar -- ;
-
       }
+      // fixes issue with start/end when selection from/to is between two rows
+      if(fromChunk.noFrom || toChunk.noTo) endChar -- ;
 
       this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
 
