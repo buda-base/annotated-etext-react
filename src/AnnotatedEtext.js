@@ -56,14 +56,19 @@ export default class AnnotatedEtext extends Component<Props,State> {
 
       let startChar = Number(fromChunk.start) + fromChunk.offset
       let endChar = Number(toChunk.start) + toChunk.offset
+
       if(startChar > endChar)
       {
          let val = endChar
          endChar = startChar
          startChar = val;
+         // when selection starts after end of row backwards
+         if(Number(toChunk.start) + toChunk.offset == toChunk.end) startChar ++
       }
-      // fixes issue with start/end when selection from/to is between two rows
-      if(fromChunk.noFrom || toChunk.noTo) endChar -- ;
+      // when selection starts after end of row
+      else if(Number(fromChunk.start) + fromChunk.offset == fromChunk.end) startChar ++
+      // when selection ends between two rows
+      if(toChunk.noTo) endChar -- ;
 
       this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
 
