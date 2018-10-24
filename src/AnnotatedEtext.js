@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import '../src/AnnotatedEtext.css'
 import ReactDOM from 'react-dom';
 import rangy from 'rangy';
+import _ from "lodash" ;
 
 type Props = {
    chunks:[],
@@ -64,6 +65,35 @@ export default class AnnotatedEtext extends Component<Props,State> {
                   chunk.annoList.push(anno)
                }
             }
+            if(chunk.annoList)
+            {
+               let tmp = chunk.annoList.reduce( (acc,e,i) => {
+                  let a = e.startChar
+                  let z = e.endChar
+                  if(a < chunk.start) a = chunk.start
+                  if(z > chunk.end) z = chunk.end
+                  return ([ ...acc, { i, char:a, start:true }, { i, char:z, start:false } ])
+               },[])
+               tmp = _.orderBy(tmp,['char'],['ASC']);
+               console.log(tmp)
+               chunk.pieces = []
+               let nb = 0  // for superposition of annotations
+               let idx = chunk.start // cursor into chunk
+               let nxt = idx  // next start/end of annotation
+               for(let a of tmp)
+               {
+                  nxt = a.char
+                  if(idx != nxt) chunk.pieces.push({nb,start:idx,end:nxt})
+                  if(a.start) nb ++
+                  else nb-- ;
+                  idx = nxt
+               }
+               if(nxt < chunk.end) chunk.pieces.push({nb,start:nxt,end:chunk.end})
+               //console.log(JSON.stringify(chunk.pieces,null,4))
+               chunk.annoList = _.orderBy(chunk.annoList,['char'],['ASC'])
+               //console.log(chunk.annoList)
+
+            }
 
             annoChunks.push(chunk)
          }
@@ -72,38 +102,46 @@ export default class AnnotatedEtext extends Component<Props,State> {
       else return { ...state  }
    }
 
+   getSelectedNode(node:{},offset:number=0)
+   {
+      node = node.parentNode
+      //while(node && node.dataset && node.dataset.seq) { node = node.parentNode ; }
+      let data = {
+         // make numbers addable
+         ...Object.keys(node.dataset).reduce((acc,e) => ({...acc,[e]:Number(node.dataset[e])}), {}),
+         offset
+      }
+      return data ;
+   }
 
-   onMouseUp(e:Event)
+
+   onMouseUp(e:{})
    {
       let selec = rangy.getSelection()
 
-      let fromChunk = selec.anchorNode.parentNode.dataset
-      if(!fromChunk.seq) fromChunk = { ...selec.anchorNode.firstChild.parentNode.dataset, noFrom:true }
-      fromChunk = { ...fromChunk, offset: selec.anchorOffset  }
-      let toChunk = selec.focusNode.parentNode.dataset
-      if(!toChunk.seq) toChunk = { ...selec.focusNode.firstChild.parentNode.dataset, noTo:true}
-      toChunk = { ...toChunk, offset: selec.focusOffset  }
+      console.log("selec",selec,e)
 
-      let startChar = Number(fromChunk.start) + fromChunk.offset
-      let endChar = Number(toChunk.start) + toChunk.offset
-
+      let fromChunk = this.getSelectedNode(selec.anchorNode, selec.anchorOffset)
+      let toChunk = this.getSelectedNode(selec.focusNode, selec.focusOffset)
+      let startChar = fromChunk.offset + fromChunk.start
+      let endChar = toChunk.offset + toChunk.start
       if(startChar > endChar)
       {
          let val = endChar
          endChar = startChar
          startChar = val;
          // when selection starts after end of row backwards
-         if(toChunk.offset + toChunk.start == toChunk.end) startChar ++
+         //if(toChunk.offset + toChunk.start == toChunk.end) startChar ++
       }
       // when selection starts after end of row
-      else if(fromChunk.offset + fromChunk.start == fromChunk.end) startChar ++
+      //else if(fromChunk.offset + fromChunk.start == fromChunk.end) startChar ++
       // when selection ends between two rows
-      if(toChunk.noTo) endChar -- ;
+      //if(toChunk.noTo) endChar -- ;
 
-      if(startChar !== endChar)
+      if(!isNaN(startChar) && !isNaN(endChar) && startChar !== endChar)
          this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
 
-      console.log("selec ",startChar,endChar,fromChunk,toChunk,selec)
+      console.log("selec ",startChar,endChar,fromChunk,toChunk,selec,e)
 
       selec.collapseToStart()
    }
@@ -115,12 +153,14 @@ export default class AnnotatedEtext extends Component<Props,State> {
       let ret =
          <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) }>
             {this.state.chunks && this.state.chunks.map((c,i) => (
-               <div>
-                  { c.annoList && c.annoList.map(a => (<div className='anno'>
-                     <span>{c.value.substring(0,a.startChar-c.start)}</span>
-                     <span className="color">{c.value.substring(a.startChar-c.start,a.endChar-c.start)}</span>
-                  </div>) ) }
-                  <div className="text" key={i} data-seq={c.seq} data-start={c.start} data-end={c.end}>{c.value}</div>
+               <div key={i} >
+                  <div className="text" data-seq={c.seq} data-start={c.start} data-end={c.end}>
+                     {!c.pieces && c.value}
+                     {c.pieces && c.pieces.map( (a,j) =>
+                        (<span { ...(a.nb > 0 ? {onClick:function(e){alert(a.nb+" annotation"+(a.nb > 1?"s":"")+" here")} } :{})  } className={a.nb > 0 ? "anno":""} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
+                           style={ { backgroundColor:"rgba(128,255,0,"+0.35*a.nb+")" } }>{c.value.substring(a.start-c.start,a.end-c.start)}
+                        </span>))}
+                  </div>
                </div>
             ))}
          </div> ;
