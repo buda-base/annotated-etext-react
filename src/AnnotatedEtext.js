@@ -104,8 +104,11 @@ export default class AnnotatedEtext extends Component<Props,State> {
 
    getSelectedNode(node:{},offset:number=0)
    {
-      node = node.parentNode
-      //while(node && node.dataset && node.dataset.seq) { node = node.parentNode ; }
+      while(node && (!node.dataset || !node.dataset.seq))
+      {
+        node = node.parentNode ;
+        console.log("node",node,node.dataset,!node.dataset,!node.dataset.seq)
+      }
       let data = {
          // make numbers addable
          ...Object.keys(node.dataset).reduce((acc,e) => ({...acc,[e]:Number(node.dataset[e])}), {}),
@@ -130,13 +133,7 @@ export default class AnnotatedEtext extends Component<Props,State> {
          let val = endChar
          endChar = startChar
          startChar = val;
-         // when selection starts after end of row backwards
-         //if(toChunk.offset + toChunk.start == toChunk.end) startChar ++
       }
-      // when selection starts after end of row
-      //else if(fromChunk.offset + fromChunk.start == fromChunk.end) startChar ++
-      // when selection ends between two rows
-      //if(toChunk.noTo) endChar -- ;
 
       if(!isNaN(startChar) && !isNaN(endChar) && startChar !== endChar)
          this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
