@@ -157,7 +157,7 @@ export default class AnnotatedEtext extends Component<Props,State> {
                   <div className="text" data-seq={c.seq} data-start={c.start} data-end={c.end}>
                      {!c.pieces && c.value}
                      {c.pieces && c.pieces.map( (a,j) =>
-                        (<span { ...(a.nb > 0 ? {onClick:function(e){alert(a.nb+" annotation"+(a.nb > 1?"s":"")+" here")} } :{})  } className={a.nb > 0 ? "anno":""} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
+                        (<span { ...(a.nb > 0 ? {onClick:function(e){alert(a.nb+" annotation"+(a.nb > 1?"s":"")+" here")} } :{})  } className={a.nb > 0 ? "annotated":""} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
                            style={ { backgroundColor:"rgba(128,255,0,"+0.35*a.nb+")" } }>{c.value.substring(a.start-c.start,a.end-c.start)}
                         </span>))}
                   </div>

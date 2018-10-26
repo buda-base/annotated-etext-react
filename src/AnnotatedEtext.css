@@ -4,4 +4,4 @@
 #annotatedEtext > div > div { font-size:25px;line-height:45px;margin:5px 0; text-align:left; pointer-events:auto;}
 #annotatedEtext > div > div.text { z-index:1; position:relative; }
 #annotatedEtext > div > div.text > span { display:inline-block; }
-#annotatedEtext > div > div.text > span.anno { cursor:pointer; }
+#annotatedEtext > div > div.text > span.annotated { cursor:pointer; }
