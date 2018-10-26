@@ -83,12 +83,13 @@ export default class AnnotatedEtext extends Component<Props,State> {
                for(let a of tmp)
                {
                   nxt = a.char
+                  if(nxt >= chunk.end) nxt ++ ; 
                   if(idx != nxt) chunk.pieces.push({nb,start:idx,end:nxt})
                   if(a.start) nb ++
                   else nb-- ;
                   idx = nxt
                }
-               if(nxt < chunk.end) chunk.pieces.push({nb,start:nxt,end:chunk.end})
+               if(nxt < chunk.end) chunk.pieces.push({nb,start:nxt,end:chunk.end+1})
                //console.log(JSON.stringify(chunk.pieces,null,4))
                chunk.annoList = _.orderBy(chunk.annoList,['char'],['ASC'])
                //console.log(chunk.annoList)
