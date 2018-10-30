@@ -1,6 +1,6 @@
 
 #annotatedEtext { padding:15px; font-size:0;}
-#annotatedEtext > div { position:relative; white-space:pre; }
+#annotatedEtext > div { position:relative; white-space:pre-wrap; }
 #annotatedEtext > div > div { font-size:25px;line-height:45px;margin:5px 0; text-align:left; pointer-events:auto;}
 #annotatedEtext > div > div.text { z-index:1; position:relative; }
 #annotatedEtext > div > div.text > span { display:inline-block; }
