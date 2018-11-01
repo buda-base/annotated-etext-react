@@ -8,8 +8,10 @@
     "index.js"
   ],
   "scripts": {
-    "build": "babel src -d lib",
-    "test": "jest"
+    "build": "flow && babel src -d lib",
+    "test": "flow && jest",
+    "flow": "flow",
+    "postinstall": "flow-typed install"
   },
   "repository": "git@github.com:BuddhistDigitalResourceCenter/annotated-etext-react.git",
   "author": "berger-n <quai.ledrurollin@gmail.com>",
@@ -53,6 +55,7 @@
     "enzyme-adapter-react-16": "^1.6.0",
     "enzyme-to-json": "^3.3.4",
     "flow-bin": "^0.83.0",
+    "flow-typed": "^2.5.1",
     "jest": "^23.6.0",
     "jest-css-modules": "^1.1.0"
   },
@@ -64,9 +67,6 @@
     "transform": {
       "^.+\\.css$": "<rootDir>/node_modules/jest-css-modules",
       "^.+\\.js$": "babel-jest"
-    },
-    "setupFiles": [
-      "./setup_jest.js"
-    ]
+    }
   }
 }
