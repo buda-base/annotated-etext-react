@@ -34,7 +34,7 @@ Transform Flow code to JavaScript before pushing to git: `yarn build`.
 #### Tests
 
 ```
-ỳarn test
+yarn test
 ```
 
 ## Copyright and License

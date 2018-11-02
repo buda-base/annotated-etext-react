@@ -3,12 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import AnnotatedEtext from './AnnotatedEtext';
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state: Object, ownProps: Object) => {
     let props = { ...ownProps }
     return props ;
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: *) => {
     return {
     }
 };
