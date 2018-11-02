@@ -1,6 +1,8 @@
 //@flow
 
-const mockfetchdata: Object = {
+import nock from 'nock';
+
+const mockdata: Object = {
     "http://api.bdrc.io/annotations/collectionService": {
         "@context": "http://purl.bdrc.io/ontology/ext/annservice/context.json",
         "@id": "http://api.bdrc.io/annotations/collectionService",
@@ -71,4 +73,12 @@ const mockfetchdata: Object = {
 
 }
 
-export default mockfetchdata;
+export default mockdata;
+
+export function nock_data_once(domain: string, path: string, query: string): void {
+    let n = nock(domain)
+        .post(path, query)
+        .reply(200, function(uri: string, requestBody: string) {
+            return mockdata.uri;
+        });
+}

@@ -3,14 +3,16 @@
 import CollectionService from './CollectionService';
 import type {CollectionInfo, URL} from './AnnotationTypes';
 
-import fetchmock from './fetchmock';
- 
+import mockdata, {nock_data_once} from './mockdata';
+
 describe('testing collection service', () => {
  
   it('calls service and return collections for a resource', async () => {
+
+    nock_data_once("http://api.bdrc.io", "/annotations/collectionSearch", "?res=bdr:UTDEMO_01");
  
     const res: string = "bdr:UTDEMO_01";
-    const serviceUrl: string = "http://api.bdrc.io/annotations/collectionSearch?res=bdr:UTDEMO_01";
+    const serviceUrl: string = "http://api.bdrc.io/annotations/collectionSearch";
 
     const service: CollectionService = new CollectionService(serviceUrl);
 

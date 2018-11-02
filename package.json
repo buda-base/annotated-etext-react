@@ -9,9 +9,10 @@
   ],
   "scripts": {
     "build": "flow && babel src -d lib",
-    "test": "flow && jest",
+    "test": "flow && babel src -d lib && jest",
     "flow": "flow",
-    "postinstall": "flow-typed install"
+    "postinstall": "flow-typed install -s",
+    "precommit": "flow && babel src -d lib && jest"
   },
   "repository": "git@github.com:BuddhistDigitalResourceCenter/annotated-etext-react.git",
   "author": "berger-n <quai.ledrurollin@gmail.com>",
@@ -57,7 +58,9 @@
     "flow-bin": "^0.83.0",
     "flow-typed": "^2.5.1",
     "jest": "^23.6.0",
-    "jest-css-modules": "^1.1.0"
+    "jest-css-modules": "^1.1.0",
+    "nock": "^10.0.1",
+    "whatwg-fetch": "^3.0.0"
   },
   "jest": {
     "testPathIgnorePatterns": [
@@ -67,6 +70,7 @@
     "transform": {
       "^.+\\.css$": "<rootDir>/node_modules/jest-css-modules",
       "^.+\\.js$": "babel-jest"
-    }
+    },
+    "setupFiles": ["<rootDir>setup_jest.js"]
   }
 }
