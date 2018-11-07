@@ -5,7 +5,6 @@ import Enzyme,{ shallow,mount } from 'enzyme';
 import AnnotatedEtext from './AnnotatedEtext';
 import AnnotatedEtextContainer from './AnnotatedEtextContainer';
 import { createMockStore } from 'redux-test-utils';
-import 'babel-polyfill';
 import Adapter from 'enzyme-adapter-react-16'
 
 Enzyme.configure({ adapter: new Adapter() })

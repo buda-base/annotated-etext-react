@@ -1,6 +1,6 @@
 {
-   "presets": [ "env", "react", "stage-0", "es2015" ],
+   "presets": [ "@babel/preset-env", "@babel/preset-react", "@babel/preset-flow" ],
    "plugins": [
-      "transform-flow-strip-types","transform-object-rest-spread"
+      "@babel/plugin-proposal-class-properties","@babel/plugin-proposal-object-rest-spread"
    ]
 }

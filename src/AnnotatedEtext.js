@@ -11,8 +11,8 @@ type Props = {
 }
 
 type State = {
-   annotations:[],
-   chunks?:[],
+   annotations: Array<Object>,
+   chunks?:Array<Object>,
    numAnno?:number
 }
 
@@ -22,7 +22,7 @@ export default class AnnotatedEtext extends Component<Props,State> {
    {
       super(props);
 
-      this.state = { annotations:[] }
+      this.state = { annotations: [] }
    }
    /*
    componentWillMount()
