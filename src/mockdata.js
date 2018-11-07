@@ -7,7 +7,8 @@ const mockdata: Object = {
         "@context": "http://purl.bdrc.io/ontology/ext/annservice/context.json",
         "@id": "http://api.bdrc.io/annotations/collectionService",
         "profile": "http://purl.bdrc.io/ontology/ext/annservice/collectionService",
-        "label": "BDRC Simple Web Annotation Service",
+        "label": "BDRC Annotations",
+        "comment": "BDRC Simple Web Annotation Service",
         "service": [
           {
             "@id": "http://api.bdrc.io/annotations/create",
@@ -28,14 +29,20 @@ const mockdata: Object = {
         {
           "collection": {
             "@id": "bdac:ANCUTDEMO_NER001",
+            "@type": ["bdo:AnnotationLayer", "AnnotationCollection"],
             "label": {
               "@value": "NER annotations for bdr:UTDEMO_01",
               "@language": "en"
             },
             "layerType": "bdr:LayerNER",
-            "layerForResource": "bdr:UTDEMO_01"
+            "layerForResource": "bdr:UTDEMO_01",
+            "total": 5
           },
-          "services": [
+          "hints": {
+            "access_hint": "read-only",
+            "preselect": true
+          },
+          "service": [
             {
               "@context": "http://iiif.io/api/search/1/context.json",
               "@id": "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/",
@@ -75,10 +82,17 @@ const mockdata: Object = {
 
 export default mockdata;
 
-export function nock_data_once(domain: string, path: string, query: string): void {
+export function nock_data(domain: string, path: string, query: Object): void {
     let n = nock(domain)
-        .post(path, query)
-        .reply(200, function(uri: string, requestBody: string) {
-            return mockdata.uri;
+        .persist()
+        .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+        //.log(console.log)
+        .get(path)
+        .query(query)
+        .reply(200, function(path: string, requestBody: string) {
+            const uri: string = domain+path;
+            //console.log(uri);
+            //console.log(mockdata[uri]);
+            return mockdata[uri];
         });
 }

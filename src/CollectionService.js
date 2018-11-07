@@ -23,5 +23,4 @@ export default class CollectionService implements CollectionServiceInterface {
         const res: Array<CollectionInfo> = await this._getCollectionInfo(resp);
         return res;
     }
-
 }
