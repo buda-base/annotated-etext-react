@@ -83,7 +83,7 @@ export default class AnnotatedEtext extends Component<Props,State> {
                for(let a of tmp)
                {
                   nxt = a.char
-                  if(nxt >= chunk.end) nxt ++ ; 
+                  if(nxt >= chunk.end) nxt ++ ;
                   if(idx != nxt) chunk.pieces.push({nb,start:idx,end:nxt})
                   if(a.start) nb ++
                   else nb-- ;
@@ -121,6 +121,8 @@ export default class AnnotatedEtext extends Component<Props,State> {
 
    onMouseUp(e:{})
    {
+      if(this.props.dontSelect) return
+
       let selec = rangy.getSelection()
 
       console.log("selec",selec,e)
