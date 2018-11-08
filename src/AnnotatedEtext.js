@@ -110,7 +110,9 @@ export default class AnnotatedEtext extends Component<Props,State> {
         node = node.parentNode ;
         console.log("node",node,node.dataset,!node.dataset,!node.dataset.seq)
       }
-      let data = {
+
+      let data ;
+      if(node) data = {
          // make numbers addable
          ...Object.keys(node.dataset).reduce((acc,e) => ({...acc,[e]:Number(node.dataset[e])}), {}),
          offset
@@ -123,27 +125,40 @@ export default class AnnotatedEtext extends Component<Props,State> {
    {
       if(this.props.dontSelect) return
 
-      let selec = rangy.getSelection()
+      try {
 
-      console.log("selec",selec,e)
+         let selec = rangy.getSelection()
 
-      let fromChunk = this.getSelectedNode(selec.anchorNode, selec.anchorOffset)
-      let toChunk = this.getSelectedNode(selec.focusNode, selec.focusOffset)
-      let startChar = fromChunk.offset + fromChunk.start
-      let endChar = toChunk.offset + toChunk.start
-      if(startChar > endChar)
-      {
-         let val = endChar
-         endChar = startChar
-         startChar = val;
+         console.log("selec",selec,e)
+
+         let fromChunk = this.getSelectedNode(selec.anchorNode, selec.anchorOffset)
+         let toChunk = this.getSelectedNode(selec.focusNode, selec.focusOffset)
+         if(fromChunk && toChunk)
+         {
+            let startChar = fromChunk.offset + fromChunk.start
+            let endChar = toChunk.offset + toChunk.start
+            if(startChar > endChar)
+            {
+               let val = endChar
+               endChar = startChar
+               startChar = val;
+            }
+
+            if(!isNaN(startChar) && !isNaN(endChar) && startChar !== endChar)
+               this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
+
+            console.log("selec ",startChar,endChar,fromChunk,toChunk,selec,e)
+         }
+         else {
+            console.log("no chunk selec",fromChunk,toChunk)
+         }
+
+         selec.collapseToStart()
       }
-
-      if(!isNaN(startChar) && !isNaN(endChar) && startChar !== endChar)
-         this.setState({ ...this.state, annotations:[...this.state.annotations, { startChar, endChar } ]})
-
-      console.log("selec ",startChar,endChar,fromChunk,toChunk,selec,e)
-
-      selec.collapseToStart()
+      catch(e)
+      {
+         console.error("selec error",e)
+      }
    }
 
    render() {

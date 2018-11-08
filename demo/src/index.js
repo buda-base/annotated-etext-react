@@ -44,4 +44,4 @@ ReactDOM.render(
     <AppContainer />
   </Provider>, document.getElementById('root'));
 
-store.dispatch(initiateApp("bdr:UT1KG6155_I1KG8423_0000")) //"bdr:UTDEMO_01"))
+store.dispatch(initiateApp("bdr:UTDEMO_01"))

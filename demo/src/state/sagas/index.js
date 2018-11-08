@@ -5,7 +5,7 @@ import { INITIATE_APP } from '../actions';
 import * as data from '../data/actions';
 //import * as uiActions from '../ui/actions';
 import _ from 'lodash' ;
-import {demodata} from '../../data/data1';
+import {demodata} from '../../data/data0';
 
 function initiateApp(iri:string) {
    try {
