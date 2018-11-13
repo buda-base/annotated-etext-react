@@ -29,7 +29,8 @@ describe('AnnotatedEtext tests', () => {
       const store = createMockStore(testState)
       const component = shallowWithStore(<AnnotatedEtextContainer />, store);
       expect(typeof component).toBe('object')
-      console.log(component.debug())
+
+      //console.log(component.debug())
    });
 
    it('testing etext mocking', async () => {
@@ -39,7 +40,9 @@ describe('AnnotatedEtext tests', () => {
       const data:Response = await fetch("http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES=bdr:UTDEMO_01&I_SEQ=1")
       const chunks:Object = await data.json()
 
-      console.log(JSON.stringify(chunks,null,3))
+      expect(chunks["@graph"].filter(e => e["seqNum"]).length).toEqual(10);
+      expect(chunks["@graph"].filter(e => e["@id"] === "bdr:UTDEMO_01")[0]["eTextHasChunk"].length).toEqual(10);
+      //console.log(JSON.stringify(chunks,null,3))
    })
 
 

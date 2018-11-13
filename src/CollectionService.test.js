@@ -20,6 +20,6 @@ describe('testing collection service', () => {
 
     expect(collections.length).toEqual(1);
 
-    console.log(JSON.stringify(collections,null,3))
+    //console.log(JSON.stringify(collections,null,3))
   })
 })

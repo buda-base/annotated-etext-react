@@ -389,13 +389,13 @@ export function nock_data(domain: string, path: string, query: Object): void {
     let n = nock(domain)
         .persist()
         .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-        .log(console.log)
+        //.log(console.log)
         .get(path)
         .query(query)
         .reply(200, function(path: string, requestBody: string) {
             const uri: string = domain+path;
-            console.log(uri);
-            console.log(mockdata[uri]);
+            //console.log(uri);
+            //console.log(mockdata[uri]);
             return mockdata[uri];
         });
 }

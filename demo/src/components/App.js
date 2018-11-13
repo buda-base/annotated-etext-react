@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import AnnotatedEtextContainer from '../lib/AnnotatedEtextContainer';
 import InfiniteScroll from 'react-infinite-scroller';
+import LayerSelectorContainer from '../lib/LayerSelectorContainer';
 import './App.css';
 
 type Props = {
@@ -40,6 +41,7 @@ class App extends Component<Props,State> {
 
       return (
          <div className="App">
+            <LayerSelectorContainer />
             <InfiniteScroll hasMore={this.props.IRI && chunks.length !== this.props.next } pageStart={0}
                  loadMore={(e) => { this.props.onGetChunks(this.props.IRI,chunks.length) } } >
                   <AnnotatedEtextContainer dontSelect={false} chunks={chunks} annoCollec={annoCollec}/>
