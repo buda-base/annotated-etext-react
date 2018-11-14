@@ -58,8 +58,7 @@
     "flow-typed": "^2.5.1",
     "jest": "^23.6.0",
     "jest-css-modules": "^1.1.0",
-    "nock": "^10.0.1",
-    "whatwg-fetch": "^3.0.0"
+    "nock": "^10.0.1"
   },
   "jest": {
     "testPathIgnorePatterns": [
@@ -70,6 +69,8 @@
       "^.+\\.css$": "<rootDir>/node_modules/jest-css-modules",
       "^.+\\.js$": "babel-jest"
     },
-    "setupFiles": ["<rootDir>setup_jest.js"]
+    "setupFiles": [
+      "<rootDir>setup_jest.js"
+    ]
   }
 }

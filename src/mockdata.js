@@ -394,8 +394,10 @@ export function nock_data(domain: string, path: string, query: Object): void {
         .query(query)
         .reply(200, function(path: string, requestBody: string) {
             const uri: string = domain+path;
-            //console.log(uri);
+            //console.log("nock",uri);
             //console.log(mockdata[uri]);
             return mockdata[uri];
         });
+
+   //console.log(n);
 }
