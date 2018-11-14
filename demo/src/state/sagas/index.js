@@ -27,12 +27,12 @@ async function getChunks(iri:string,n:number) {
 
    try {
 
-      //let demo = await fetch("http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+iri+"&I_SEQ="+n,{ method: "GET" })
-      //let text = JSON.parse(await demo.text())
+      let demo = await fetch("http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+iri+"&I_SEQ="+n,{ method: "GET" })      
+      let text = JSON.parse(await demo.text())
 
       //let text = demodata[iri][n]
 
-      let text = mockdata["http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+iri+"&I_SEQ="+n]
+      //let text = mockdata["http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+iri+"&I_SEQ="+n]
 
       console.log("demo",text,iri,n,mockdata)
 

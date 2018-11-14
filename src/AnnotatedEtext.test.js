@@ -9,7 +9,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import CollectionService from './CollectionService';
 import type {CollectionInfo, URL} from './AnnotationTypes';
 
-import {nock_data} from './mockdata';
+import {mock_data} from './mockdata';
 
 Enzyme.configure({ adapter: new Adapter() })
 
@@ -35,14 +35,14 @@ describe('AnnotatedEtext tests', () => {
 
    it('testing etext mocking', async () => {
 
-      nock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 10, R_RES: "bdr:UTDEMO_01", I_SEQ: 1 })
+      mock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 10, R_RES: "bdr:UTDEMO_01", I_SEQ: 1 })
 
       const data:Response = await fetch("http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES=bdr:UTDEMO_01&I_SEQ=1")
       const chunks:Object = await data.json()
 
       expect(chunks["@graph"].filter(e => e["seqNum"]).length).toEqual(10);
       expect(chunks["@graph"].filter(e => e["@id"] === "bdr:UTDEMO_01")[0]["eTextHasChunk"].length).toEqual(10);
-      //console.log(JSON.stringify(chunks,null,3))
+      console.log(JSON.stringify(chunks,null,3))
    })
 
 

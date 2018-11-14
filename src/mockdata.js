@@ -1,6 +1,6 @@
 //@flow
-
-import nock from 'nock';
+import nock from 'nock' ;
+import fetchMock from "fetch-mock"
 
 const mockdata: Object = {
     "http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES=bdr:UTDEMO_01&I_SEQ=1":
@@ -124,6 +124,104 @@ const mockdata: Object = {
      ],
       "@context": "http://purl.bdrc.io/context.jsonld"
    },
+   "http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES=bdr:UTDEMO_01&I_SEQ=11":{
+     "@graph": [
+       {
+         "@id": "_:b0",
+         "chunkContents": {
+           "@language": "bo",
+           "@value": "རེས་འགའ་ནི་ཨང་གའི་རྒྱལ་པོ་དཔུང་དང་མཐུ་ཆེ་བ་ཡིན་ལ། རེས་འགའ་ནི་རྒྱལ་པོ་པད་མ་ཆེན་པོ་དཔུང་དང་མཐུ་ཆེ་བ་ཡིན་ནོ། །"
+         },
+         "seqNum": 14,
+         "sliceEndChar": 1416,
+         "sliceStartChar": 1310
+       },
+       {
+         "@id": "_:b1",
+         "chunkContents": {
+           "@language": "bo",
+           "@value": "གླང་པོ་ཆེ་པའི་ཚོགས་དང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་ཚོགས་དང་། དཔུང་བུ་ཆུང་གི་ཚོགས་གོ་བསྐོན་ཏེ།"
+         },
+         "seqNum": 18,
+         "sliceEndChar": 1847,
+         "sliceStartChar": 1753
+       },
+       {
+         "@id": "_:b2",
+         "chunkContents": {
+           "@language": "bo",
+           "@value": "དཔུང་བུ་ཆུང་གི་ཚོགས་གོ་བསྐོན་ཏེ། ཡུལ་མ་ག་དྷཱ་རྒྱལ་པོའི་ཁབ་མ་གཏོགས་པ་བཅོམ་ནས་ཕྱིར་ལྡོག་པར་བྱེད་དོ། །"
+         },
+         "seqNum": 16,
+         "sliceEndChar": 1660,
+         "sliceStartChar": 1561
+       },
+       {
+         "@id": "_:b3",
+         "chunkContents": {
+           "@language": "bo",
+           "@value": "རྒྱལ་སྲིད་འབྱོར་པ་རྒྱས་པ་བདེ་བ་ལོ་ལེགས་པ་སྐྱེ་བོ་དང་མི་མང་པོས་གང་བ་བྱེད་དུ་བཅུག་གོ། །"
+         },
+         "seqNum": 13,
+         "sliceEndChar": 1309,
+         "sliceStartChar": 1224
+       },
+       {
+         "@id": "_:b4",
+         "chunkContents": {
+           "@language": "bo",
+           "@value": "གང་གི་ཚེ་ཨང་གའི་རྒྱལ་པོ་དཔུང་དང་མཐུ་ཆེ་བ་དེའི་ཚེ་ན། དེས་དཔུང་གི་ཚོགས་ཡན་ལག་བཞི་པ། གླང་པོ་ཆེ་པའི་ཚོགས་དང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་ཚོགས་དང་། "
+         },
+         "seqNum": 15,
+         "sliceEndChar": 1560,
+         "sliceStartChar": 1417
+       },
+       {
+         "@id": "_:b6",
+         "chunkContents": {
+           "@language": "bo",
+           "@value": "རྒྱས་པ་བདེ་བ་ལོ་ལེགས་པ་སྐྱེ་བོ་དང་མི་མང་པོས་གང་བ་བྱེད་དུ་བཅུག་གོ། །"
+         },
+         "seqNum": 11,
+         "sliceEndChar": 1171,
+         "sliceStartChar": 1105
+       },
+       {
+         "@id": "_:b7",
+         "chunkContents": {
+           "@language": "bo",
+           "@value": "ཡུལ་མ་ག་དྷཱ་དག་ན་ཡང་རྒྱལ་པོ་པད་མ་ཆེན་པོ་ཞེས་བྱ་བས། "
+         },
+         "seqNum": 12,
+         "sliceEndChar": 1223,
+         "sliceStartChar": 1172
+       },
+       {
+         "@id": "_:b8",
+         "chunkContents": {
+           "@language": "bo",
+           "@value": "གང་གི་ཚེ་རྒྱལ་པོ་པད་མ་ཆེན་པོ་དཔུང་དང་མཐུ་ཆེ་བ་དེའི་ཚེ་ན། དེས་ཀྱང་དཔུང་གི་ཚོགས་ཡན་ལག་བཞི་པ། "
+         },
+         "seqNum": 17,
+         "sliceEndChar": 1752,
+         "sliceStartChar": 1661
+       },
+       {
+         "@id": "bdr:UTDEMO_01",
+         "eTextHasChunk": [
+           "_:b1",
+           "_:b0",
+           "_:b7",
+           "_:b4",
+           "_:b2",
+           "_:b8",
+           "_:b3",
+           "_:b6"
+         ]
+       }
+     ],
+     "@context": "http://purl.bdrc.io/context.jsonld"
+   },
     "http://api.bdrc.io/annotations/collectionService": {
         "@context": "http://purl.bdrc.io/ontology/ext/annservice/context.json",
         "@id": "http://api.bdrc.io/annotations/collectionService",
@@ -142,7 +240,7 @@ const mockdata: Object = {
           }
         ]
     },
-    "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1000": {
+   "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1000": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1000",
       "type" : "AnnotationPage",
@@ -386,10 +484,11 @@ const mockdata: Object = {
 export default mockdata;
 
 export function nock_data(domain: string, path: string, query: Object): void {
+
     let n = nock(domain)
         .persist()
         .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-        //.log(console.log)
+        .log(console.log)
         .get(path)
         .query(query)
         .reply(200, function(path: string, requestBody: string) {
@@ -397,7 +496,17 @@ export function nock_data(domain: string, path: string, query: Object): void {
             //console.log("nock",uri);
             //console.log(mockdata[uri]);
             return mockdata[uri];
-        });
+        })
 
-   //console.log(n);
+}
+
+
+export function mock_data(domain: string, path: string, query: Object): void {
+
+   const uri = domain+path+Object.keys(query).reduce((acc,k,i) => acc+(i==0?"?":"&")+k+"="+query[k],"")
+
+   console.log("uri",uri)
+
+   fetchMock.get(uri, function() { return mockdata[uri] })
+
 }

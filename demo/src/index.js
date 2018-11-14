@@ -10,11 +10,11 @@ import createSagaMiddleware from 'redux-saga';
 import rootSaga from './state/sagas'
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import {nock_data} from './lib/mockdata';
+import {mock_data} from './lib/mockdata';
 
-nock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 10, R_RES: "bdr:UTDEMO_01", I_SEQ: 1 })
-//nock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 10, R_RES: "bdr:UTDEMO_01", I_SEQ: 10 })
-
+mock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 10, R_RES: "bdr:UTDEMO_01", I_SEQ: 1 })
+mock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 10, R_RES: "bdr:UTDEMO_01", I_SEQ: 11 })
+//mock_data("http://api.bdrc.io", "/annotations/collectionSearch", {res: "bdr:UTDEMO_01"});
 
 const logger = store => next => action => {
   console.group(action.type)

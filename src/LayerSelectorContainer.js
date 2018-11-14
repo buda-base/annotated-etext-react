@@ -31,7 +31,10 @@ class LayerSelector extends React.Component<LayerSelectorProps, ServiceState> {
   }
 
   render() {
-        const res = <div><h3>Annotation layer selector</h3> {this.props.services && this.props.services.map((service) => (<LayerServiceListContainer />))}</div>;
+        const res =
+         <div><h3>Annotation layer selector</h3>
+            {this.props.services && this.props.services.map((service) => (<LayerServiceListContainer IRI={this.props.IRI}/>))}
+         </div>;
         return res;
   };
 }
