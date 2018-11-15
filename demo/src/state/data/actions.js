@@ -4,6 +4,14 @@ import type { Action } from '../actions';
 
 export const TYPES = {};
 
+TYPES.addedService = 'ADDED_SERVICE';
+export const addedService = (service:{}): Action => {
+   return {
+      type : TYPES.addedService,
+      payload:service
+   }
+}
+
 TYPES.getChunks = 'GET_CHUNKS';
 export const getChunks = (iri:string,n:number): Action => {
    return {

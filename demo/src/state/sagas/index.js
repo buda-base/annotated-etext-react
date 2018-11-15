@@ -3,31 +3,38 @@ import { takeLatest, all } from 'redux-saga/effects';
 import {store} from '../../index';
 import { INITIATE_APP } from '../actions';
 import * as data from '../data/actions';
+import * as anno from '../../lib/Layer/actions' ;
 //import * as uiActions from '../ui/actions';
 import _ from 'lodash' ;
 import mockdata from '../../lib/mockdata';
+import {URL} from '../../lib/AnnotationTypes';
+import CollectionService from "../../lib/CollectionService"
 
 function initiateApp(iri:string) {
    try {
+
       store.dispatch(data.getChunks(iri,1))
+
    }
    catch(e) {
      console.error('initiateApp error: %o', e);
    }
 }
 
-export function* watchInitiateApp() {
-   yield takeLatest(
-      INITIATE_APP,
-      (action) => initiateApp(action.payload)
-   );
+
+async function addService(url:URL) {
+   console.log("aS",url)
+
+   const service: CollectionService = new CollectionService(url);
+
+   store.dispatch(data.addedService(service))
 }
 
 async function getChunks(iri:string,n:number) {
 
    try {
 
-      let demo = await fetch("http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+iri+"&I_SEQ="+n,{ method: "GET" })      
+      let demo = await fetch("http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+iri+"&I_SEQ="+n,{ method: "GET" })
       let text = JSON.parse(await demo.text())
 
       //let text = demodata[iri][n]
@@ -47,10 +54,26 @@ async function getChunks(iri:string,n:number) {
    }
 }
 
+// --------------------------------------------------------
+
+export function* watchInitiateApp() {
+   yield takeLatest(
+      INITIATE_APP,
+      (action) => initiateApp(action.payload)
+   );
+}
+
 export function* watchGetChunks() {
    yield takeLatest(
       data.TYPES.getChunks,
       (action) => getChunks(action.payload,action.meta)
+   );
+}
+
+export function* watchAddService() {
+   yield takeLatest(
+      anno.ADD_SERVICE,
+      (action) => addService(action.serviceUrl)
    );
 }
 
@@ -60,6 +83,7 @@ export function* watchGetChunks() {
 export default function* rootSaga() {
    yield all([
       watchGetChunks(),
+      watchAddService(),
       watchInitiateApp()
    ])
 }

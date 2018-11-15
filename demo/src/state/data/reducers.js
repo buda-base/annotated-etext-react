@@ -2,11 +2,13 @@
 import type { Action } from '../actions';
 import { createReducer } from '../actions';
 import * as actions from './actions';
+import * as anno from '../../lib/Layer/actions';
 
 export type DataState = {
    IRI?:[],
    chunks? : [],
-   next:number
+   next:number,
+   services:{}
 }
 
 const DEFAULT_STATE: DataState = {
@@ -14,6 +16,22 @@ const DEFAULT_STATE: DataState = {
 }
 
 let reducers = {};
+
+export const addedService = (state: DataState, action: Action) => {
+   let services = state.services
+   if(!services || services === true) services = []
+   services = [ ...services, action.payload ]
+
+   console.log("services",services)
+
+    return { ...state, services }
+}
+reducers[actions.TYPES.addedService] = addedService;
+
+export const addService = (state: DataState, action: Action) => {
+    return { ...state, services:true }
+}
+reducers[anno.ADD_SERVICE] = addService;
 
 export const getChunks = (state: DataState, action: Action) => {
     return { ...state, next:action.meta }

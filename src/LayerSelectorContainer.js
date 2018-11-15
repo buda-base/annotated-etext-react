@@ -6,22 +6,25 @@ import {CollectionServiceInterface} from './AnnotationTypes';
 import LayerServiceListContainer from './LayerServiceList';
 import type {CollectionInfo, URL} from './AnnotationTypes';
 import type {ServiceState} from './Layer/types';
+import * as anno from  "./Layer/actions"
 
 type LayerSelectorState = {
-    servicesById: {[id: URL]: ServiceState}
 };
 
 type LayerSelectorProps = {
-    servicesIds: Array<string>
+    IRI:string,
+    servicesIds: {[string]:URL},
+    servicesById: {[id: URL]: ServiceState},
+    onGetCollectionList:(string)=>void
 };
 
 class LayerSelector extends React.Component<LayerSelectorProps, ServiceState> {
 
   static defaultProps: LayerSelectorProps = {
-    servicesIds: [ "http://api.bdrc.io/annotations/collectionSearch" ] // should come from some config
+    servicesIds: { collectionSearch :"http://api.bdrc.io/annotations/collectionSearch" } // should come from some config
   };
 
-  constructor(props: LayerSelectorProps) {
+  constructor(props: LayerSelectorProps = defaultProps) {
     super(props)
   }
 
@@ -31,9 +34,14 @@ class LayerSelector extends React.Component<LayerSelectorProps, ServiceState> {
   }
 
   render() {
+     console.log("props",this.props)
+
         const res =
-         <div><h3>Annotation layer selector</h3>
-            {this.props.services && this.props.services.map((service) => (<LayerServiceListContainer IRI={this.props.IRI}/>))}
+         <div id="annoLayerSelec"><h3>Annotation layer selection</h3>
+            {this.props.services && this.props.services.map((service,i) => (<LayerServiceListContainer key={i} IRI={this.props.IRI}/>))}
+            {!this.props.services && <div><a href="#"
+               onClick={(e) => this.props.onGetCollectionList(this.props.IRI,this.props.servicesIds["collectionSearch"])}
+            >Get list</a></div>}
          </div>;
         return res;
   };
@@ -41,12 +49,31 @@ class LayerSelector extends React.Component<LayerSelectorProps, ServiceState> {
 
 
 const mapStateToProps = (state = initialState, ownProps: Object): Object => {
-    let props = { ...ownProps, services: state.services }
+    let props = { ...ownProps  }
+    // state here refers to global redux state not object state
+    //, services: state.services }
+
+    console.log("LSCms2p",state,ownProps)
+
+    let services = state.data.services
+    props = { ...props, services }
+
+    //props["seri"]
+
     return props ;
 }
 
+const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
+  return {
+    onGetCollectionList: (iri,url) => {
+      dispatch(anno.addService(url));
+    }
+  };
+};
+
 const LayerSelectorContainer = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(LayerSelector);
 
 export default LayerSelectorContainer;

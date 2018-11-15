@@ -41,7 +41,7 @@ class App extends Component<Props,State> {
 
       return (
          <div className="App">
-            <LayerSelectorContainer IRI={this.props.IRI}/>
+            <LayerSelectorContainer IRI={this.props.IRI} />
             <InfiniteScroll hasMore={this.props.IRI && chunks.length+1 !== this.props.next } pageStart={0}
                  loadMore={(e) => { this.props.onGetChunks(this.props.IRI,chunks.length+1) } } >
                   <AnnotatedEtextContainer dontSelect={false} chunks={chunks} annoCollec={annoCollec}/>
