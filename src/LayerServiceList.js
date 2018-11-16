@@ -6,6 +6,7 @@ import {CollectionServiceInterface} from './AnnotationTypes';
 import type {CollectionInfo, URL} from './AnnotationTypes';
 
 type LayerSelectorProps = {
+   service:ServiceState,
     collections: Array<CollectionInfo>
 };
 
@@ -20,7 +21,14 @@ class LayerServiceList extends React.Component<LayerSelectorProps> {
   };
 
   render() {
-        const res = <div></div>;
+     console.log("LSLprops",this.props);
+
+        const res =
+         <div>
+            {this.props.service && Object.keys(this.props.service.collectionsById).map( (id,i) => (
+               <a key={i} href="#">{this.props.service.collectionsById[id]["collectionInfo"]["collection"]["label"]["@value"]}</a>
+            ))}
+         </div>;
         return res;
   };
 }
@@ -32,16 +40,17 @@ const mapStateToProps = (state = initialState, ownProps: Object): Object => {
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
-     /*
-    onTodoClick: id => {
-      dispatch(toggleTodo(id));
-    }
-    */
+
+    //onTodoClick: id => {
+    //  dispatch(toggleTodo(id));
+    //}
+
   };
 };
 
 const LayerServiceListContainer = connect(
     mapStateToProps
 )(LayerServiceList);
+
 
 export default LayerServiceListContainer;

@@ -34,14 +34,14 @@ class LayerSelector extends React.Component<LayerSelectorProps, ServiceState> {
   }
 
   render() {
-     console.log("props",this.props)
+     console.log("LSCprops",this.props)
 
         const res =
          <div id="annoLayerSelec"><h3>Annotation layer selection</h3>
-            {this.props.services && this.props.services.map((service,i) => (<LayerServiceListContainer key={i} IRI={this.props.IRI}/>))}
+            {this.props.services && this.props.services.map((service,i) => (<LayerServiceListContainer key={i} service={service} IRI={this.props.IRI}/>))}
             {!this.props.services && <div><a href="#"
                onClick={(e) => this.props.onGetCollectionList(this.props.IRI,this.props.servicesIds["collectionSearch"])}
-            >Get list</a></div>}
+            >Get collection list</a></div>}
          </div>;
         return res;
   };
@@ -66,7 +66,7 @@ const mapStateToProps = (state = initialState, ownProps: Object): Object => {
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
     onGetCollectionList: (iri,url) => {
-      dispatch(anno.addService(url));
+      dispatch(anno.addService(iri,url));
     }
   };
 };

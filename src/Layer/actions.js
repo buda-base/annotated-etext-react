@@ -21,9 +21,10 @@ export type CollectionAction =
   | { type: 'TOGGLE_COLLECTION', +collectionUrl: URL }
   | { type: 'RECEIVE_PAGE', +collectionUrl: URL, +range?: NumericRange, +page: AnnotationPage };
 
-export const addService = (serviceUrl: URL): ServiceAction => {
+export const addService = (resourceUrl:URL,serviceUrl: URL): ServiceAction => {
   return {
     type: ADD_SERVICE,
+    resourceUrl: resourceUrl,
     serviceUrl: serviceUrl
   };
 };
@@ -64,4 +65,3 @@ export const receivePage = (collectionUrl: URL, range: NumericRange, page: Annot
     page: page
   };
 };
-

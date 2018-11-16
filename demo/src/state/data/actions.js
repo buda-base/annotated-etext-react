@@ -5,10 +5,11 @@ import type { Action } from '../actions';
 export const TYPES = {};
 
 TYPES.addedService = 'ADDED_SERVICE';
-export const addedService = (service:{}): Action => {
+export const addedService = (iri:URL,service:{},collections:[]): Action => {
    return {
       type : TYPES.addedService,
-      payload:service
+      payload:service,
+      meta:{iri,collections}
    }
 }
 

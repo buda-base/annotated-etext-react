@@ -22,13 +22,16 @@ function initiateApp(iri:string) {
 }
 
 
-async function addService(url:URL) {
+async function addService(iri:URL,url:URL) {
    console.log("aS",url)
 
    const service: CollectionService = new CollectionService(url);
+   const collections: Array<CollectionInfo> = await service.getAnnotationCollectionsServices(iri);
 
-   store.dispatch(data.addedService(service))
+   store.dispatch(data.addedService(iri,service,collections))
 }
+
+
 
 async function getChunks(iri:string,n:number) {
 
@@ -73,7 +76,7 @@ export function* watchGetChunks() {
 export function* watchAddService() {
    yield takeLatest(
       anno.ADD_SERVICE,
-      (action) => addService(action.serviceUrl)
+      (action) => addService(action.resourceUrl,action.serviceUrl)
    );
 }
 

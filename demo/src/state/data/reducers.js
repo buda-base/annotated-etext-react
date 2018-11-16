@@ -19,8 +19,25 @@ let reducers = {};
 
 export const addedService = (state: DataState, action: Action) => {
    let services = state.services
-   if(!services || services === true) services = []
-   services = [ ...services, action.payload ]
+   if(!services) services = []
+   services = [ ...services,
+         {
+            selectedResource:action.meta.iri,
+            fetching:false,
+            service:action.payload,
+            collectionsById:action.meta.collections.reduce((acc,c) => {
+               return { ...acc, [c["collection"]["@id"]] : {
+                  fetching:false,
+                  selected:false,
+                  supportsRange:true,
+                  shouldSyncFor:{start:1,end:1000},
+                  syncedFor:false, // or modify type to allow not present ?
+                  collectionInfo:c,
+                  pages:{}
+               } } ;
+            },{})
+         }
+      ]
 
    console.log("services",services)
 
@@ -29,7 +46,7 @@ export const addedService = (state: DataState, action: Action) => {
 reducers[actions.TYPES.addedService] = addedService;
 
 export const addService = (state: DataState, action: Action) => {
-    return { ...state, services:true }
+    return { ...state, services:[] }
 }
 reducers[anno.ADD_SERVICE] = addService;
 
