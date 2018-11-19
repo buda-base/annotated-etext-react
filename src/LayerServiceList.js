@@ -17,7 +17,7 @@ const initialState = {
 class LayerServiceList extends React.Component<LayerSelectorProps> {
 
   static defaultProps = {
-    collections: []
+      collections: []
   };
 
   render() {
@@ -34,7 +34,8 @@ class LayerServiceList extends React.Component<LayerSelectorProps> {
 }
 
 const mapStateToProps = (state = initialState, ownProps: Object): Object => {
-    let props = { ...ownProps, collections: state.collections }
+    let props = { ...ownProps } //, collections: state.collections }
+    props = { ...props, collections: state.data.services.map( s => Object.keys(s.collectionsById).map( k => s.collectionsById[k].collectionInfo ) ) }
     return props ;
 }
 
