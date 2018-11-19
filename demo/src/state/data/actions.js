@@ -14,11 +14,11 @@ export const addedService = (iri:URL,service:{},collections:[]): Action => {
 }
 
 TYPES.getChunks = 'GET_CHUNKS';
-export const getChunks = (iri:string,n:number): Action => {
+export const getChunks = (iri:string,next:number,services:ServiceState[],lastChar:number): Action => {
    return {
       type : TYPES.getChunks,
       payload:iri,
-      meta:n
+      meta:{next,services,lastChar}
    }
 }
 

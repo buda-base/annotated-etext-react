@@ -33,28 +33,33 @@ async function addService(iri:URL,url:URL) {
 
 
 
-async function getChunks(iri:string,n:number) {
+async function getChunks(iri:string,n:number,services:ServiceState[],lastChar:number) {
 
    try {
 
       let demo = await fetch("http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+iri+"&I_SEQ="+n,{ method: "GET" })
       let text = JSON.parse(await demo.text())
-
       //let text = demodata[iri][n]
-
       //let text = mockdata["http://purl.bdrc.io/graph/Chunks?I_LIM=10&R_RES="+iri+"&I_SEQ="+n]
-
       console.log("demo",text,iri,n,mockdata)
 
       let chunks = text["@graph"].filter(e => e.chunkContents)
       chunks = _.orderBy(chunks,["seqNum"],["ASC"])
       store.dispatch(data.gotChunks(iri,chunks))
 
+      lastChar = chunks[chunks.length - 1].sliceEndChar
    }
    catch(e) {
      //console.error('getChunks error: %o', e,iri,n);
      store.dispatch(data.noChunk())
    }
+
+   // now check services to sync annotation with loaded chunks
+   if(services) for(let s of services)
+   {
+      // yes but this must also be called when annotations are turned on
+   }
+
 }
 
 // --------------------------------------------------------
@@ -69,7 +74,7 @@ export function* watchInitiateApp() {
 export function* watchGetChunks() {
    yield takeLatest(
       data.TYPES.getChunks,
-      (action) => getChunks(action.payload,action.meta)
+      (action) => getChunks(action.payload,action.meta.next,action.meta.services,action.meta.lastChar)
    );
 }
 

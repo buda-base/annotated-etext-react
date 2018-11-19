@@ -9,15 +9,16 @@ const mapStateToProps = (state, ownProps) => {
     let chunks = state.data.chunks
     let IRI = state.data.IRI
     let next = state.data.next
-    props = { ...props, chunks, IRI, next}
+    let services = state.data.services
+    props = { ...props, chunks, IRI, next, services}
     return props ;
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-      onGetChunks:(iri:string,n:number) => {
-         dispatch(data.getChunks(iri,n));
-      },
+      onGetChunks:(iri:string,n:number,s:ServiceState[],c:number) => {
+         dispatch(data.getChunks(iri,n,s,c));
+      }
     }
 };
 

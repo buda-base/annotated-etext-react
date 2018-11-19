@@ -28,7 +28,7 @@ export const addedService = (state: DataState, action: Action) => {
             collectionsById:action.meta.collections.reduce((acc,c) => {
                return { ...acc, [c["collection"]["@id"]] : {
                   fetching:false,
-                  selected:false,
+                  selected:true,
                   supportsRange:true,
                   shouldSyncFor:{start:1,end:1000},
                   syncedFor:false, // or modify type to allow not present ?
@@ -51,7 +51,7 @@ export const addService = (state: DataState, action: Action) => {
 reducers[anno.ADD_SERVICE] = addService;
 
 export const getChunks = (state: DataState, action: Action) => {
-    return { ...state, next:action.meta }
+    return { ...state, next:action.meta.next }
 }
 reducers[actions.TYPES.getChunks] = getChunks;
 

@@ -8,7 +8,8 @@ type Props = {
    IRI?:string,
    chunks? : [],
    next?:number,
-   onGetChunks : (iri:string,n:number) => void
+   services:ServiceState[],
+   onGetChunks : (iri:string,n:number,s:ServiceState[],c:number) => void
 }
 
 type State = {
@@ -37,14 +38,14 @@ class App extends Component<Props,State> {
          }
       ))
 
-      let annoCollec = []
-
       return (
          <div className="App">
             <LayerSelectorContainer IRI={this.props.IRI} />
             <InfiniteScroll hasMore={this.props.IRI && chunks.length+1 !== this.props.next } pageStart={0}
-                 loadMore={(e) => { this.props.onGetChunks(this.props.IRI,chunks.length+1) } } >
-                  <AnnotatedEtextContainer dontSelect={false} chunks={chunks} annoCollec={annoCollec}/>
+                 loadMore={(e) => {
+                    this.props.onGetChunks(this.props.IRI,chunks.length+1,this.props.services,this.props.chunks[this.props.chunks.length - 1].sliceEndChar)
+                 } } >
+                  <AnnotatedEtextContainer dontSelect={false} chunks={chunks} />
             </InfiniteScroll>
          </div>
       );
