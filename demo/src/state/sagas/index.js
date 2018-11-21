@@ -7,7 +7,7 @@ import * as anno from '../../lib/Layer/actions' ;
 //import * as uiActions from '../ui/actions';
 import _ from 'lodash' ;
 import mockdata from '../../lib/mockdata';
-import {URL} from '../../lib/AnnotationTypes';
+import {URL,NumericRange} from '../../lib/AnnotationTypes';
 import CollectionService from "../../lib/CollectionService"
 
 function initiateApp(iri:string) {
@@ -21,19 +21,7 @@ function initiateApp(iri:string) {
    }
 }
 
-
-async function addService(iri:URL,url:URL) {
-   console.log("aS",url)
-
-   const service: CollectionService = new CollectionService(url);
-   const collections: Array<CollectionInfo> = await service.getAnnotationCollectionsServices(iri);
-
-   store.dispatch(data.addedService(iri,service,collections))
-}
-
-
-
-async function getChunks(iri:string,n:number,services:ServiceState[],lastChar:number) {
+async function getChunks(iri:string,n:number) {
 
    try {
 
@@ -47,19 +35,34 @@ async function getChunks(iri:string,n:number,services:ServiceState[],lastChar:nu
       chunks = _.orderBy(chunks,["seqNum"],["ASC"])
       store.dispatch(data.gotChunks(iri,chunks))
 
-      lastChar = chunks[chunks.length - 1].sliceEndChar
    }
    catch(e) {
      //console.error('getChunks error: %o', e,iri,n);
      store.dispatch(data.noChunk())
    }
+}
 
-   // now check services to sync annotation with loaded chunks
-   if(services) for(let s of services)
-   {
-      // yes but this must also be called when annotations are turned on
-   }
+async function addService(iri:URL,url:URL) {
+   //console.log("aS",url)
 
+   const service: CollectionService = new CollectionService(url);
+
+   console.log("service",service.constructor.name)
+
+   const collections: Array<CollectionInfo> = await service.getAnnotationCollectionsServices(iri);
+
+   store.dispatch(data.addedService(iri,service,collections))
+
+}
+
+async function syncService(service:URL,range:NumericRange)
+{
+   //console.log("syS",service,range)
+
+   const data:Response = await fetch(service+"?range="+range.start+"-"+range.end)
+   const page:Object = await data.json()
+
+   store.dispatch(anno.receivePage(service,range,page))
 }
 
 // --------------------------------------------------------
@@ -74,7 +77,7 @@ export function* watchInitiateApp() {
 export function* watchGetChunks() {
    yield takeLatest(
       data.TYPES.getChunks,
-      (action) => getChunks(action.payload,action.meta.next,action.meta.services,action.meta.lastChar)
+      (action) => getChunks(action.payload,action.meta.next)
    );
 }
 
@@ -85,6 +88,13 @@ export function* watchAddService() {
    );
 }
 
+export function* watchSyncService() {
+   yield takeLatest(
+      anno.SYNC_SERVICE,
+      (action) => syncService(action.serviceUrl,action.range)
+   );
+}
+
 
 /** Root **/
 
@@ -92,6 +102,7 @@ export default function* rootSaga() {
    yield all([
       watchGetChunks(),
       watchAddService(),
+      watchSyncService(),
       watchInitiateApp()
    ])
 }

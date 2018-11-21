@@ -3,11 +3,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import type { Dispatch } from "redux";
 import {CollectionServiceInterface} from './AnnotationTypes';
-import type {CollectionInfo, URL} from './AnnotationTypes';
+import type {CollectionInfo, URL, NumericRange} from './AnnotationTypes';
+import {syncService} from './Layer/actions'
 
 type LayerSelectorProps = {
    service:ServiceState,
-    collections: Array<CollectionInfo>
+   collections: Array<CollectionInfo>,
+   onSyncService:(service:URL,range:NumericRange) => void
 };
 
 const initialState = {
@@ -19,6 +21,39 @@ class LayerServiceList extends React.Component<LayerSelectorProps> {
   static defaultProps = {
       collections: []
   };
+
+  constructor(props:LayerSelectorProps)
+  {
+     super(props);
+     this.checkSync(props);
+  }
+
+  shouldComponentUpdate(nextProps,nextState)
+  {
+     return this.checkSync(nextProps)
+  }
+
+  checkSync(nextProps)
+  {
+     console.log("LSLcs",nextProps);
+
+     if(nextProps.service && nextProps.service.collectionsById)
+     {
+        for(let id of Object.keys(nextProps.service.collectionsById))
+        {
+           let collec = nextProps.service.collectionsById[id]
+           if(collec.shouldSyncFor.start > collec.syncedFor.end && !collec.fetching)
+           {
+              this.props.onSyncService("http://api.bdrc.io/annotations/search/"+id+"/",collec.shouldSyncFor)
+              // wait for collection to sync before re-render
+              return false
+           }
+        }
+     }
+     return true;
+  }
+
+
 
   render() {
      console.log("LSLprops",this.props);
@@ -41,16 +76,15 @@ const mapStateToProps = (state = initialState, ownProps: Object): Object => {
 
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
-
-    //onTodoClick: id => {
-    //  dispatch(toggleTodo(id));
-    //}
-
+      onSyncService:(service:URL,range:NumericRange) => {
+         dispatch(syncService(service,range));
+      }
   };
 };
 
 const LayerServiceListContainer = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(LayerServiceList);
 
 

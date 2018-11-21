@@ -15,6 +15,7 @@ import {mock_data} from './lib/mockdata';
 mock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 10, R_RES: "bdr:UTDEMO_01", I_SEQ: 1 })
 mock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 10, R_RES: "bdr:UTDEMO_01", I_SEQ: 11 })
 mock_data("http://api.bdrc.io", "/annotations/collectionSearch", {res: "bdr:UTDEMO_01"});
+mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1000"});
 
 const logger = store => next => action => {
   console.group(action.type)

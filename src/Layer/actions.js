@@ -8,7 +8,7 @@ export const ADD_COLLECTION = 'ADD_COLLECTION'
 export const TOGGLE_COLLECTION = 'TOGGLE_COLLECTION'
 export const RECEIVE_PAGE = 'RECEIVE_PAGE'
 export const SELECT_RESOURCE = 'SELECT_RESOURCE'
-export const SYNC_SERVICE_FOR_RANGE = 'SYNC_FOR_RANGE'
+export const SYNC_SERVICE = 'SYNC_SERVICE'
 
 export type ServiceAction =
   | { type: 'ADD_SERVICE', +serviceUrl: URL }
@@ -26,6 +26,14 @@ export const addService = (resourceUrl:URL,serviceUrl: URL): ServiceAction => {
     type: ADD_SERVICE,
     resourceUrl: resourceUrl,
     serviceUrl: serviceUrl
+  };
+};
+
+export const syncService = (serviceUrl: URL,range:NumericRange): ServiceAction => {
+  return {
+    type: SYNC_SERVICE,
+    serviceUrl, // means " 'serviceUrl' : serviceUrl "
+    range
   };
 };
 
