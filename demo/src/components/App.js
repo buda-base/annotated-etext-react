@@ -41,7 +41,7 @@ class App extends Component<Props,State> {
       return (
          <div className="App">
             <LayerSelectorContainer IRI={this.props.IRI} />
-            <InfiniteScroll hasMore={this.props.IRI && chunks.length+1 !== this.props.next } pageStart={0}
+            <InfiniteScroll hasMore={this.props.IRI && chunks.length+1 !== this.props.next } pageStart={0} threshold={50}
                  loadMore={(e) => {
                     this.props.onGetChunks(this.props.IRI,chunks.length+1)
                  } } >

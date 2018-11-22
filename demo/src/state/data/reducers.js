@@ -3,7 +3,7 @@ import type { Action } from '../actions';
 import { createReducer } from '../actions';
 import * as actions from './actions';
 import * as anno from '../../lib/Layer/actions';
-import CollectionService from '../../lib/CollectionService'
+//import CollectionService from '../../lib/CollectionService'
 
 export type DataState = {
    IRI?:[],
