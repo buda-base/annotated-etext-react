@@ -19,6 +19,14 @@ const DEFAULT_STATE: DataState = {
 let reducers = {};
 
 export const addedService = (state: DataState, action: Action) => {
+   let start = 1, end = 1000
+
+   let chunks = state.chunks
+   if(chunks) {
+      start = chunks[0].sliceStartChar
+      end = chunks[chunks.length - 1].sliceEndChar
+   }
+
    let services = state.services
    if(!services) services = []
    services = [ ...services,
@@ -31,7 +39,7 @@ export const addedService = (state: DataState, action: Action) => {
                   fetching:false,
                   selected:true,
                   supportsRange:true,
-                  shouldSyncFor:{start:1,end:1000},
+                  shouldSyncFor:{start,end},
                   syncedFor:{start:0,end:0},
                   collectionInfo:c,
                   pages:{}
@@ -123,11 +131,12 @@ export const gotChunks = (state: DataState, action: Action) => {
             let collectionsById = Object.keys(s.collectionsById).reduce( (acc,id) => {
                let collec = s.collectionsById[id]
 
+               let sync = {
+                  start: action.payload[0].sliceStartChar,
+                  end: chunks[chunks.length - 1].sliceEndChar
+               }
 
-               let sync = collec.shouldSyncFor
-
-
-               collec = { ...collec, shouldSyncFor:sync, youpi:true }
+               collec = { ...collec, shouldSyncFor:sync }
                return {...acc, [id] : collec }
             },{})
 

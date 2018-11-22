@@ -22,6 +22,9 @@ mock_data("http://api.bdrc.io", "/annotations/collectionSearch", {res: "bdr:UTDE
 //mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1000"});
 mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-551"});
 mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "552-1104"});
+mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1104"});
+mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1560"});
+mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1847"});
 
 const logger = store => next => action => {
   console.group(action.type)

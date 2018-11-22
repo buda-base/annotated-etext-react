@@ -58,11 +58,16 @@ async function addService(iri:URL,url:URL) {
 async function syncService(service:URL,range:NumericRange)
 {
    //console.log("syS",service,range)
+   try {
+      const data:Response = await fetch(service+"?range="+range.start+"-"+range.end)
+      const page:Object = await data.json()
+      store.dispatch(anno.receivePage(service,range,page))
+   }
+   catch(e)
+   {
+      console.error("NO ANNOTATION PAGE");
+   }
 
-   const data:Response = await fetch(service+"?range="+range.start+"-"+range.end)
-   const page:Object = await data.json()
-
-   store.dispatch(anno.receivePage(service,range,page))
 }
 
 // --------------------------------------------------------

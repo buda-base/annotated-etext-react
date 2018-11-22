@@ -356,69 +356,56 @@ const mockdata: Object = {
    },
    "http://purl.bdrc.io/graph/Chunks?I_LIM=5&R_RES=bdr:UTDEMO_01&I_SEQ=11":
    {
-     "@graph": [
-       {
-         "@id": "_:b0",
-         "chunkContents": {
-           "@language": "bo",
-           "@value": "སྨན་དང་གོས་དང་སྲ་བརྐྱང་དང་། །ཀཽ་ཤཱམ་བཱི་དང་ལས་ཀྱི་གཞི། །དམར་སེར་ཅན་དང་གང་ཟག་དང་། །སྤོ་དང་གསོ་སྦྱོང་བཞག་པ་དང་། །"
-         },
-         "seqNum": 6,
-         "sliceEndChar": 662,
-         "sliceStartChar": 552
+     "@graph" : [ {
+       "@id" : "_:b0",
+       "chunkContents" : {
+         "@language" : "bo",
+         "@value" : "རྒྱས་པ་བདེ་བ་ལོ་ལེགས་པ་སྐྱེ་བོ་དང་མི་མང་པོས་གང་བ་བྱེད་དུ་བཅུག་གོ། །"
        },
-       {
-         "@id": "_:b1",
-         "chunkContents": {
-           "@language": "bo",
-           "@value": "བསྙེན་པར་རྫོགས་པར་གནང་བ་དང་། །ཉེ་སྡེས་ཚོགས་ནི་བསྡུས་པ་དང་། །ལྔ་པའི་སྡེ་ཚན་བསྡུས་པ་ཡིན། །བྱང་ཆུབ་སེམས་དཔའ་དགའ་ལྡན་གྱི་གནས་ན་བཞུགས་པ་ན། "
-         },
-         "seqNum": 9,
-         "sliceEndChar": 1045,
-         "sliceStartChar": 911
+       "seqNum" : 11,
+       "sliceEndChar" : 1171,
+       "sliceStartChar" : 1105
+     }, {
+       "@id" : "_:b1",
+       "chunkContents" : {
+         "@language" : "bo",
+         "@value" : "གང་གི་ཚེ་ཨང་གའི་རྒྱལ་པོ་དཔུང་དང་མཐུ་ཆེ་བ་དེའི་ཚེ་ན། དེས་དཔུང་གི་ཚོགས་ཡན་ལག་བཞི་པ། གླང་པོ་ཆེ་པའི་ཚོགས་དང་། རྟ་པའི་ཚོགས་དང་། ཤིང་རྟ་པའི་ཚོགས་དང་། "
        },
-       {
-         "@id": "_:b2",
-         "chunkContents": {
-           "@language": "bo",
-           "@value": "དགེ་ཚུལ་གཉིས་དང་བྱ་རོག་སྐྲོད། །དགྲ་བཅོམ་བསད་དང་ལག་རྡུམ་གྱི། །སྡེ་ཚན་ཡང་དག་བསྡུས་པ་ཡིན། །སྡོམ་ལ། ཤཱ་རིའི་བུ་དང་རབ་འབྱུང་དང་། །"
-         },
-         "seqNum": 8,
-         "sliceEndChar": 910,
-         "sliceStartChar": 786
+       "seqNum" : 15,
+       "sliceEndChar" : 1560,
+       "sliceStartChar" : 1417
+     }, {
+       "@id" : "_:b2",
+       "chunkContents" : {
+         "@language" : "bo",
+         "@value" : "རྒྱལ་སྲིད་འབྱོར་པ་རྒྱས་པ་བདེ་བ་ལོ་ལེགས་པ་སྐྱེ་བོ་དང་མི་མང་པོས་གང་བ་བྱེད་དུ་བཅུག་གོ། །"
        },
-       {
-         "@id": "_:b3",
-         "chunkContents": {
-           "@language": "bo",
-           "@value": "གནས་མལ་དང་ནི་རྩོད་པ་དང་། །དགེ་འདུན་དབྱེན་རྣམས་བསྡུས་པ་ཡིན། །རབ་ཏུ་འབྱུང་བའི་གཞིའི་སྤྱི་སྡོམ་ལ། ཤཱ་རིའི་བུ་དང་མུ་སྟེགས་ཅན། །"
-         },
-         "seqNum": 7,
-         "sliceEndChar": 785,
-         "sliceStartChar": 663
+       "seqNum" : 13,
+       "sliceEndChar" : 1309,
+       "sliceStartChar" : 1224
+     }, {
+       "@id" : "_:b3",
+       "chunkContents" : {
+         "@language" : "bo",
+         "@value" : "རེས་འགའ་ནི་ཨང་གའི་རྒྱལ་པོ་དཔུང་དང་མཐུ་ཆེ་བ་ཡིན་ལ། རེས་འགའ་ནི་རྒྱལ་པོ་པད་མ་ཆེན་པོ་དཔུང་དང་མཐུ་ཆེ་བ་ཡིན་ནོ། །"
        },
-       {
-         "@id": "_:b4",
-         "chunkContents": {
-           "@language": "bo",
-           "@value": "ཡུལ་ཨང་ག་དག་ན་ཨང་གའི་རྒྱལ་པོ་ཞེས་བྱ་བས་རྒྱལ་སྲིད་འབྱོར་པ། "
-         },
-         "seqNum": 10,
-         "sliceEndChar": 1104,
-         "sliceStartChar": 1046
+       "seqNum" : 14,
+       "sliceEndChar" : 1416,
+       "sliceStartChar" : 1310
+     }, {
+       "@id" : "_:b4",
+       "chunkContents" : {
+         "@language" : "bo",
+         "@value" : "ཡུལ་མ་ག་དྷཱ་དག་ན་ཡང་རྒྱལ་པོ་པད་མ་ཆེན་པོ་ཞེས་བྱ་བས། "
        },
-       {
-         "@id": "bdr:UTDEMO_01",
-         "eTextHasChunk": [
-           "_:b2",
-           "_:b3",
-           "_:b1",
-           "_:b0",
-           "_:b4"
-         ]
-       }
-     ],
-     "@context": "http://purl.bdrc.io/context.jsonld"
+       "seqNum" : 12,
+       "sliceEndChar" : 1223,
+       "sliceStartChar" : 1172
+     }, {
+       "@id" : "bdr:UTDEMO_01",
+       "eTextHasChunk" : [ "_:b3", "_:b4", "_:b1", "_:b2", "_:b0" ]
+     } ],
+     "@context" : "http://purl.bdrc.io/context.jsonld"
    },
    "http://purl.bdrc.io/graph/Chunks?I_LIM=5&R_RES=bdr:UTDEMO_01&I_SEQ=16":
    {
@@ -691,6 +678,552 @@ const mockdata: Object = {
    "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1000": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1000",
+      "type" : "AnnotationPage",
+      "items" : [ {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_001",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "bdr:W4CZ16824",
+          "type" : "Work",
+          "adm:access" : "bdr:AccessOpen",
+          "adm:gitRevision" : "2d58f8275303110e5f9e7b9ce71cc7b1c9e5445b",
+          "adm:license" : "bdr:LicensePublicDomain",
+          "adm:status" : "bdr:StatusReleased",
+          "creatorPandita" : [ "bdr:P8211", "bdr:P8249", "bdr:P00KG07267" ],
+          "creatorReviserOfTranslation" : "bdr:P4CZ10511",
+          "creatorTranslator" : "bdr:P4259",
+          "workCreator" : [ "bdr:P4CZ10511", "bdr:P8249", "bdr:P00KG07267", "bdr:P4259", "bdr:P8211" ],
+          "workGenre" : "bdr:T769",
+          "workHasExpression" : "bdr:W0RKT0001",
+          "workIsAbout" : "bdr:T55",
+          "workLangScript" : [ "bdr:Sa", "bdr:LanguageTaxonomy" ],
+          "workType" : "bdr:WorkTypeAbstractWork",
+          "skos:prefLabel" : [ {
+            "@language" : "sa-x-iast",
+            "@value" : "vinayavastu"
+          }, {
+            "@language" : "bo-x-ewts",
+            "@value" : "'dul ba'i gzhi/"
+          } ]
+        },
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 58,
+          "workLocationEndChar" : 69,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "identifying"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "bdr:GDEMO001",
+          "type" : "Place",
+          "skos:altLabel" : [ {
+            "@language" : "bo",
+            "@value" : "ཀཽ་ཤམབྷི"
+          }, {
+            "@language" : "bo",
+            "@value" : "ཀཽ་ཤཱམ་བཱི།"
+          } ],
+          "skos:prefLabel" : {
+            "@language" : "sa-x-iast",
+            "@value" : "kauśhambhi"
+          }
+        },
+        "target" : {
+          "id" : "_:b2",
+          "type" : "WorkLocation",
+          "workLocationChar" : 581,
+          "workLocationEndChar" : 591,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "identifying"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_003",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "_:b1",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Are we sure about that?"
+          }
+        },
+        "target" : {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+          "type" : "Annotation",
+          "body" : {
+            "id" : "bdr:GDEMO001",
+            "type" : "Place",
+            "skos:altLabel" : [ {
+              "@language" : "bo",
+              "@value" : "ཀཽ་ཤམབྷི"
+            }, {
+              "@language" : "bo",
+              "@value" : "ཀཽ་ཤཱམ་བཱི།"
+            } ],
+            "skos:prefLabel" : {
+              "@language" : "sa-x-iast",
+              "@value" : "kauśhambhi"
+            }
+          },
+          "target" : {
+            "id" : "_:b2",
+            "type" : "WorkLocation",
+            "workLocationChar" : 581,
+            "workLocationEndChar" : 591,
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          },
+          "motivation" : "identifying"
+        },
+        "motivation" : "questioning"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_004",
+        "type" : "Annotation",
+        "body" : [ {
+          "type" : "TextualBody",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Well, yeah, sort of"
+          }
+        }, {
+          "type" : "TextualBody",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Well, yeah, sort of"
+          }
+        } ],
+        "target" : {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_003",
+          "type" : "Annotation",
+          "body" : {
+            "id" : "_:b1",
+            "rdfs:comment" : {
+              "@language" : "en",
+              "@value" : "Are we sure about that?"
+            }
+          },
+          "target" : {
+            "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+            "type" : "Annotation",
+            "body" : {
+              "id" : "bdr:GDEMO001",
+              "type" : "Place",
+              "skos:altLabel" : [ {
+                "@language" : "bo",
+                "@value" : "ཀཽ་ཤམབྷི"
+              }, {
+                "@language" : "bo",
+                "@value" : "ཀཽ་ཤཱམ་བཱི།"
+              } ],
+              "skos:prefLabel" : {
+                "@language" : "sa-x-iast",
+                "@value" : "kauśhambhi"
+              }
+            },
+            "target" : {
+              "id" : "_:b2",
+              "type" : "WorkLocation",
+              "workLocationChar" : 581,
+              "workLocationEndChar" : 591,
+              "workLocationVolume" : 1,
+              "workLocationWork" : "bdr:WUTDEMO"
+            },
+            "motivation" : "identifying"
+          },
+          "motivation" : "questioning"
+        },
+        "motivation" : "replying"
+      } ],
+      "next" : null,
+      "partOf" : {
+        "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001",
+        "type" : [ "AnnotationCollection", "AnnotationLayer" ],
+        "layerForResource" : {
+          "id" : "bdr:UTDEMO_01"
+        },
+        "layerType" : {
+          "id" : "bdr:LayerNER"
+        },
+        "label" : {
+          "@language" : "en",
+          "@value" : "NER annotations for bdr:UTDEMO_01"
+        },
+        "as:totalItems" : 4
+      },
+      "prev" : null,
+      "as:startIndex" : 0
+    },
+   "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1847": {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1847",
+      "type" : "AnnotationPage",
+      "items" : [ {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_001",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "bdr:W4CZ16824",
+          "type" : "Work",
+          "adm:access" : "bdr:AccessOpen",
+          "adm:gitRevision" : "2d58f8275303110e5f9e7b9ce71cc7b1c9e5445b",
+          "adm:license" : "bdr:LicensePublicDomain",
+          "adm:status" : "bdr:StatusReleased",
+          "creatorPandita" : [ "bdr:P8211", "bdr:P8249", "bdr:P00KG07267" ],
+          "creatorReviserOfTranslation" : "bdr:P4CZ10511",
+          "creatorTranslator" : "bdr:P4259",
+          "workCreator" : [ "bdr:P4CZ10511", "bdr:P8249", "bdr:P00KG07267", "bdr:P4259", "bdr:P8211" ],
+          "workGenre" : "bdr:T769",
+          "workHasExpression" : "bdr:W0RKT0001",
+          "workIsAbout" : "bdr:T55",
+          "workLangScript" : [ "bdr:Sa", "bdr:LanguageTaxonomy" ],
+          "workType" : "bdr:WorkTypeAbstractWork",
+          "skos:prefLabel" : [ {
+            "@language" : "sa-x-iast",
+            "@value" : "vinayavastu"
+          }, {
+            "@language" : "bo-x-ewts",
+            "@value" : "'dul ba'i gzhi/"
+          } ]
+        },
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 58,
+          "workLocationEndChar" : 69,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "identifying"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "bdr:GDEMO001",
+          "type" : "Place",
+          "skos:altLabel" : [ {
+            "@language" : "bo",
+            "@value" : "ཀཽ་ཤམབྷི"
+          }, {
+            "@language" : "bo",
+            "@value" : "ཀཽ་ཤཱམ་བཱི།"
+          } ],
+          "skos:prefLabel" : {
+            "@language" : "sa-x-iast",
+            "@value" : "kauśhambhi"
+          }
+        },
+        "target" : {
+          "id" : "_:b2",
+          "type" : "WorkLocation",
+          "workLocationChar" : 581,
+          "workLocationEndChar" : 591,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "identifying"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_003",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "_:b1",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Are we sure about that?"
+          }
+        },
+        "target" : {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+          "type" : "Annotation",
+          "body" : {
+            "id" : "bdr:GDEMO001",
+            "type" : "Place",
+            "skos:altLabel" : [ {
+              "@language" : "bo",
+              "@value" : "ཀཽ་ཤམབྷི"
+            }, {
+              "@language" : "bo",
+              "@value" : "ཀཽ་ཤཱམ་བཱི།"
+            } ],
+            "skos:prefLabel" : {
+              "@language" : "sa-x-iast",
+              "@value" : "kauśhambhi"
+            }
+          },
+          "target" : {
+            "id" : "_:b2",
+            "type" : "WorkLocation",
+            "workLocationChar" : 581,
+            "workLocationEndChar" : 591,
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          },
+          "motivation" : "identifying"
+        },
+        "motivation" : "questioning"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_004",
+        "type" : "Annotation",
+        "body" : [ {
+          "type" : "TextualBody",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Well, yeah, sort of"
+          }
+        }, {
+          "type" : "TextualBody",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Well, yeah, sort of"
+          }
+        } ],
+        "target" : {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_003",
+          "type" : "Annotation",
+          "body" : {
+            "id" : "_:b1",
+            "rdfs:comment" : {
+              "@language" : "en",
+              "@value" : "Are we sure about that?"
+            }
+          },
+          "target" : {
+            "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+            "type" : "Annotation",
+            "body" : {
+              "id" : "bdr:GDEMO001",
+              "type" : "Place",
+              "skos:altLabel" : [ {
+                "@language" : "bo",
+                "@value" : "ཀཽ་ཤམབྷི"
+              }, {
+                "@language" : "bo",
+                "@value" : "ཀཽ་ཤཱམ་བཱི།"
+              } ],
+              "skos:prefLabel" : {
+                "@language" : "sa-x-iast",
+                "@value" : "kauśhambhi"
+              }
+            },
+            "target" : {
+              "id" : "_:b2",
+              "type" : "WorkLocation",
+              "workLocationChar" : 581,
+              "workLocationEndChar" : 591,
+              "workLocationVolume" : 1,
+              "workLocationWork" : "bdr:WUTDEMO"
+            },
+            "motivation" : "identifying"
+          },
+          "motivation" : "questioning"
+        },
+        "motivation" : "replying"
+      } ],
+      "next" : null,
+      "partOf" : {
+        "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001",
+        "type" : [ "AnnotationCollection", "AnnotationLayer" ],
+        "layerForResource" : {
+          "id" : "bdr:UTDEMO_01"
+        },
+        "layerType" : {
+          "id" : "bdr:LayerNER"
+        },
+        "label" : {
+          "@language" : "en",
+          "@value" : "NER annotations for bdr:UTDEMO_01"
+        },
+        "as:totalItems" : 4
+      },
+      "prev" : null,
+      "as:startIndex" : 0
+    },
+   "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1104": {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1104",
+      "type" : "AnnotationPage",
+      "items" : [ {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_001",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "bdr:W4CZ16824",
+          "type" : "Work",
+          "adm:access" : "bdr:AccessOpen",
+          "adm:gitRevision" : "2d58f8275303110e5f9e7b9ce71cc7b1c9e5445b",
+          "adm:license" : "bdr:LicensePublicDomain",
+          "adm:status" : "bdr:StatusReleased",
+          "creatorPandita" : [ "bdr:P8211", "bdr:P8249", "bdr:P00KG07267" ],
+          "creatorReviserOfTranslation" : "bdr:P4CZ10511",
+          "creatorTranslator" : "bdr:P4259",
+          "workCreator" : [ "bdr:P4CZ10511", "bdr:P8249", "bdr:P00KG07267", "bdr:P4259", "bdr:P8211" ],
+          "workGenre" : "bdr:T769",
+          "workHasExpression" : "bdr:W0RKT0001",
+          "workIsAbout" : "bdr:T55",
+          "workLangScript" : [ "bdr:Sa", "bdr:LanguageTaxonomy" ],
+          "workType" : "bdr:WorkTypeAbstractWork",
+          "skos:prefLabel" : [ {
+            "@language" : "sa-x-iast",
+            "@value" : "vinayavastu"
+          }, {
+            "@language" : "bo-x-ewts",
+            "@value" : "'dul ba'i gzhi/"
+          } ]
+        },
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 58,
+          "workLocationEndChar" : 69,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "identifying"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "bdr:GDEMO001",
+          "type" : "Place",
+          "skos:altLabel" : [ {
+            "@language" : "bo",
+            "@value" : "ཀཽ་ཤམབྷི"
+          }, {
+            "@language" : "bo",
+            "@value" : "ཀཽ་ཤཱམ་བཱི།"
+          } ],
+          "skos:prefLabel" : {
+            "@language" : "sa-x-iast",
+            "@value" : "kauśhambhi"
+          }
+        },
+        "target" : {
+          "id" : "_:b2",
+          "type" : "WorkLocation",
+          "workLocationChar" : 581,
+          "workLocationEndChar" : 591,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "identifying"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_003",
+        "type" : "Annotation",
+        "body" : {
+          "id" : "_:b1",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Are we sure about that?"
+          }
+        },
+        "target" : {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+          "type" : "Annotation",
+          "body" : {
+            "id" : "bdr:GDEMO001",
+            "type" : "Place",
+            "skos:altLabel" : [ {
+              "@language" : "bo",
+              "@value" : "ཀཽ་ཤམབྷི"
+            }, {
+              "@language" : "bo",
+              "@value" : "ཀཽ་ཤཱམ་བཱི།"
+            } ],
+            "skos:prefLabel" : {
+              "@language" : "sa-x-iast",
+              "@value" : "kauśhambhi"
+            }
+          },
+          "target" : {
+            "id" : "_:b2",
+            "type" : "WorkLocation",
+            "workLocationChar" : 581,
+            "workLocationEndChar" : 591,
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          },
+          "motivation" : "identifying"
+        },
+        "motivation" : "questioning"
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_004",
+        "type" : "Annotation",
+        "body" : [ {
+          "type" : "TextualBody",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Well, yeah, sort of"
+          }
+        }, {
+          "type" : "TextualBody",
+          "rdfs:comment" : {
+            "@language" : "en",
+            "@value" : "Well, yeah, sort of"
+          }
+        } ],
+        "target" : {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_003",
+          "type" : "Annotation",
+          "body" : {
+            "id" : "_:b1",
+            "rdfs:comment" : {
+              "@language" : "en",
+              "@value" : "Are we sure about that?"
+            }
+          },
+          "target" : {
+            "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_002",
+            "type" : "Annotation",
+            "body" : {
+              "id" : "bdr:GDEMO001",
+              "type" : "Place",
+              "skos:altLabel" : [ {
+                "@language" : "bo",
+                "@value" : "ཀཽ་ཤམབྷི"
+              }, {
+                "@language" : "bo",
+                "@value" : "ཀཽ་ཤཱམ་བཱི།"
+              } ],
+              "skos:prefLabel" : {
+                "@language" : "sa-x-iast",
+                "@value" : "kauśhambhi"
+              }
+            },
+            "target" : {
+              "id" : "_:b2",
+              "type" : "WorkLocation",
+              "workLocationChar" : 581,
+              "workLocationEndChar" : 591,
+              "workLocationVolume" : 1,
+              "workLocationWork" : "bdr:WUTDEMO"
+            },
+            "motivation" : "identifying"
+          },
+          "motivation" : "questioning"
+        },
+        "motivation" : "replying"
+      } ],
+      "next" : null,
+      "partOf" : {
+        "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001",
+        "type" : [ "AnnotationCollection", "AnnotationLayer" ],
+        "layerForResource" : {
+          "id" : "bdr:UTDEMO_01"
+        },
+        "layerType" : {
+          "id" : "bdr:LayerNER"
+        },
+        "label" : {
+          "@language" : "en",
+          "@value" : "NER annotations for bdr:UTDEMO_01"
+        },
+        "as:totalItems" : 4
+      },
+      "prev" : null,
+      "as:startIndex" : 0
+    },
+    "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1560": {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1104",
       "type" : "AnnotationPage",
       "items" : [ {
         "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_001",
