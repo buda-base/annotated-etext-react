@@ -6,6 +6,10 @@ import AnnotatedEtext from './AnnotatedEtext';
 
 const mapStateToProps = (state: Object, ownProps: Object): Object => {
     let props = { ...ownProps }
+
+    let services = state.data.services
+    props = { ...props, services }
+
     return props ;
 }
 

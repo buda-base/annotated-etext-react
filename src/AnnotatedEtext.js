@@ -49,13 +49,34 @@ export default class AnnotatedEtext extends Component<Props,State> {
    {
       console.log("getDSfP",props,state)
       let annoChunks = []
-      if(props.chunks && (!state.chunks || state.annotations.length !== state.numAnno
+      let annoInfo = [ ...state.annotations ]
+      if(props.services) for(let service of props.services)
+      {
+         for(let id of Object.keys(service.collectionsById))
+         {
+            let pages = service.collectionsById[id].pages
+            for(let p of Object.values(pages))
+            {
+               for(let anno of p.items)
+               {
+                  console.log("anno",anno)
+                  if(anno.target && anno.target.type === "WorkLocation")
+                     annoInfo.push({ startChar:anno.target.workLocationChar, endChar:anno.target.workLocationEndChar});
+               }
+            }
+         }
+      }
+
+      console.log("annoInfo",annoInfo);
+
+      if(props.chunks && (!state.chunks || annoInfo.length !== state.numAnno
                            || props.chunks.length !== state.chunks.length ))
       {
+
          for(let elem of props.chunks)
          {
             let chunk = { ...elem }
-            for(let anno of state.annotations)
+            for(let anno of annoInfo)
             {
                if((anno.startChar >= chunk.start && anno.startChar <= chunk.end)
                   ||(anno.endChar >= chunk.start && anno.endChar <= chunk.end)
@@ -75,7 +96,7 @@ export default class AnnotatedEtext extends Component<Props,State> {
                   return ([ ...acc, { i, char:a, start:true }, { i, char:z, start:false } ])
                },[])
                tmp = _.orderBy(tmp,['char'],['ASC']);
-               console.log(tmp)
+               console.log("tmp",tmp)
                chunk.pieces = []
                let nb = 0  // for superposition of annotations
                let idx = chunk.start // cursor into chunk
@@ -163,7 +184,7 @@ export default class AnnotatedEtext extends Component<Props,State> {
 
    render() {
 
-      console.log("render",this.props,this.state)
+      console.log("AeT",this.props,this.state)
 
       let ret =
          <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) }>
