@@ -502,8 +502,8 @@ const mockdata: Object = {
         },
         "target" : {
           "type" : "WorkLocation",
-          "workLocationChar" : 58,
-          "workLocationEndChar" : 69,
+          "workLocationChar" : 61,
+          "workLocationEndChar" : 72,
           "workLocationVolume" : 1,
           "workLocationWork" : "bdr:WUTDEMO"
         },
@@ -708,8 +708,8 @@ const mockdata: Object = {
         },
         "target" : {
           "type" : "WorkLocation",
-          "workLocationChar" : 58,
-          "workLocationEndChar" : 69,
+          "workLocationChar" : 61,
+          "workLocationEndChar" : 72,
           "workLocationVolume" : 1,
           "workLocationWork" : "bdr:WUTDEMO"
         },
@@ -890,8 +890,8 @@ const mockdata: Object = {
         },
         "target" : {
           "type" : "WorkLocation",
-          "workLocationChar" : 58,
-          "workLocationEndChar" : 69,
+          "workLocationChar" : 61,
+          "workLocationEndChar" : 72,
           "workLocationVolume" : 1,
           "workLocationWork" : "bdr:WUTDEMO"
         },
@@ -1072,8 +1072,8 @@ const mockdata: Object = {
         },
         "target" : {
           "type" : "WorkLocation",
-          "workLocationChar" : 58,
-          "workLocationEndChar" : 69,
+          "workLocationChar" : 61,
+          "workLocationEndChar" : 72,
           "workLocationVolume" : 1,
           "workLocationWork" : "bdr:WUTDEMO"
         },
@@ -1254,8 +1254,8 @@ const mockdata: Object = {
         },
         "target" : {
           "type" : "WorkLocation",
-          "workLocationChar" : 58,
-          "workLocationEndChar" : 69,
+          "workLocationChar" : 61,
+          "workLocationEndChar" : 72,
           "workLocationVolume" : 1,
           "workLocationWork" : "bdr:WUTDEMO"
         },
