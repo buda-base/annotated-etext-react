@@ -61,7 +61,12 @@ export default class AnnotatedEtext extends Component<Props,State> {
                {
                   console.log("anno",anno)
                   if(anno.target && anno.target.type === "WorkLocation")
-                     annoInfo.push({ startChar:anno.target.workLocationChar, endChar:anno.target.workLocationEndChar});
+                     annoInfo.push({
+                        startChar:anno.target.workLocationChar,
+                        endChar:anno.target.workLocationEndChar,
+                        body:anno.body,
+                        id:anno.id
+                     });
                }
             }
          }
@@ -93,25 +98,42 @@ export default class AnnotatedEtext extends Component<Props,State> {
                   let z = e.endChar
                   if(a < chunk.start) a = chunk.start
                   if(z > chunk.end) z = chunk.end
-                  return ([ ...acc, { i, char:a, start:true }, { i, char:z, start:false } ])
+                  return ([ ...acc, { i, char:a, start:true, id:e.id, body:e.body }, { i, char:z, start:false,id:e.id } ])
                },[])
                tmp = _.orderBy(tmp,['char'],['ASC']);
                console.log("tmp",tmp)
                chunk.pieces = []
-               let nb = 0  // for superposition of annotations
+               let nb = 0, body  // for superposition of annotations
                let idx = chunk.start // cursor into chunk
                let nxt = idx  // next start/end of annotation
                for(let a of tmp)
                {
+                  let elem ;
                   nxt = a.char
                   if(nxt >= chunk.end) nxt ++ ;
-                  if(idx != nxt) chunk.pieces.push({nb,start:idx,end:nxt})
-                  if(a.start) nb ++
-                  else nb-- ;
+                  if(idx != nxt) {
+                     elem = {nb,start:idx,end:nxt}
+                     if(body) elem.annotations = { ...body }
+                     chunk.pieces.push(elem)
+                  }
+                  if(a.start) {
+                     nb ++
+                     if(a.body) {
+                        if(!body) body = {}
+                        body[a.id] = { ...a.body }
+                     }
+                  }
+                  else {
+                     if(nb == 0) body = false
+                     nb-- ;
+                     if(a.id) delete body[a.id]
+                  }
                   idx = nxt
                }
-               if(nxt < chunk.end) chunk.pieces.push({nb,start:nxt,end:chunk.end+1})
-               //console.log(JSON.stringify(chunk.pieces,null,4))
+               if(nxt < chunk.end) chunk.pieces.push({nb,start:nxt,end:chunk.end+1,
+                     ...(nb>0?{annotations:{...body}}:{})
+                  })
+               console.log(JSON.stringify(chunk.pieces,null,4))
                chunk.annoList = _.orderBy(chunk.annoList,['char'],['ASC'])
                //console.log(chunk.annoList)
 
