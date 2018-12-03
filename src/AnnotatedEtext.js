@@ -13,7 +13,8 @@ type Props = {
 type State = {
    annotations: Array<Object>,
    chunks?:Array<Object>,
-   numAnno?:number
+   numAnno?:number,
+   annoPanel?:boolean
 }
 
 export default class AnnotatedEtext extends Component<Props,State> {
@@ -233,24 +234,35 @@ export default class AnnotatedEtext extends Component<Props,State> {
       }
    }
 
+   onAnnoClick(e) {
+
+      this.setState({...this.state,annoPanel:!this.state.annoPanel})
+      //alert(a.nb+" annotation"+(a.nb > 1?"s":"")+" here")}
+
+   }
+
    render() {
 
       console.log("AeT",this.props,this.state)
 
       let ret =
+         [<div id='annoPanel' className={(this.state.annoPanel?" open":"")}><h3>Annotation panel</h3></div>,
          <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) }>
             {this.state.chunks && this.state.chunks.map((c,i) => (
                <div key={i} >
                   <div className="text" data-seq={c.seq} data-start={c.start} data-end={c.end}>
                      {!c.pieces && c.value}
                      {c.pieces && c.pieces.map( (a,j) =>
-                        (<span { ...(a.nb > 0 ? {onClick:function(e){alert(a.nb+" annotation"+(a.nb > 1?"s":"")+" here")} } :{})  } className={a.nb > 0 ? "annotated":""} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
-                           style={ { backgroundColor:"rgba(128,255,0,"+0.35*a.nb+")" } }>{c.value.substring(a.start-c.start,a.end-c.start)}
+                        (<span { ...(a.nb > 0 ? {onClick:this.onAnnoClick.bind(this)}:{})  }
+                        className={a.nb > 0 ? "annotated":""} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
+                        style={ { backgroundColor:"rgba(128,255,0,"+0.35*a.nb+")" } }>
+                           {c.value.substring(a.start-c.start,a.end-c.start)}
                         </span>))}
                   </div>
                </div>
             ))}
-         </div> ;
-      return ret ;
+         </div>] ;
+
+      return ret
    }
 }

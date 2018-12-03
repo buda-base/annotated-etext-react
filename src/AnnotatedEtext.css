@@ -6,3 +6,9 @@
 /* #annotatedEtext > div > div.text > span { display:inline-block; } */
 #annotatedEtext > div > div.text > span { display:inline; padding:8px 0 9px 0; }
 #annotatedEtext > div > div.text > span.annotated { cursor:pointer; }
+
+#annoPanel { position: fixed; right: -410px; width: 400px; top: 0; background: white; height: 100%; box-shadow:-2px 0 2px 0px rgba(0,0,0,0.35);
+   transition: all 400ms ease-in-out ; padding:30px; box-sizing:border-box;
+}
+#annoPanel.open { right:0; }
+#annoPanel h3 { text-align:left; margin-top:0; }
