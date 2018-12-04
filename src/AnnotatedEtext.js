@@ -4,10 +4,23 @@ import '../src/AnnotatedEtext.css'
 import ReactDOM from 'react-dom';
 import rangy from 'rangy';
 import _ from "lodash" ;
+import { withStyles } from '@material-ui/core/styles';
+import Tooltip from "@material-ui/core/Tooltip"
+
+const styles = theme => ({
+  lightTooltip: {
+    background: "rgb(250,250,250)",
+    color: theme.palette.text.primary,
+    boxShadow: theme.shadows[1],
+    fontSize: 14,
+    padding:"20px"
+  }
+})
 
 type Props = {
    chunks:[],
    IRI:string,
+   classes:{}
 }
 
 type State = {
@@ -17,7 +30,7 @@ type State = {
    annoPanel?:boolean
 }
 
-export default class AnnotatedEtext extends Component<Props,State> {
+class AnnotatedEtext extends Component<Props,State> {
 
    constructor(props:Props)
    {
@@ -215,10 +228,10 @@ export default class AnnotatedEtext extends Component<Props,State> {
             if(!isNaN(startChar) && !isNaN(endChar) && startChar !== endChar)
             {
                let id = Math.random().toString(36).substr(2, 9)
-               this.setState({ ...this.state, annotations:[...this.state.annotations, {
+               this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations, {
                   startChar, endChar, motivation:"identifying",
-                  body:{ "rdfs:comment": { "@language": "en", "@value": "This is test annotation #"+id },
-               }, id:"tmp:test"+'_' + id } ] })
+                  body:{ "rdfs:comment": { "@language": "en", "@value": "This is test annotation #"+id }, id:"tmp:test" + id
+               }, id:"tmp:test" + id } ] })
             }
             console.log("selec ",startChar,endChar,fromChunk,toChunk,selec,e)
          }
@@ -227,6 +240,8 @@ export default class AnnotatedEtext extends Component<Props,State> {
          }
 
          selec.collapseToStart()
+
+
       }
       catch(e)
       {
@@ -236,9 +251,53 @@ export default class AnnotatedEtext extends Component<Props,State> {
 
    onAnnoClick(e) {
 
-      this.setState({...this.state,annoPanel:!this.state.annoPanel})
+      this.setState({...this.state,annoPanel:true})
       //alert(a.nb+" annotation"+(a.nb > 1?"s":"")+" here")}
 
+   }
+
+   prefLabel(body:{})
+   {
+      let val
+      if(body["id"]) val = body["id"]
+      if(body["skos:prefLabel"]) {
+         if(Array.isArray(body["skos:prefLabel"])) for(let l of body["skos:prefLabel"])
+         {
+            // take first as a starting point (cf library/getLangLabel code)
+            val = l["@value"]
+            if(!val) val = l["value"]
+            break ;
+         }
+         else {
+            val = body["skos:prefLabel"]["@value"]
+            if(!val) val = body["skos:prefLabel"]["value"]
+         }
+      }
+      return val
+   }
+
+   identifying(body:{})
+   {
+      let val = <a href={"http://library.bdrc.io/show/"+body["id"]} target="_blank">{this.prefLabel(body)}</a>
+      return val
+   }
+
+   questioning(body:{})
+   {
+      let val
+      if(Array.isArray(body)) for(let c of body)
+      {
+         val = c["rdfs:comment"]["@value"]
+      }
+      else {
+         val = body["rdfs:comment"]["@value"]
+      }
+      return val
+   }
+
+   replying(body:{})
+   {
+      return this.questioning(body);
    }
 
    render() {
@@ -252,12 +311,28 @@ export default class AnnotatedEtext extends Component<Props,State> {
                <div key={i} >
                   <div className="text" data-seq={c.seq} data-start={c.start} data-end={c.end}>
                      {!c.pieces && c.value}
-                     {c.pieces && c.pieces.map( (a,j) =>
-                        (<span { ...(a.nb > 0 ? {onClick:this.onAnnoClick.bind(this)}:{})  }
-                        className={a.nb > 0 ? "annotated":""} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
-                        style={ { backgroundColor:"rgba(128,255,0,"+0.35*a.nb+")" } }>
-                           {c.value.substring(a.start-c.start,a.end-c.start)}
-                        </span>))}
+                     {c.pieces && c.pieces.map( (a,j) => {
+                        if(a.nb == 0) return (
+                           <span key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}>
+                              {c.value.substring(a.start-c.start,a.end-c.start)}
+                           </span>)
+                        else return (
+                           <Tooltip
+                              title={
+                                 Object.keys(a.annotations).map(k => (<span className="anno-tooltip-span">
+                                    { a.annotations[k].motivation === "identifying" && <span><u>identifying</u>: {this.identifying(a.annotations[k].body)}</span> }
+                                    { a.annotations[k].motivation === "questioning" && <span><u>questioning</u>: {this.questioning(a.annotations[k].body)}</span> }
+                                    { a.annotations[k].motivation === "replying"    && <span><u>replying</u>:    {this.replying(a.annotations[k].body)}</span> }
+                                 </span>))
+                              }
+                              interactive classes={{ tooltip: this.props.classes.lightTooltip }} PopperProps={{style:{ opacity:1 } }}>
+                              <span onClick={this.onAnnoClick.bind(this)} className={"annotated"} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
+                                 style={ { backgroundColor:"rgba(128,255,0,"+0.35*a.nb+")" } }>
+                                    {c.value.substring(a.start-c.start,a.end-c.start)}
+                              </span>
+                           </Tooltip> )
+                        }
+                     )}
                   </div>
                </div>
             ))}
@@ -266,3 +341,6 @@ export default class AnnotatedEtext extends Component<Props,State> {
       return ret
    }
 }
+
+
+export default withStyles(styles)(AnnotatedEtext);
