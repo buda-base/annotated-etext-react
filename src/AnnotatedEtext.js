@@ -309,12 +309,25 @@ class AnnotatedEtext extends Component<Props,State> {
       return this.questioning(body);
    }
 
+
+   renderAnno(a:{})
+   {
+      return (Object.keys(a.annotations).map(k => (
+          <span id="anno-tooltip-span" class={a.annotations[k].motivation}>
+            { a.annotations[k].motivation === "identifying" && <span><u>identifying</u>: {this.identifying(a.annotations[k].body)}</span> }
+            { a.annotations[k].motivation === "questioning" && <span><u>questioning</u>: {this.questioning(a.annotations[k].body)}</span> }
+            { a.annotations[k].motivation === "replying"    && <span><u>replying</u>:    {this.replying(a.annotations[k].body)}</span> }
+         </span>)) )
+   }
+
    render() {
 
       console.log("AeT",this.props,this.state)
 
+      let panel = []
+
       let ret =
-         [<div id='annoPanel' className={(this.state.annoPanel?" open":"")}><h3>Annotation panel</h3></div>,
+      <div>
          <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) }>
             {this.state.chunks && this.state.chunks.map((c,i) => (
                <div key={i} >
@@ -325,28 +338,24 @@ class AnnotatedEtext extends Component<Props,State> {
                            <span key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}>
                               {c.value.substring(a.start-c.start,a.end-c.start)}
                            </span>)
-                        else return (
+                        else {
+
+                           let anno = this.renderAnno(a);
+                           panel.push(<div>{anno}</div>)
+
+                           return (
                            <Tooltip
                               title={
                                   <div id="anno-tooltip">
-                                      <div>
-                                      {
-                                        Object.keys(a.annotations).map(k => (
-                                          <span id="anno-tooltip-span">
-                                            { a.annotations[k].motivation === "identifying" && <span><u>identifying</u>: {this.identifying(a.annotations[k].body)}</span> }
-                                            { a.annotations[k].motivation === "questioning" && <span><u>questioning</u>: {this.questioning(a.annotations[k].body)}</span> }
-                                            { a.annotations[k].motivation === "replying"    && <span><u>replying</u>:    {this.replying(a.annotations[k].body)}</span> }
-                                          </span>))
-                                      }
-                                      </div>
+                                      <div> { anno } </div>
                                       <div id="anno-tooltip-menu" onMouseUp={ e => { e.stopPropagation(); } }>
-                                        <IconButton size="small" title="Question" onClick={ e => console.log("click Q")}>
+                                        <IconButton size="small" title="Question" onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                           <Announcement/>
                                         </IconButton>
-                                        <IconButton size="small" title="Reply" onClick={ e => console.log("click R")}>
+                                        <IconButton size="small" title="Reply" onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                           <QuestionAnswer/>
                                         </IconButton>
-                                        <IconButton size="small" title="Edit" onClick={ e => console.log("click E")}>
+                                        <IconButton size="small" title="Edit" onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                           <Build/>
                                         </IconButton>
                                       </div>
@@ -358,12 +367,15 @@ class AnnotatedEtext extends Component<Props,State> {
                                     {c.value.substring(a.start-c.start,a.end-c.start)}
                               </span>
                            </Tooltip> )
+                          }
                         }
                      )}
                   </div>
                </div>
             ))}
-         </div>] ;
+         </div>
+         <div id='annoPanel' className={(this.state.annoPanel?" open":"")}><h3>Annotation panel</h3>{panel}</div>
+      </div>
 
       return ret
    }
