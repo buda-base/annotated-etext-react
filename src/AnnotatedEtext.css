@@ -13,4 +13,7 @@
 #annoPanel.open { right:0; }
 #annoPanel h3 { text-align:left; margin-top:0; }
 
-.anno-tooltip-span { display:block; }
+#anno-tooltip { position:relative; }
+#anno-tooltip-span { display:block; }
+#anno-tooltip-menu { position:absolute; text-align:right; width:calc(100% + 20px); padding-top:5px; }
+#anno-tooltip-menu button { padding:10px;}

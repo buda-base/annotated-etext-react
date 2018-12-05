@@ -5,7 +5,12 @@ import ReactDOM from 'react-dom';
 import rangy from 'rangy';
 import _ from "lodash" ;
 import { withStyles } from '@material-ui/core/styles';
+import IconButton from '@material-ui/core/IconButton';
 import Tooltip from "@material-ui/core/Tooltip"
+import Reply from "@material-ui/icons/Reply"
+import Build from "@material-ui/icons/Build"
+import Announcement from "@material-ui/icons/Announcement"
+import QuestionAnswer from "@material-ui/icons/QuestionAnswer"
 
 const styles = theme => ({
   lightTooltip: {
@@ -13,7 +18,9 @@ const styles = theme => ({
     color: theme.palette.text.primary,
     boxShadow: theme.shadows[1],
     fontSize: 14,
-    padding:"20px"
+    padding:"20px",
+    paddingBottom:"50px",
+    minWidth:"200px"
   }
 })
 
@@ -204,6 +211,8 @@ class AnnotatedEtext extends Component<Props,State> {
 
    onMouseUp(e:{})
    {
+      console.log("mUp",e)
+
       if(this.props.dontSelect) return
 
       try {
@@ -319,11 +328,29 @@ class AnnotatedEtext extends Component<Props,State> {
                         else return (
                            <Tooltip
                               title={
-                                 Object.keys(a.annotations).map(k => (<span className="anno-tooltip-span">
-                                    { a.annotations[k].motivation === "identifying" && <span><u>identifying</u>: {this.identifying(a.annotations[k].body)}</span> }
-                                    { a.annotations[k].motivation === "questioning" && <span><u>questioning</u>: {this.questioning(a.annotations[k].body)}</span> }
-                                    { a.annotations[k].motivation === "replying"    && <span><u>replying</u>:    {this.replying(a.annotations[k].body)}</span> }
-                                 </span>))
+                                  <div id="anno-tooltip">
+                                      <div>
+                                      {
+                                        Object.keys(a.annotations).map(k => (
+                                          <span id="anno-tooltip-span">
+                                            { a.annotations[k].motivation === "identifying" && <span><u>identifying</u>: {this.identifying(a.annotations[k].body)}</span> }
+                                            { a.annotations[k].motivation === "questioning" && <span><u>questioning</u>: {this.questioning(a.annotations[k].body)}</span> }
+                                            { a.annotations[k].motivation === "replying"    && <span><u>replying</u>:    {this.replying(a.annotations[k].body)}</span> }
+                                          </span>))
+                                      }
+                                      </div>
+                                      <div id="anno-tooltip-menu" onMouseUp={ e => { e.stopPropagation(); } }>
+                                        <IconButton size="small" title="Question" onClick={ e => console.log("click Q")}>
+                                          <Announcement/>
+                                        </IconButton>
+                                        <IconButton size="small" title="Reply" onClick={ e => console.log("click R")}>
+                                          <QuestionAnswer/>
+                                        </IconButton>
+                                        <IconButton size="small" title="Edit" onClick={ e => console.log("click E")}>
+                                          <Build/>
+                                        </IconButton>
+                                      </div>
+                                 </div>
                               }
                               interactive classes={{ tooltip: this.props.classes.lightTooltip }} PopperProps={{style:{ opacity:1 } }}>
                               <span onClick={this.onAnnoClick.bind(this)} className={"annotated"} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
