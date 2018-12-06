@@ -83,7 +83,7 @@ class AnnotatedEtext extends Component<Props,State> {
                   console.log("anno",anno)
                   if(anno.target)
                   {
-                     let startChar, endChar
+                     let startChar, endChar, target
                      if(anno.target.type === "WorkLocation")
                      {
                         startChar = anno.target.workLocationChar
@@ -91,15 +91,18 @@ class AnnotatedEtext extends Component<Props,State> {
                      }
                      else if(anno.target.type === "Annotation")
                      {
-                        let target = anno.target
+                        target = anno.target
+                        let targetId
                         // can be recursive in target eg target.target...target
                         do {
+                           if(!targetId) targetId = target.id
                            target = target.target
                         }
                         while(target.type && target.type != "WorkLocation" && target.target)
                         if(target) {
                            startChar = target.workLocationChar
                            endChar = target.workLocationEndChar
+                           target = targetId
                         }
                      }
                      annoInfo.push({
@@ -108,6 +111,7 @@ class AnnotatedEtext extends Component<Props,State> {
                         body:anno.body,
                         id:anno.id,
                         motivation:anno.motivation,
+                        ...(target?{target:target}:{})
                      });
                   }
                }
@@ -141,8 +145,9 @@ class AnnotatedEtext extends Component<Props,State> {
                   let z = e.endChar
                   if(a < chunk.start) a = chunk.start
                   if(z > chunk.end) z = chunk.end
+                  let target = e.target
                   return ([ ...acc,
-                           { i, char:a, start:true, id:e.id, body:e.body,motivation:e.motivation },
+                           { i, char:a, start:true, id:e.id, body:e.body,motivation:e.motivation,target },
                            { i, char:z, start:false,id:e.id } ])
                },[])
                tmp = _.orderBy(tmp,['char'],['ASC']);
@@ -158,14 +163,17 @@ class AnnotatedEtext extends Component<Props,State> {
                   if(nxt >= chunk.end) nxt ++ ;
                   if(idx != nxt) {
                      elem = {nb,start:idx,end:nxt}
-                     if(body) elem.annotations = { ...body }
+                     if(body) {
+                        elem.annotations = { ...body }
+                        elem.text = chunk.value.substring(idx - chunk.start,nxt - chunk.start  )
+                     }
                      chunk.pieces.push(elem)
                   }
                   if(a.start) {
                      nb ++
                      if(a.body) {
                         if(!body) body = {}
-                        body[a.id] = { body:a.body,motivation:a.motivation }
+                        body[a.id] = { body:a.body,motivation:a.motivation, ...(a.target?{targetAnno:a.target}:{}) }
                      }
                   }
                   else {
@@ -178,7 +186,7 @@ class AnnotatedEtext extends Component<Props,State> {
                if(nxt < chunk.end) chunk.pieces.push({nb,start:nxt,end:chunk.end+1,
                      ...(nb>0?{annotations:{...body}}:{})
                   })
-               console.log(JSON.stringify(chunk.pieces,null,4))
+               //console.log(JSON.stringify(chunk.pieces,null,4))
                chunk.annoList = _.orderBy(chunk.annoList,['char'],['ASC'])
                //console.log(chunk.annoList)
 

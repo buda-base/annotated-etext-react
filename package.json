@@ -14,7 +14,7 @@
     "postinstall": "flow-typed install -s",
     "precommit": "flow && babel src -d lib && jest"
   },
-  "repository": "git@github.com:BuddhistDigitalResourceCenter/annotated-etext-react.git",
+  "repository": "git@github.com:buda-base/annotated-etext-react.git",
   "author": "berger-n <quai.ledrurollin@gmail.com>",
   "license": "MIT",
   "dependencies": {
