@@ -128,19 +128,19 @@ class AnnotatedEtext extends Component<Props,State> {
          for(let elem of props.chunks)
          {
             let chunk = { ...elem }
+            let annoList = []
             for(let anno of annoInfo)
             {
                if((anno.startChar >= chunk.start && anno.startChar <= chunk.end)
                   ||(anno.endChar >= chunk.start && anno.endChar <= chunk.end)
                   ||(chunk.start >= anno.startChar && chunk.end <= anno.endChar))
                {
-                  if(!chunk.annoList) chunk["annoList"] = []
-                  chunk.annoList.push(anno)
+                  annoList.push(anno)
                }
             }
-            if(chunk.annoList)
+            if(annoList.length > 0)
             {
-               let tmp = chunk.annoList.reduce( (acc,e,i) => {
+               let tmp = annoList.reduce( (acc,e,i) => {
                   let a = e.startChar
                   let z = e.endChar
                   if(a < chunk.start) a = chunk.start
@@ -173,7 +173,7 @@ class AnnotatedEtext extends Component<Props,State> {
                      nb ++
                      if(a.body) {
                         if(!body) body = {}
-                        body[a.id] = { body:a.body,motivation:a.motivation, ...(a.target?{targetAnno:a.target}:{}) }
+                        body[a.id] = { body:a.body,motivation:a.motivation, ...(a.target?{target:a.target}:{}) }
                      }
                   }
                   else {
@@ -187,7 +187,7 @@ class AnnotatedEtext extends Component<Props,State> {
                      ...(nb>0?{annotations:{...body}}:{})
                   })
                //console.log(JSON.stringify(chunk.pieces,null,4))
-               chunk.annoList = _.orderBy(chunk.annoList,['char'],['ASC'])
+               annoList = _.orderBy(annoList,['char'],['ASC'])
                //console.log(chunk.annoList)
 
             }
@@ -320,12 +320,21 @@ class AnnotatedEtext extends Component<Props,State> {
 
    renderAnno(a:{})
    {
-      return (Object.keys(a.annotations).map(k => (
-          <span id="anno-tooltip-span" class={a.annotations[k].motivation}>
-            { a.annotations[k].motivation === "identifying" && <span><u>identifying</u>: {this.identifying(a.annotations[k].body)}</span> }
-            { a.annotations[k].motivation === "questioning" && <span><u>questioning</u>: {this.questioning(a.annotations[k].body)}</span> }
-            { a.annotations[k].motivation === "replying"    && <span><u>replying</u>:    {this.replying(a.annotations[k].body)}</span> }
-         </span>)) )
+      return (
+         Object.keys(a.annotations).map(k => {
+            let anno = a.annotations[k]
+            return (
+               <div>
+                   { !anno.target && <h4>{a.text}</h4> }
+                   <span id="anno-tooltip-span" className={a.annotations[k].motivation}>
+                     { a.annotations[k].motivation === "identifying" && <span><u>identifying</u>: {this.identifying(a.annotations[k].body)}</span> }
+                     { a.annotations[k].motivation === "questioning" && <span><u>questioning</u>: {this.questioning(a.annotations[k].body)}</span> }
+                     { a.annotations[k].motivation === "replying"    && <span><u>replying</u>:    {this.replying(a.annotations[k].body)}</span> }
+                  </span>
+               </div>
+            )}
+         )
+      )
    }
 
    render() {
