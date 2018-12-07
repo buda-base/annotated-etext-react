@@ -320,6 +320,50 @@ class AnnotatedEtext extends Component<Props,State> {
 
    renderAnno(a:{})
    {
+
+      let remaining = [ ...Object.keys(a.annotations) ]
+      let nb = remaining.length
+      let renderedAnno = {}
+      while(nb > 0)
+      {
+         console.log("remaining",remaining,renderedAnno)
+         for(let k of remaining)
+         {
+            let anno = a.annotations[k]
+            let newAnno = []
+            if(!anno.target) newAnno.push(<h4>{a.text}</h4>)
+            newAnno.push(
+               <span id="anno-tooltip-span" className={anno.motivation}>
+                  { anno.motivation === "identifying" && <span><u>identifying</u>: {this.identifying(anno.body)}</span> }
+                  { anno.motivation === "questioning" && <span><u>questioning</u>: {this.questioning(anno.body)}</span> }
+                  { anno.motivation === "replying"    && <span><u>replying</u>:    {this.replying(anno.body)}</span> }
+               </span>
+            )
+            renderedAnno[k] = newAnno
+            if(!anno.target)
+            {
+               remaining.splice(remaining.indexOf(k),1)
+               nb --
+            }
+            else if(renderedAnno[anno.target])
+            {
+               renderedAnno[anno.target].push(<div className='sub-anno'>{newAnno}</div>)
+               remaining.splice(remaining.indexOf(k),1)
+               nb --
+            }
+         }
+      }
+      console.log("remains",remaining,renderedAnno)
+
+      let ret = []
+
+      for(let k of Object.keys(a.annotations)) {
+         if(!a.annotations[k].target) ret.push(renderedAnno[k])
+      }
+
+      return ret ;
+
+      /*
       return (
          Object.keys(a.annotations).map(k => {
             let anno = a.annotations[k]
@@ -335,6 +379,7 @@ class AnnotatedEtext extends Component<Props,State> {
             )}
          )
       )
+      */
    }
 
    render() {
