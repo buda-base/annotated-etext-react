@@ -11,6 +11,8 @@ import Reply from "@material-ui/icons/Reply"
 import Build from "@material-ui/icons/Build"
 import Announcement from "@material-ui/icons/Announcement"
 import QuestionAnswer from "@material-ui/icons/QuestionAnswer"
+import Search from "@material-ui/icons/Search"
+import Delete from "@material-ui/icons/Delete"
 
 const styles = theme => ({
   lightTooltip: {
@@ -18,9 +20,9 @@ const styles = theme => ({
     color: theme.palette.text.primary,
     boxShadow: theme.shadows[1],
     fontSize: 14,
-    padding:"20px",
-    paddingBottom:"50px",
-    minWidth:"200px"
+    padding:"0px",
+    paddingBottom:"44px",
+    minWidth:44*5+"px"
   }
 })
 
@@ -246,7 +248,7 @@ class AnnotatedEtext extends Component<Props,State> {
             {
                let id = Math.random().toString(36).substr(2, 9)
                this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations, {
-                  startChar, endChar, motivation:"identifying",
+                  startChar, endChar, //motivation:"identifying",
                   body:{ "rdfs:comment": { "@language": "en", "@value": "This is test annotation #"+id }, id:"tmp:test" + id
                }, id:"tmp:test" + id } ] })
             }
@@ -411,6 +413,11 @@ class AnnotatedEtext extends Component<Props,State> {
                                   <div id="anno-tooltip">
                                       <div> { anno } </div>
                                       <div id="anno-tooltip-menu" onMouseUp={ e => { e.stopPropagation(); } }>
+                                        <a href={"http://library.bdrc.io/search?q=\""+a.text+"\"&lg="+c.lang+"&t=Any"} target="_blank">
+                                          <IconButton size="small" title={"Search in Library"} onClick={ e => this.setState({...this.state,annoPanel:true})}>
+                                            <Search/>
+                                          </IconButton>
+                                        </a>
                                         <IconButton size="small" title="Question" onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                           <Announcement/>
                                         </IconButton>
@@ -419,6 +426,9 @@ class AnnotatedEtext extends Component<Props,State> {
                                         </IconButton>
                                         <IconButton size="small" title="Edit" onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                           <Build/>
+                                        </IconButton>
+                                        <IconButton size="small" title="Delete" onClick={ e => this.setState({...this.state,annoPanel:true})}>
+                                          <Delete/>
                                         </IconButton>
                                       </div>
                                  </div>

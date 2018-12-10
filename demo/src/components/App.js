@@ -30,8 +30,9 @@ class App extends Component<Props,State> {
 
       let chunks = [{"value":"Hello World"}]
       if(this.props.chunks) chunks = this.props.chunks.map(e => (
-         {
-            "value":e.chunkContents["@value"],
+          {
+            value:e.chunkContents["@value"],
+            lang:e.chunkContents["@language"],
             seq:e.seqNum,
             start:e.sliceStartChar,
             end:e.sliceEndChar

@@ -10,9 +10,11 @@
 
 #anno-tooltip { position:relative; }
 #anno-tooltip h4 { display:none; }
+#anno-tooltip > div:not(#anno-tooltip-menu) { margin:10px;position:relative;}
+#anno-tooltip > div:not(#anno-tooltip-menu) > #anno-tooltip-span:first-of-type:not(:empty) { padding-top:10px }
 #anno-tooltip-span { display:block; }
 /* #anno-tooltip-span.replying,#anno-tooltip-span.questioning { display:none;} */
-#anno-tooltip-menu { position:absolute; text-align:right; width:calc(100% + 20px); padding-top:5px; }
+#anno-tooltip-menu { position:absolute; text-align:right; width:calc(100%); padding-top:0px; }
 #anno-tooltip-menu button { padding:10px;}
 
 .sub-anno { padding:5px;border-left:2px solid #eee;margin-left:15px;padding-bottom:0; }
