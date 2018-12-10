@@ -148,8 +148,9 @@ class AnnotatedEtext extends Component<Props,State> {
                   if(a < chunk.start) a = chunk.start
                   if(z > chunk.end) z = chunk.end
                   let target = e.target
+                  let text = chunk.value.substring(a - chunk.start, z - chunk.start)
                   return ([ ...acc,
-                           { i, char:a, start:true, id:e.id, body:e.body,motivation:e.motivation,target },
+                           { i, char:a, start:true, id:e.id, body:e.body,motivation:e.motivation, target, text },
                            { i, char:z, start:false,id:e.id } ])
                },[])
                tmp = _.orderBy(tmp,['char'],['ASC']);
@@ -167,7 +168,7 @@ class AnnotatedEtext extends Component<Props,State> {
                      elem = {nb,start:idx,end:nxt}
                      if(body) {
                         elem.annotations = { ...body }
-                        elem.text = chunk.value.substring(idx - chunk.start,nxt - chunk.start  )
+                        //elem.text = a.text //chunk.value.substring(idx - chunk.start,nxt - chunk.start  )
                      }
                      chunk.pieces.push(elem)
                   }
@@ -175,7 +176,11 @@ class AnnotatedEtext extends Component<Props,State> {
                      nb ++
                      if(a.body) {
                         if(!body) body = {}
-                        body[a.id] = { body:a.body,motivation:a.motivation, ...(a.target?{target:a.target}:{}) }
+                        body[a.id] = {
+                           body:a.body,motivation:a.motivation,
+                           ...(a.target?{target:a.target}:{}),
+                           ...(a.text?{text:a.text}:{})
+                        }
                      }
                   }
                   else {
@@ -333,7 +338,7 @@ class AnnotatedEtext extends Component<Props,State> {
          {
             let anno = a.annotations[k]
             let newAnno = []
-            if(!anno.target) newAnno.push(<h4>{a.text}</h4>)
+            if(!anno.target) newAnno.push(<h4>{anno.text}</h4>)
             newAnno.push(
                <span id="anno-tooltip-span" className={anno.motivation}>
                   { anno.motivation === "identifying" && <span><u>identifying</u>: {this.identifying(anno.body)}</span> }
@@ -364,25 +369,8 @@ class AnnotatedEtext extends Component<Props,State> {
       }
 
       return ret ;
-
-      /*
-      return (
-         Object.keys(a.annotations).map(k => {
-            let anno = a.annotations[k]
-            return (
-               <div>
-                   { !anno.target && <h4>{a.text}</h4> }
-                   <span id="anno-tooltip-span" className={a.annotations[k].motivation}>
-                     { a.annotations[k].motivation === "identifying" && <span><u>identifying</u>: {this.identifying(a.annotations[k].body)}</span> }
-                     { a.annotations[k].motivation === "questioning" && <span><u>questioning</u>: {this.questioning(a.annotations[k].body)}</span> }
-                     { a.annotations[k].motivation === "replying"    && <span><u>replying</u>:    {this.replying(a.annotations[k].body)}</span> }
-                  </span>
-               </div>
-            )}
-         )
-      )
-      */
    }
+
 
    render() {
 
