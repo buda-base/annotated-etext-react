@@ -36,7 +36,8 @@ type State = {
    annotations: Array<Object>,
    chunks?:Array<Object>,
    numAnno?:number,
-   annoPanel?:boolean
+   annoPanel?:boolean,
+   trash:[]
 }
 
 class AnnotatedEtext extends Component<Props,State> {
@@ -121,7 +122,11 @@ class AnnotatedEtext extends Component<Props,State> {
          }
       }
 
-      console.log("annoInfo",annoInfo);
+      annoInfo = annoInfo.filter(k => {
+         //console.log("trash?",k,state.trash)
+         return (!state.trash || state.trash.indexOf(k.id) === -1)
+      })
+      console.log("annoInfo",annoInfo,state,state.trash);
       let panelAnno = annoInfo.reduce( (acc,a) => ({...acc,[a.id]:a}),{})
 
       if(props.chunks && (!state.chunks || annoInfo.length !== state.numAnno
@@ -386,6 +391,16 @@ class AnnotatedEtext extends Component<Props,State> {
       return ret ;
    }
 
+   trash(e:Event,anno:{})
+   {
+      console.log("trash",anno)
+
+      let trash = this.state.trash
+      if(!trash) trash = []
+      for(let k of Object.keys(anno)) if(trash.indexOf(k) === -1) trash.push(k)
+
+      this.setState({...this.state,annoPanel:true,trash})
+   }
 
    render() {
 
@@ -429,9 +444,12 @@ class AnnotatedEtext extends Component<Props,State> {
                                         <IconButton size="small" title="Edit" onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                           <Build/>
                                         </IconButton>
-                                        <IconButton size="small" title="Delete" onClick={ e => this.setState({...this.state,annoPanel:true})}>
-                                          <Delete/>
-                                        </IconButton>
+                                        {
+                                           Object.keys(a.annotations).length === 1 &&
+                                           <IconButton size="small" title="Delete" onClick={e => this.trash(e,a.annotations) }>
+                                              <Delete/>
+                                           </IconButton>
+                                        }
                                       </div>
                                  </div>
                               }
