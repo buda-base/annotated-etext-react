@@ -122,6 +122,7 @@ class AnnotatedEtext extends Component<Props,State> {
       }
 
       console.log("annoInfo",annoInfo);
+      let panelAnno = annoInfo.reduce( (acc,a) => ({...acc,[a.id]:a}),{})
 
       if(props.chunks && (!state.chunks || annoInfo.length !== state.numAnno
                            || props.chunks.length !== state.chunks.length ))
@@ -181,6 +182,8 @@ class AnnotatedEtext extends Component<Props,State> {
                            ...(a.target?{target:a.target}:{}),
                            ...(a.text?{text:a.text}:{})
                         }
+
+                        if(a.text) panelAnno[a.id]["text"] = a.text
                      }
                   }
                   else {
@@ -201,7 +204,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
             annoChunks.push(chunk)
          }
-         return { ...state, chunks:annoChunks, numAnno:state.annotations.length }
+         return { ...state, chunks:annoChunks, numAnno:state.annotations.length, panelAnno }
       }
       else return { ...state  }
    }
@@ -325,18 +328,24 @@ class AnnotatedEtext extends Component<Props,State> {
    }
 
 
-   renderAnno(a:{})
+   renderAnno(annotations:{},inDiv:boolean=false)
    {
+     console.log("rendering",annotations,inDiv)
 
-      let remaining = [ ...Object.keys(a.annotations) ]
+      let remaining = [ ...Object.keys(annotations) ]
+      let next
       let nb = remaining.length
       let renderedAnno = {}
       while(nb > 0)
       {
-         console.log("remaining",remaining,renderedAnno)
+         next = [ ...remaining ]
+         //console.log("remaining",remaining,renderedAnno)
          for(let k of remaining)
          {
-            let anno = a.annotations[k]
+            let anno = annotations[k]
+
+            //console.log("anno",k,anno,remaining)
+
             let newAnno = []
             if(!anno.target) newAnno.push(<h4>{anno.text}</h4>)
             newAnno.push(
@@ -349,23 +358,27 @@ class AnnotatedEtext extends Component<Props,State> {
             renderedAnno[k] = newAnno
             if(!anno.target)
             {
-               remaining.splice(remaining.indexOf(k),1)
+               next.splice(next.indexOf(k),1)
                nb --
             }
             else if(renderedAnno[anno.target])
             {
                renderedAnno[anno.target].push(<div className='sub-anno'>{newAnno}</div>)
-               remaining.splice(remaining.indexOf(k),1)
+               next.splice(next.indexOf(k),1)
                nb --
             }
          }
+         remaining = [ ...next ]
       }
-      console.log("remains",remaining,renderedAnno)
+      //console.log("remains",remaining,renderedAnno)
 
       let ret = []
 
-      for(let k of Object.keys(a.annotations)) {
-         if(!a.annotations[k].target) ret.push(renderedAnno[k])
+      for(let k of Object.keys(annotations)) {
+         if(!annotations[k].target) {
+            if(!inDiv) ret.push(renderedAnno[k])
+            else ret.push(<div>{renderedAnno[k]}</div>)
+        }
       }
 
       return ret ;
@@ -377,6 +390,8 @@ class AnnotatedEtext extends Component<Props,State> {
       console.log("AeT",this.props,this.state)
 
       let panel = []
+
+      panel.push(<div>{this.renderAnno(this.state.panelAnno)}</div>)
 
       let ret =
       <div>
@@ -391,15 +406,11 @@ class AnnotatedEtext extends Component<Props,State> {
                               {c.value.substring(a.start-c.start,a.end-c.start)}
                            </span>)
                         else {
-
-                           let anno = this.renderAnno(a);
-                           panel.push(<div>{anno}</div>)
-
                            return (
                            <Tooltip
                               title={
                                   <div id="anno-tooltip">
-                                      <div> { anno } </div>
+                                      <div> { this.renderAnno(a.annotations) } </div>
                                       <div id="anno-tooltip-menu" onMouseUp={ e => { e.stopPropagation(); } }>
                                         <a href={"http://library.bdrc.io/search?q=\""+a.text+"\"&lg="+c.lang+"&t=Any"} target="_blank">
                                           <IconButton size="small" title={"Search in Library"} onClick={ e => this.setState({...this.state,annoPanel:true})}>
@@ -434,7 +445,9 @@ class AnnotatedEtext extends Component<Props,State> {
                </div>
             ))}
          </div>
-         <div id='annoPanel' className={(this.state.annoPanel?" open":"")}><h3>Annotation panel</h3>{panel}</div>
+         <div id='annoPanel' className={(this.state.annoPanel?" open":"")}><h3>Annotation panel</h3>
+            {this.renderAnno(this.state.panelAnno,true)}
+          </div>
       </div>
 
       return ret
