@@ -373,8 +373,10 @@ class AnnotatedEtext extends Component<Props,State> {
       //console.log("remains",remaining,renderedAnno)
 
       let ret = []
-
-      for(let k of Object.keys(annotations)) {
+      let annoK = Object.keys(annotations).map( k => ({ anno:k, key:annotations[k].startChar }))
+      annoK = _.orderBy(annoK,['key'],['ASC']).map( e => e.anno )
+      console.log("annoK",annoK)
+      for(let k of annoK) {
          if(!annotations[k].target) {
             if(!inDiv) ret.push(renderedAnno[k])
             else ret.push(<div>{renderedAnno[k]}</div>)
@@ -401,9 +403,10 @@ class AnnotatedEtext extends Component<Props,State> {
                   <div className="text" data-seq={c.seq} data-start={c.start} data-end={c.end}>
                      {!c.pieces && c.value}
                      {c.pieces && c.pieces.map( (a,j) => {
+                        let text = c.value.substring(a.start-c.start,a.end-c.start)
                         if(a.nb == 0) return (
                            <span key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}>
-                              {c.value.substring(a.start-c.start,a.end-c.start)}
+                              {text}
                            </span>)
                         else {
                            return (
@@ -412,7 +415,7 @@ class AnnotatedEtext extends Component<Props,State> {
                                   <div id="anno-tooltip">
                                       <div> { this.renderAnno(a.annotations) } </div>
                                       <div id="anno-tooltip-menu" onMouseUp={ e => { e.stopPropagation(); } }>
-                                        <a href={"http://library.bdrc.io/search?q=\""+a.text+"\"&lg="+c.lang+"&t=Any"} target="_blank">
+                                        <a href={"http://library.bdrc.io/search?q=\""+text+"\"&lg="+c.lang+"&t=Any"} target="_blank">
                                           <IconButton size="small" title={"Search in Library"} onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                             <Search/>
                                           </IconButton>
@@ -435,7 +438,7 @@ class AnnotatedEtext extends Component<Props,State> {
                               interactive classes={{ tooltip: this.props.classes.lightTooltip }} PopperProps={{style:{ opacity:1 } }}>
                               <span onClick={this.onAnnoClick.bind(this)} className={"annotated"} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
                                  style={ { backgroundColor:"rgba(128,255,0,"+0.35*a.nb+")" } }>
-                                    {c.value.substring(a.start-c.start,a.end-c.start)}
+                                    {text}
                               </span>
                            </Tooltip> )
                           }
