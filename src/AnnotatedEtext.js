@@ -261,7 +261,7 @@ class AnnotatedEtext extends Component<Props,State> {
             {
                let id = Math.random().toString(36).substr(2, 9)
                this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations, {
-                  startChar, endChar, motivation:"identifying",
+                  startChar, endChar, //motivation:"identifying",
                   body:{ "rdfs:comment": { "@language": "en", "@value": "This is test annotation #"+id }, id:"tmp:test" + id
                }, id:"tmp:test" + id } ] })
             }
@@ -335,21 +335,25 @@ class AnnotatedEtext extends Component<Props,State> {
 
    renderAnno(annotations:{},inDiv:boolean=false)
    {
-     console.log("rendering",annotations,inDiv)
+      console.group("RENDER_ANNO")
+      console.log("rendering",annotations,inDiv)
 
-      let remaining = [ ...Object.keys(annotations) ]
+      let remaining = [ ...Object.keys(annotations).map(k => ({k,motivation:annotations[k].motivation})) ]
+      remaining = _.orderBy(remaining,["motivation"],['ASC']).map(e => e.k)
       let next
       let nb = remaining.length
       let renderedAnno = {}
       while(nb > 0)
       {
          next = [ ...remaining ]
-         //console.log("remaining",remaining,renderedAnno)
+
+         console.log("remaining",remaining,renderedAnno,annotations)
+
          for(let k of remaining)
          {
             let anno = annotations[k]
 
-            //console.log("anno",k,anno,remaining)
+            console.log("anno",k,anno) //,remaining,renderedAnno)
 
             let newAnno = []
             if(!anno.target) newAnno.push(<h4>{anno.text}</h4>)
@@ -363,14 +367,20 @@ class AnnotatedEtext extends Component<Props,State> {
             renderedAnno[k] = newAnno
             if(!anno.target)
             {
+               console.log("no target")
                next.splice(next.indexOf(k),1)
                nb --
             }
             else if(renderedAnno[anno.target])
             {
+               console.log("target rendered",anno.target)
                renderedAnno[anno.target].push(<div className='sub-anno'>{newAnno}</div>)
                next.splice(next.indexOf(k),1)
                nb --
+            }
+            else
+            {
+               console.log("target unrendered",anno.target)
             }
          }
          remaining = [ ...next ]
@@ -380,13 +390,14 @@ class AnnotatedEtext extends Component<Props,State> {
       let ret = []
       let annoK = Object.keys(annotations).map( k => ({ anno:k, key:annotations[k].startChar }))
       annoK = _.orderBy(annoK,['key'],['ASC']).map( e => e.anno )
-      console.log("annoK",annoK)
+      console.log("annoK",annoK,renderedAnno)
       for(let k of annoK) {
          if(!annotations[k].target) {
             if(!inDiv) ret.push(renderedAnno[k])
             else ret.push(<div>{renderedAnno[k]}</div>)
         }
       }
+      console.groupEnd()
 
       return ret ;
    }
@@ -405,19 +416,44 @@ class AnnotatedEtext extends Component<Props,State> {
    question(e:Event,a:{})
    {
 
-      let anno = Object.keys(a.annotations)[0]
+      let anno = Object.keys(a.annotations).filter(k => !a.annotations[k].target)[0]
       console.log("question",a,anno)
       let id = anno.replace(/^.*?([^:/]+)$/,"$1")
       let startChar = a.start
       let endChar = a.end
 
+      let uniq = Math.random().toString(36).substr(2, 9)
+
       this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
          {
-            id:"tmp:question_" + id,
+            id:"tmp:question_" + uniq,
             startChar, endChar, motivation:"questioning",
             target:anno,
             body:{
-               "rdfs:comment": { "@language": "en", "@value": "about annotation #"+id }, id:"tmp:question_" + id
+               "rdfs:comment": { "@language": "en", "@value": "about annotation #"+id }, id:"tmp:question_" + uniq
+            }
+         } ] })
+   }
+
+   reply(e:Event,a:{})
+   {
+
+      let anno = Object.keys(a.annotations).filter(k => a.annotations[k].motivation === "questioning")[0]
+      console.log("reply",anno,a)
+      let id = anno.replace(/^.*?([^:/]+)$/,"$1")
+      let startChar = a.start
+      let endChar = a.end
+
+      let uniq = Math.random().toString(36).substr(2, 9)
+
+      this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
+         {
+            id:"tmp:reply_" + uniq,
+            startChar, endChar, motivation:"replying",
+            target:anno,
+            body:{
+               "rdfs:comment": { "@language": "en", "@value": "about question on annotation #"+id },
+               id:"tmp:reply_" + uniq
             }
          } ] })
    }
@@ -455,24 +491,24 @@ class AnnotatedEtext extends Component<Props,State> {
                                             <Search/>
                                           </IconButton>
                                         </a>
-                                        {
-                                           Object.keys(a.annotations).length === 1 &&
-                                           [<IconButton size="small" title="Question" onClick={ e => this.question(e,a) }>
-                                             <Announcement/>
-                                          </IconButton>,
-                                           <IconButton size="small" title="Reply" onClick={ e => this.setState({...this.state,annoPanel:true})}>
+                                       <IconButton size="small" title="Question" onClick={ e => this.question(e,a) }>
+                                          <Announcement/>
+                                       </IconButton>
+                                       {
+                                          Object.keys(a.annotations).filter(k => a.annotations[k].motivation === "questioning").length === 1 &&
+                                           <IconButton size="small" title="Reply" onClick={ e =>  this.reply(e,a) }>
                                              <QuestionAnswer/>
-                                          </IconButton>]
-                                        }
+                                          </IconButton>
+                                       }
                                         <IconButton size="small" title="Edit" onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                           <Build/>
                                         </IconButton>
-                                       {
-                                          Object.keys(a.annotations).length === 1 &&
-                                          <IconButton size="small" title="Delete" onClick={e => this.trash(e,a.annotations) }>
-                                             <Delete/>
-                                          </IconButton>
-                                       }
+                                        {
+                                           Object.keys(a.annotations).length === 1 &&
+                                           <IconButton size="small" title="Delete" onClick={e => this.trash(e,a.annotations) }>
+                                              <Delete/>
+                                           </IconButton>
+                                        }
                                       </div>
                                  </div>
                               }
