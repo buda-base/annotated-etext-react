@@ -261,7 +261,7 @@ class AnnotatedEtext extends Component<Props,State> {
             {
                let id = Math.random().toString(36).substr(2, 9)
                this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations, {
-                  startChar, endChar, //motivation:"identifying",
+                  startChar, endChar, motivation:"identifying",
                   body:{ "rdfs:comment": { "@language": "en", "@value": "This is test annotation #"+id }, id:"tmp:test" + id
                }, id:"tmp:test" + id } ] })
             }
@@ -402,6 +402,26 @@ class AnnotatedEtext extends Component<Props,State> {
       this.setState({...this.state,annoPanel:true,trash})
    }
 
+   question(e:Event,a:{})
+   {
+
+      let anno = Object.keys(a.annotations)[0]
+      console.log("question",a,anno)
+      let id = anno.replace(/^.*?([^:/]+)$/,"$1")
+      let startChar = a.start
+      let endChar = a.end
+
+      this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
+         {
+            id:"tmp:question_" + id,
+            startChar, endChar, motivation:"questioning",
+            target:anno,
+            body:{
+               "rdfs:comment": { "@language": "en", "@value": "about annotation #"+id }, id:"tmp:question_" + id
+            }
+         } ] })
+   }
+
    render() {
 
       console.log("AeT",this.props,this.state)
@@ -435,21 +455,24 @@ class AnnotatedEtext extends Component<Props,State> {
                                             <Search/>
                                           </IconButton>
                                         </a>
-                                        <IconButton size="small" title="Question" onClick={ e => this.setState({...this.state,annoPanel:true})}>
-                                          <Announcement/>
-                                        </IconButton>
-                                        <IconButton size="small" title="Reply" onClick={ e => this.setState({...this.state,annoPanel:true})}>
-                                          <QuestionAnswer/>
-                                        </IconButton>
+                                        {
+                                           Object.keys(a.annotations).length === 1 &&
+                                           [<IconButton size="small" title="Question" onClick={ e => this.question(e,a) }>
+                                             <Announcement/>
+                                          </IconButton>,
+                                           <IconButton size="small" title="Reply" onClick={ e => this.setState({...this.state,annoPanel:true})}>
+                                             <QuestionAnswer/>
+                                          </IconButton>]
+                                        }
                                         <IconButton size="small" title="Edit" onClick={ e => this.setState({...this.state,annoPanel:true})}>
                                           <Build/>
                                         </IconButton>
-                                        {
-                                           Object.keys(a.annotations).length === 1 &&
-                                           <IconButton size="small" title="Delete" onClick={e => this.trash(e,a.annotations) }>
-                                              <Delete/>
-                                           </IconButton>
-                                        }
+                                       {
+                                          Object.keys(a.annotations).length === 1 &&
+                                          <IconButton size="small" title="Delete" onClick={e => this.trash(e,a.annotations) }>
+                                             <Delete/>
+                                          </IconButton>
+                                       }
                                       </div>
                                  </div>
                               }
@@ -466,8 +489,9 @@ class AnnotatedEtext extends Component<Props,State> {
                </div>
             ))}
          </div>
-         <div id='annoPanel' className={(this.state.annoPanel?" open":"")}><h3>Annotation panel</h3>
-            {this.renderAnno(this.state.panelAnno,true)}
+         <div id='annoPanel' className={(this.state.annoPanel?" open":"")}>
+               <h3>Annotation panel</h3>
+               {this.renderAnno(this.state.panelAnno,true)}
           </div>
       </div>
 

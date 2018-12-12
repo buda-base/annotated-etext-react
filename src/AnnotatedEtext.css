@@ -22,7 +22,7 @@
 .sub-anno { padding:5px;border-left:2px solid #eee;margin-left:15px;padding-bottom:0; }
 
 #annoPanel { position: fixed; right: -410px; width: 400px; top: 0; background: white; height: 100%; box-shadow:-2px 0 2px 0px rgba(0,0,0,0.35);
-   transition: all 400ms ease-in-out ; padding:30px; box-sizing:border-box; z-index:1;
+   transition: all 400ms ease-in-out ; padding:30px; box-sizing:border-box; z-index:1;overflow:auto;
 }
 #annoPanel.open { right:0; }
 #annoPanel h3 { text-align:left; margin-top:0; }
