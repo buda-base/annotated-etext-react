@@ -7,12 +7,14 @@ import _ from "lodash" ;
 import { withStyles } from '@material-ui/core/styles';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from "@material-ui/core/Tooltip"
+import Chat from "@material-ui/icons/Chat"
 import Reply from "@material-ui/icons/Reply"
 import Build from "@material-ui/icons/Build"
 import Announcement from "@material-ui/icons/Announcement"
 import QuestionAnswer from "@material-ui/icons/QuestionAnswer"
 import Search from "@material-ui/icons/Search"
 import Delete from "@material-ui/icons/Delete"
+import AddLocation from "@material-ui/icons/AddLocation"
 
 const styles = theme => ({
   lightTooltip: {
@@ -21,8 +23,8 @@ const styles = theme => ({
     boxShadow: theme.shadows[1],
     fontSize: 14,
     padding:"0px",
-    paddingBottom:"44px",
-    minWidth:44*5+"px"
+    //paddingBottom:"44px",
+    //minWidth:44*5+"px"
   }
 })
 
@@ -332,6 +334,10 @@ class AnnotatedEtext extends Component<Props,State> {
       return this.questioning(body);
    }
 
+   assessing(body:{})
+   {
+      return this.questioning(body);
+   }
 
    renderAnno(annotations:{},inDiv:boolean=false)
    {
@@ -362,6 +368,7 @@ class AnnotatedEtext extends Component<Props,State> {
                   { anno.motivation === "identifying" && <span><u>identifying</u>: {this.identifying(anno.body)}</span> }
                   { anno.motivation === "questioning" && <span><u>questioning</u>: {this.questioning(anno.body)}</span> }
                   { anno.motivation === "replying"    && <span><u>replying</u>:    {this.replying(anno.body)}</span> }
+                  { anno.motivation === "assessing"    && <span><u>assessing</u>:    {this.assessing(anno.body)}</span> }
                </span>
             )
             renderedAnno[k] = newAnno
@@ -458,6 +465,45 @@ class AnnotatedEtext extends Component<Props,State> {
          } ] })
    }
 
+   assert(e:Event,a:{})
+   {
+      console.log("assert",a)
+      let startChar = a.start
+      let endChar = a.end
+
+      let uniq = Math.random().toString(36).substr(2, 9)
+
+      this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
+         {
+            id:"tmp:assert_" + uniq,
+            startChar, endChar, motivation:"assessing",
+            body:{
+               "rdfs:comment": { "@language": "en", "@value": "assertion #"+uniq },
+               id:"tmp:assert_" + uniq
+            }
+         } ] })
+   }
+
+   identify(e:Event,a:{})
+   {
+
+      console.log("identify",a)
+      let startChar = a.start
+      let endChar = a.end
+
+      let uniq = Math.random().toString(36).substr(2, 9)
+
+      this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
+         {
+            id:"tmp:indentify_" + uniq,
+            startChar, endChar, motivation:"identifying",
+            body:{
+               "rdfs:comment": { "@language": "en", "@value": "identifying #"+uniq },
+               id:"tmp:identify_" + uniq
+            }
+         } ] })
+   }
+
    render() {
 
       console.log("AeT",this.props,this.state)
@@ -491,18 +537,30 @@ class AnnotatedEtext extends Component<Props,State> {
                                             <Search/>
                                           </IconButton>
                                         </a>
-                                       <IconButton size="small" title="Question" onClick={ e => this.question(e,a) }>
-                                          <Announcement/>
-                                       </IconButton>
+                                        <IconButton size="small" title="Assert" onClick={ e => this.identify(e,a) }>
+                                           <AddLocation/>
+                                        </IconButton>
+                                        <IconButton size="small" title="Assert" onClick={ e => this.assert(e,a) }>
+                                           <Chat/>
+                                        </IconButton>
+                                        {
+                                           Object.keys(a.annotations).filter(k => a.annotations[k].motivation).length >= 1 &&
+                                           <IconButton size="small" title="Question" onClick={ e => this.question(e,a) }>
+                                              <Announcement/>
+                                           </IconButton>
+                                       }
                                        {
                                           Object.keys(a.annotations).filter(k => a.annotations[k].motivation === "questioning").length === 1 &&
                                            <IconButton size="small" title="Reply" onClick={ e =>  this.reply(e,a) }>
                                              <QuestionAnswer/>
                                           </IconButton>
                                        }
-                                        <IconButton size="small" title="Edit" onClick={ e => this.setState({...this.state,annoPanel:true})}>
-                                          <Build/>
-                                        </IconButton>
+                                       {
+                                          Object.keys(a.annotations).filter(k => a.annotations[k].motivation).length >= 1 &&
+                                           <IconButton size="small" title="Edit" onClick={ e => this.setState({...this.state,annoPanel:true})}>
+                                             <Build/>
+                                           </IconButton>
+                                       }
                                         {
                                            Object.keys(a.annotations).length === 1 &&
                                            <IconButton size="small" title="Delete" onClick={e => this.trash(e,a.annotations) }>

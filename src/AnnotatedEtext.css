@@ -16,7 +16,7 @@
 { padding-top:10px }
 #anno-tooltip-span { display:block; }
 /* #anno-tooltip-span.replying,#anno-tooltip-span.questioning { display:none;} */
-#anno-tooltip-menu { position:absolute; text-align:right; width:calc(100%); padding-top:0px; }
+#anno-tooltip-menu { /* position:absolute; */ text-align:right; width:calc(100%); padding-top:0px; }
 #anno-tooltip-menu button { padding:10px;}
 
 .sub-anno { padding:5px;border-left:2px solid #eee;margin-left:15px;padding-bottom:0; }
