@@ -43,6 +43,7 @@ type State = {
 }
 
 class AnnotatedEtext extends Component<Props,State> {
+   _addingAnno : boolean = false ;
 
    constructor(props:Props)
    {
@@ -61,6 +62,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
    componentWillUpdate(nextProps, nextState)
    {
+
    }
 
    componentDidUpdate()
@@ -236,7 +238,9 @@ class AnnotatedEtext extends Component<Props,State> {
 
    onMouseUp(e:{})
    {
-      console.log("mUp",e)
+      console.log("mUp",e,this._addingAnno)
+      if(this._addingAnno) { this._addingAnno = false ; return ; }
+      this._addingAnno = true
 
       if(this.props.dontSelect) return
 
@@ -262,7 +266,7 @@ class AnnotatedEtext extends Component<Props,State> {
             if(!isNaN(startChar) && !isNaN(endChar) && startChar !== endChar)
             {
                let id = Math.random().toString(36).substr(2, 9)
-               this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations, {
+               this.setState({ ...this.state, annoPanel:true, newAnno: "tmp:test" + id, annotations:[...this.state.annotations, {
                   startChar, endChar, //motivation:"identifying",
                   body:{ "rdfs:comment": { "@language": "en", "@value": "This is test annotation #"+id }, id:"tmp:test" + id
                }, id:"tmp:test" + id } ] })
@@ -495,7 +499,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
       this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
          {
-            id:"tmp:indentify_" + uniq,
+            id:"tmp:identify_" + uniq,
             startChar, endChar, motivation:"identifying",
             body:{
                "rdfs:comment": { "@language": "en", "@value": "identifying #"+uniq },
@@ -507,6 +511,8 @@ class AnnotatedEtext extends Component<Props,State> {
    render() {
 
       console.log("AeT",this.props,this.state)
+
+      this._addingAnno = false
 
       let panel = []
 
@@ -528,8 +534,9 @@ class AnnotatedEtext extends Component<Props,State> {
                         else {
                            return (
                            <Tooltip
+                              {...(this.state.newAnno?{open:this.state.newAnno}:{})}
                               title={
-                                  <div id="anno-tooltip">
+                                  <div id="anno-tooltip" >
                                       <div> { this.renderAnno(a.annotations) } </div>
                                       <div id="anno-tooltip-menu" onMouseUp={ e => { e.stopPropagation(); } }>
                                         <a href={"http://library.bdrc.io/search?q=\""+text+"\"&lg="+c.lang+"&t=Any"} target="_blank">
