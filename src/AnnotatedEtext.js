@@ -508,6 +508,26 @@ class AnnotatedEtext extends Component<Props,State> {
          } ] })
    }
 
+   mayCancelAnno(e:Event)
+   {
+      console.log("cancel?",this.state,this._addingAnno)
+
+      if(this._addingAnno)
+      {
+         if(this.state.annotations && this.state.newAnno)
+         {
+            let anno = this.state.annotations.filter(a => a.id === this.state.newAnno)
+            if(anno.length > 0 && !anno.motivation)
+            {
+               console.log("should cancel ")
+               let newState = { ...this.state, annotations:this.state.annotations.filter(a => a.id != this.state.newAnno) }
+               delete newState["newAnno"]
+               this.setState(newState)
+            }
+         }
+      }
+   }
+
    render() {
 
       console.log("AeT",this.props,this.state)
@@ -520,7 +540,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
       let ret =
       <div>
-         <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) }>
+         <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) } onClick={ this.mayCancelAnno.bind(this) }>
             {this.state.chunks && this.state.chunks.map((c,i) => (
                <div key={i} >
                   <div className="text" data-seq={c.seq} data-start={c.start} data-end={c.end}>
