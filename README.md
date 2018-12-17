@@ -1,5 +1,10 @@
 # annotated-etext-react
 
+This is a demo of the principles of the text + annotation that will be used in the BUDA platform. You can find them in the following documents:
+
+- [A distributed annotation architecture](https://docs.google.com/document/d/1iwriN1UMBIBQke4i0KIZu4N7JUuN1R5sH5sU9zqLKAI/edit?usp=sharing)
+- [Annotation collection services](https://docs.google.com/document/d/1hu6bpQ0P8r87qXUMlfpToAjA0Db8ISADIZVUkJ66XSk/edit?usp=sharing)
+
 ## Installation
 
 Import into `react` as usual:
