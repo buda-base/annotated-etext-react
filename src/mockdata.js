@@ -469,7 +469,7 @@ const mockdata: Object = {
           }
         ]
     },
-   "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-551": {
+   "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange?range=1-551": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-551",
       "type" : "AnnotationPage",
@@ -528,7 +528,7 @@ const mockdata: Object = {
       "prev" : null,
       "as:startIndex" : 0
     },
-   "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=552-1104": {
+   "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange?range=552-1104": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=552-1104",
       "type" : "AnnotationPage",
@@ -675,7 +675,7 @@ const mockdata: Object = {
       "prev" : null,
       "as:startIndex" : 0
     },
-   "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1000": {
+   "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange?range=1-1000": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1000",
       "type" : "AnnotationPage",
@@ -857,7 +857,7 @@ const mockdata: Object = {
       "prev" : null,
       "as:startIndex" : 0
     },
-   "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1847": {
+   "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange?range=1-1847": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1847",
       "type" : "AnnotationPage",
@@ -1039,7 +1039,7 @@ const mockdata: Object = {
       "prev" : null,
       "as:startIndex" : 0
     },
-   "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1104": {
+   "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange?range=1-1104": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1104",
       "type" : "AnnotationPage",
@@ -1221,7 +1221,7 @@ const mockdata: Object = {
       "prev" : null,
       "as:startIndex" : 0
     },
-    "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/?range=1-1560": {
+    "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange?range=1-1560": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1104",
       "type" : "AnnotationPage",
@@ -1422,11 +1422,11 @@ const mockdata: Object = {
             "service": [
               {
                 "@context": "http://iiif.io/api/search/1/context.json",
-                "@id": "http://api.bdrc.io/annotations/search/bdac:ANCUTDEMO_NER001/",
+                "@id": "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/search",
                 "profile": "http://iiif.io/api/search/1/search"
               },
               {
-                "@id": "http://api.bdrc.io/annotations/pageForRange/bdac:ANCUTDEMO_NER001/",
+                "@id": "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange",
                 "profile": "http://purl.bdrc.io/ontology/ext/annservice/pageForRange"
               },
               {
