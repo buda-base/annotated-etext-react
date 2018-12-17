@@ -83,7 +83,7 @@ class AnnotatedEtext extends Component<Props,State> {
          for(let id of Object.keys(service.collectionsById))
          {
             let pages = service.collectionsById[id].pages
-            for(let p of Object.values(pages))
+            if(pages) for(let p of Object.values(pages))
             {
                for(let anno of p.items)
                {

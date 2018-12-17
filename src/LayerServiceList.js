@@ -44,7 +44,7 @@ class LayerServiceList extends React.Component<LayerSelectorProps> {
            let collec = nextProps.service.collectionsById[id]
            if(collec.shouldSyncFor.start > collec.syncedFor.end && !collec.fetching)
            {
-              this.props.onSyncService("http://api.bdrc.io/annotations/search/"+id+"/",collec.shouldSyncFor)
+              this.props.onSyncService("http://purl.bdrc.io/anncollection/"+id.replace(/bdac:/,"")+"/pageForRange",collec.shouldSyncFor)
               // wait for collection to sync before re-render
               return false
            }

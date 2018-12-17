@@ -20,11 +20,11 @@ mock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 5, R_RES: "bdr:UTDEMO_
 mock_data("http://purl.bdrc.io", "/graph/Chunks", {I_LIM: 5, R_RES: "bdr:UTDEMO_01", I_SEQ: 16 })
 mock_data("http://api.bdrc.io", "/annotations/collectionSearch", {res: "bdr:UTDEMO_01"});
 //mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1000"});
-mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-551"});
-mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "552-1104"});
-mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1104"});
-mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1560"});
-mock_data("http://api.bdrc.io", "/annotations/search/bdac:ANCUTDEMO_NER001/", {range: "1-1847"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_NER001/pageForRange", {range: "1-551"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_NER001/pageForRange", {range: "552-1104"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_NER001/pageForRange", {range: "1-1104"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_NER001/pageForRange", {range: "1-1560"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_NER001/pageForRange", {range: "1-1847"});
 
 const logger = store => next => action => {
   console.group(action.type)

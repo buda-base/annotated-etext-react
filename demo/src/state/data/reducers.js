@@ -67,7 +67,7 @@ export const syncService = (state: DataState, action: ServiceAction) => {
 
       let collectionsById = { ...s.collectionsById }
       if(collectionsById) {
-         let id = action.serviceUrl.replace(/^.*?[/]([^/]+)[/]$/,"$1")
+         let id = action.serviceUrl.replace(/^.*?[/]([^/]+)[/]pageForRange$/,"bdac:$1")
          let collec = { ...collectionsById[id], fetching:true }
          //console.log("id",id,collec)
          collectionsById[id] = collec
@@ -89,7 +89,7 @@ export const receivePage = (state: DataState, action: CollectionAction) => {
 
       let collectionsById = { ...s.collectionsById }
       if(collectionsById) {
-         let id = action.collectionUrl.replace(/^.*?[/]([^/]+)[/]$/,"$1")
+         let id = action.collectionUrl.replace(/^.*?[/]([^/]+)[/]pageForRange$/,"bdac:$1")
          let collec = collectionsById[id]
          collec = {
             ...collec,
