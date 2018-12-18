@@ -43,7 +43,7 @@ type State = {
 }
 
 class AnnotatedEtext extends Component<Props,State> {
-   _addingAnno : boolean = false ;
+   //_addingAnno : boolean = false ;
 
    constructor(props:Props)
    {
@@ -75,7 +75,7 @@ class AnnotatedEtext extends Component<Props,State> {
    */
    static getDerivedStateFromProps(props:Props,state:State)
    {
-      console.log("getDSfP",props,state)
+      console.log("getDSfP",props,state) //JSON.stringify(state.annotations,null,3))
       let annoChunks = []
       let annoInfo = [ ...state.annotations ]
       if(props.services) for(let service of props.services)
@@ -130,11 +130,13 @@ class AnnotatedEtext extends Component<Props,State> {
          //console.log("trash?",k,state.trash)
          return (!state.trash || state.trash.indexOf(k.id) === -1)
       })
-      console.log("annoInfo",annoInfo,state,state.trash);
+      console.log("annoInfo",annoInfo) //JSON.stringify(annoInfo,null,3),state,state.trash);
       let panelAnno = annoInfo.reduce( (acc,a) => ({...acc,[a.id]:a}),{})
 
-      if(props.chunks && (!state.chunks || annoInfo.length !== state.numAnno
-                           || props.chunks.length !== state.chunks.length ))
+      //console.log("panelAnno",JSON.stringify(panelAnno,null,3));
+
+      if(props.chunks) // && (!state.chunks || annoInfo.length !== state.numAnno
+                       //      || props.chunks.length !== state.chunks.length ))
       {
 
          for(let elem of props.chunks)
@@ -215,7 +217,7 @@ class AnnotatedEtext extends Component<Props,State> {
          }
          return { ...state, chunks:annoChunks, numAnno:state.annotations.length, panelAnno }
       }
-      else return { ...state  }
+      //else return { ...state, numAnno:state.annotations.length, panelAnno  }
    }
 
    getSelectedNode(node:{},offset:number=0)
@@ -233,65 +235,6 @@ class AnnotatedEtext extends Component<Props,State> {
          offset
       }
       return data ;
-   }
-
-
-   onMouseUp(e:{})
-   {
-      console.log("mUp",e,this._addingAnno)
-      if(this._addingAnno) { this._addingAnno = false ; return ; }
-      this._addingAnno = true
-
-      if(this.props.dontSelect) return
-
-      try {
-
-         let selec = rangy.getSelection()
-
-         console.log("selec",selec,e)
-
-         let fromChunk = this.getSelectedNode(selec.anchorNode, selec.anchorOffset)
-         let toChunk = this.getSelectedNode(selec.focusNode, selec.focusOffset)
-         if(fromChunk && toChunk)
-         {
-            let startChar = fromChunk.offset + fromChunk.start
-            let endChar = toChunk.offset + toChunk.start
-            if(startChar > endChar)
-            {
-               let val = endChar
-               endChar = startChar
-               startChar = val;
-            }
-
-            if(!isNaN(startChar) && !isNaN(endChar) && startChar !== endChar)
-            {
-               let id = Math.random().toString(36).substr(2, 9)
-               this.setState({ ...this.state, annoPanel:true, newAnno: "tmp:test" + id, annotations:[...this.state.annotations, {
-                  startChar, endChar, //motivation:"identifying",
-                  body:{ "rdfs:comment": { "@language": "en", "@value": "This is test annotation #"+id }, id:"tmp:test" + id
-               }, id:"tmp:test" + id } ] })
-            }
-            console.log("selec ",startChar,endChar,fromChunk,toChunk,selec,e)
-         }
-         else {
-            console.log("no chunk selec",fromChunk,toChunk)
-         }
-
-         selec.collapseToStart()
-
-
-      }
-      catch(e)
-      {
-         console.error("selec error",e)
-      }
-   }
-
-   onAnnoClick(e) {
-
-      this.setState({...this.state,annoPanel:true})
-      //alert(a.nb+" annotation"+(a.nb > 1?"s":"")+" here")}
-
    }
 
    prefLabel(body:{})
@@ -346,7 +289,7 @@ class AnnotatedEtext extends Component<Props,State> {
    renderAnno(annotations:{},inDiv:boolean=false)
    {
       console.group("RENDER_ANNO")
-      console.log("rendering",annotations,inDiv)
+      console.log("rendering",inDiv,annotations) //JSON.stringify(annotations,null,3))
 
       let remaining = [ ...Object.keys(annotations).map(k => ({k,motivation:annotations[k].motivation})) ]
       remaining = _.orderBy(remaining,["motivation"],['ASC']).map(e => e.k)
@@ -421,7 +364,7 @@ class AnnotatedEtext extends Component<Props,State> {
       if(!trash) trash = []
       for(let k of Object.keys(anno)) if(trash.indexOf(k) === -1) trash.push(k)
 
-      this.setState({...this.state,annoPanel:true,trash})
+      this.setState({...this.state,/*annoPanel:true,*/trash})
    }
 
    question(e:Event,a:{})
@@ -435,7 +378,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
       let uniq = Math.random().toString(36).substr(2, 9)
 
-      this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
+      this.setState({ ...this.state, /*annoPanel:true,*/ annotations:[...this.state.annotations,
          {
             id:"tmp:question_" + uniq,
             startChar, endChar, motivation:"questioning",
@@ -457,7 +400,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
       let uniq = Math.random().toString(36).substr(2, 9)
 
-      this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
+      this.setState({ ...this.state, /*annoPanel:true,*/ annotations:[...this.state.annotations,
          {
             id:"tmp:reply_" + uniq,
             startChar, endChar, motivation:"replying",
@@ -477,7 +420,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
       let uniq = Math.random().toString(36).substr(2, 9)
 
-      this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
+      this.setState({ ...this.state, /*annoPanel:true,*/ annotations:[...this.state.annotations,
          {
             id:"tmp:assert_" + uniq,
             startChar, endChar, motivation:"assessing",
@@ -497,7 +440,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
       let uniq = Math.random().toString(36).substr(2, 9)
 
-      this.setState({ ...this.state, annoPanel:true, annotations:[...this.state.annotations,
+      this.setState({ ...this.state, /*annoPanel:true,*/ annotations:[...this.state.annotations,
          {
             id:"tmp:identify_" + uniq,
             startChar, endChar, motivation:"identifying",
@@ -508,31 +451,102 @@ class AnnotatedEtext extends Component<Props,State> {
          } ] })
    }
 
-   mayCancelAnno(e:Event)
-   {
-      console.log("cancel?",this.state,this._addingAnno)
+   onAnnoClick(e) {
 
-      if(this._addingAnno)
+      this.setState({...this.state,annoPanel:true})
+      //alert(a.nb+" annotation"+(a.nb > 1?"s":"")+" here")}
+
+   }
+
+
+   onMouseUp(e:{})
+   {
+      console.log("mUp",e,this._addingAnno)
+
+      if(this.props.dontSelect) return
+
+
+/*
+      let newState = this.mayCancelAnno(e);
+      if(this._addingAnno) {
+         console.log("newS",newState)
+         if(newState) this.setState(newState);
+         return ;
+      }
+*/
+      let newState;
+
+      if(this.state.annotations && this.state.newAnno)
       {
-         if(this.state.annotations && this.state.newAnno)
+         let anno = this.state.annotations.filter(a => a.id === this.state.newAnno)
+         if(anno.length > 0 && !anno.motivation)
          {
-            let anno = this.state.annotations.filter(a => a.id === this.state.newAnno)
-            if(anno.length > 0 && !anno.motivation)
-            {
-               console.log("should cancel ")
-               let newState = { ...this.state, annotations:this.state.annotations.filter(a => a.id != this.state.newAnno) }
-               delete newState["newAnno"]
-               this.setState(newState)
-            }
+            console.log("should cancel ")
+
+            newState = { ...this.state, annotations:this.state.annotations.filter(a => a.id != this.state.newAnno) }
+            delete newState["newAnno"]
+            //return newState
+            //this.setState(newState)
+            //this.forceUpdate()
          }
+         //console.log("newS",JSON.stringify(newState.annotations,null,3))
+      }
+
+
+      //this._addingAnno = true
+
+      try {
+
+         let selec = rangy.getSelection()
+
+         console.log("selec",selec,e)
+
+         let fromChunk = this.getSelectedNode(selec.anchorNode, selec.anchorOffset)
+         let toChunk = this.getSelectedNode(selec.focusNode, selec.focusOffset)
+         if(fromChunk && toChunk)
+         {
+            let startChar = fromChunk.offset + fromChunk.start
+            let endChar = toChunk.offset + toChunk.start
+            if(startChar > endChar)
+            {
+               let val = endChar
+               endChar = startChar
+               startChar = val;
+            }
+
+            if(!isNaN(startChar) && !isNaN(endChar) && startChar !== endChar)
+            {
+               let id = Math.random().toString(36).substr(2, 9)
+               if(!newState) newState = {...this.state}
+               newState = { ...newState, /*annoPanel:true,*/ newAnno: "tmp:test" + id, annotations:[...newState.annotations, {
+                  startChar, endChar, //motivation:"identifying",
+                  body:{ "rdfs:comment": { "@language": "en", "@value": "This is test annotation #"+id }, id:"tmp:test" + id
+               }, id:"tmp:test" + id } ] }
+            }
+            console.log("end selec",startChar,endChar,fromChunk,toChunk,selec,e) //,JSON.stringify(newState.annotations,null,3))
+         }
+         else {
+            console.log("no chunk selec",fromChunk,toChunk)
+         }
+
+         selec.collapseToStart()
+
+         if(newState) this.setState(newState)
+
+      }
+      catch(e)
+      {
+         console.error("selec error",e)
       }
    }
 
+
+
    render() {
 
-      console.log("AeT",this.props,this.state)
+      console.log("AeT",this.props,this.state)//,JSON.stringify(this.state.annotations,null,3),JSON.stringify(this.state.panelAnno,null,3))
 
-      this._addingAnno = false
+      //this._addingAnno = false
 
       let panel = []
 
@@ -540,7 +554,7 @@ class AnnotatedEtext extends Component<Props,State> {
 
       let ret =
       <div>
-         <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) } onClick={ this.mayCancelAnno.bind(this) }>
+         <div id="annotatedEtext"  onMouseUp={ this.onMouseUp.bind(this) }>
             {this.state.chunks && this.state.chunks.map((c,i) => (
                <div key={i} >
                   <div className="text" data-seq={c.seq} data-start={c.start} data-end={c.end}>
@@ -552,21 +566,24 @@ class AnnotatedEtext extends Component<Props,State> {
                               {text}
                            </span>)
                         else {
+                           console.log("a.anno",this.state.newAnno&&a.annotations&&a.annotations[this.state.newAnno],a.annotations,a.annotations[this.state.newAnno],this.state.newAnno)
                            return (
                            <Tooltip
-                              {...(this.state.newAnno?{open:this.state.newAnno}:{})}
+                              id={"tip-"+Math.random().toString(36).substr(2, 9)}
+                              {...(this.state.newAnno&&a.annotations&&a.annotations[this.state.newAnno]?{open:true}:{})}
                               title={
                                   <div id="anno-tooltip" >
                                       <div> { this.renderAnno(a.annotations) } </div>
                                       <div id="anno-tooltip-menu" onMouseUp={ e => { e.stopPropagation(); } }>
+
                                         <a href={"http://library.bdrc.io/search?q=\""+text+"\"&lg="+c.lang+"&t=Any"} target="_blank">
-                                          <IconButton size="small" title={"Search in Library"} onClick={ e => this.setState({...this.state,annoPanel:true})}>
+                                          <IconButton size="small" title={"Search in BDRC Public Digital Library"} /* onClick={ e => this.setState({...this.state,annoPanel:true})} */ >
                                             <Search/>
                                           </IconButton>
                                         </a>
-                                        <IconButton size="small" title="Assert" onClick={ e => this.identify(e,a) }>
-                                           <AddLocation/>
-                                        </IconButton>
+                                       <IconButton size="small" title="Identify" onClick={ e => this.identify(e,a) }>
+                                          <AddLocation/>
+                                       </IconButton>
                                         <IconButton size="small" title="Assert" onClick={ e => this.assert(e,a) }>
                                            <Chat/>
                                         </IconButton>
