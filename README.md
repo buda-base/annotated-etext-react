@@ -1,4 +1,4 @@
-# annotated-etext-react
+# annotated-etext-react 
 
 This is a demo of the principles of the text + annotation that will be used in the BUDA platform. You can find them in the following documents:
 
