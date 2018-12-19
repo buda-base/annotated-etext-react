@@ -3,7 +3,7 @@ import type { Action } from '../actions';
 import { createReducer } from '../actions';
 import * as actions from './actions';
 import * as anno from '../../lib/Layer/actions';
-//import CollectionService from '../../lib/CollectionService'
+import CollectionAction from '../../lib/Layer/actions'
 
 export type DataState = {
    IRI?:[],
@@ -17,6 +17,19 @@ const DEFAULT_STATE: DataState = {
 }
 
 let reducers = {};
+
+export const toggleCollection = (state: DataState, action: CollectionAction) => {
+   let showCollections = { ...state.showCollections }
+
+   console.log("tC",action,showCollections)
+
+   if(showCollections[action.collectionUrl]) showCollections[action.collectionUrl] = false
+   else showCollections[action.collectionUrl] = true
+
+   return { ...state, showCollections }
+}
+reducers[anno.TOGGLE_COLLECTION] = toggleCollection;
+
 
 export const addedService = (state: DataState, action: Action) => {
    let start = 1, end = 1000
@@ -47,10 +60,12 @@ export const addedService = (state: DataState, action: Action) => {
             },{})
          }
       ]
+   let collections = action.meta.collections.reduce((acc,c) => {
+      return { ...acc, [c["collection"]["@id"]] : true } }, {})
 
    console.log("services",services,action.payload,action.payload.constructor.name)
 
-    return { ...state, services }
+    return { ...state, services, showCollections:collections }
 }
 reducers[actions.TYPES.addedService] = addedService;
 

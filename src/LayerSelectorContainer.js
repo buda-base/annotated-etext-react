@@ -59,6 +59,7 @@ const mapStateToProps = (state = initialState, ownProps: Object): Object => {
     console.log("LSCms2p",state,ownProps)
 
     let services = state.data.services
+
     props = { ...props, services }
 
     //props["seri"]

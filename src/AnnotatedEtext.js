@@ -31,7 +31,8 @@ const styles = theme => ({
 type Props = {
    chunks:[],
    IRI:string,
-   classes:{}
+   classes:{},
+   showCollections: {[id: URL]: boolean}
 }
 
 type State = {
@@ -117,6 +118,7 @@ class AnnotatedEtext extends Component<Props,State> {
                         endChar,
                         body:anno.body,
                         id:anno.id,
+                        collection:id,
                         motivation:anno.motivation,
                         ...(target?{target:target}:{})
                      });
@@ -160,9 +162,10 @@ class AnnotatedEtext extends Component<Props,State> {
                   if(a < chunk.start) a = chunk.start
                   if(z > chunk.end) z = chunk.end
                   let target = e.target
+                  let collection = e.collection
                   let text = chunk.value.substring(a - chunk.start, z - chunk.start)
                   return ([ ...acc,
-                           { i, char:a, start:true, id:e.id, body:e.body,motivation:e.motivation, target, text },
+                           { i, char:a, start:true, id:e.id, body:e.body,motivation:e.motivation, target, text,collection },
                            { i, char:z, start:false,id:e.id } ])
                },[])
                tmp = _.orderBy(tmp,['char'],['ASC']);
@@ -189,6 +192,7 @@ class AnnotatedEtext extends Component<Props,State> {
                      if(a.body) {
                         if(!body) body = {}
                         body[a.id] = {
+                           collection:a.collection,
                            body:a.body,motivation:a.motivation,
                            ...(a.target?{target:a.target}:{}),
                            ...(a.text?{text:a.text}:{})
@@ -291,7 +295,7 @@ class AnnotatedEtext extends Component<Props,State> {
       console.group("RENDER_ANNO")
       console.log("rendering",inDiv,annotations) //JSON.stringify(annotations,null,3))
 
-      let remaining = [ ...Object.keys(annotations).map(k => ({k,motivation:annotations[k].motivation})) ]
+      let remaining = [ ...Object.keys(annotations).filter(k => this.props.showCollections[annotations[k].collection]).map(k => ({k,motivation:annotations[k].motivation})) ]
       remaining = _.orderBy(remaining,["motivation"],['ASC']).map(e => e.k)
       let next
       let nb = remaining.length
@@ -476,6 +480,7 @@ class AnnotatedEtext extends Component<Props,State> {
 */
       let newState;
 
+      /* // cancel empty annotation ? or keep it as highlight only ?
       if(this.state.annotations && this.state.newAnno)
       {
          let anno = this.state.annotations.filter(a => a.id === this.state.newAnno)
@@ -492,7 +497,7 @@ class AnnotatedEtext extends Component<Props,State> {
          }
          //console.log("newS",JSON.stringify(newState.annotations,null,3))
       }
-
+      */
 
       //this._addingAnno = true
 
@@ -541,8 +546,6 @@ class AnnotatedEtext extends Component<Props,State> {
       }
    }
 
-
-
    render() {
 
       console.log("AeT",this.props,this.state)//,JSON.stringify(this.state.annotations,null,3),JSON.stringify(this.state.panelAnno,null,3))
@@ -562,7 +565,7 @@ class AnnotatedEtext extends Component<Props,State> {
                      {!c.pieces && c.value}
                      {c.pieces && c.pieces.map( (a,j) => {
                         let text = c.value.substring(a.start-c.start,a.end-c.start)
-                        if(a.nb == 0) return (
+                        if(a.nb == 0 || Object.keys(a.annotations).filter(k => this.props.showCollections[a.annotations[k].collection]).length === 0) return (
                            <span key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}>
                               {text}
                            </span>)
@@ -572,7 +575,7 @@ class AnnotatedEtext extends Component<Props,State> {
                            return (
                            <Tooltip
                               //id={tipid}
-                              {...(this.state.newAnno&&a.annotations&&a.annotations[this.state.newAnno]?{open:true}:{})}
+                              // { ...(this.state.newAnno&&a.annotations&&a.annotations[this.state.newAnno]?{open:true}:{})}
                               title={
                                   <div id="anno-tooltip" >
                                       <div> { this.renderAnno(a.annotations) } </div>

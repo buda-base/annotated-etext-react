@@ -4,12 +4,17 @@ import { connect } from 'react-redux';
 import type { Dispatch } from "redux";
 import {CollectionServiceInterface} from './AnnotationTypes';
 import type {CollectionInfo, URL, NumericRange} from './AnnotationTypes';
-import {syncService} from './Layer/actions'
+import {syncService,toggleCollection} from './Layer/actions'
+import FormControlLabel from "@material-ui/core/FormControlLabel"
+import Checkbox from "@material-ui/core/Checkbox"
+import green from "@material-ui/core/colors/green"
 
 type LayerSelectorProps = {
    service:ServiceState,
    collections: Array<CollectionInfo>,
-   onSyncService:(service:URL,range:NumericRange) => void
+   showCollections: {[id: URL]: boolean},
+   onSyncService:(service:URL,range:NumericRange) => void,
+   onToggleCollection:(id:URL,check:boolean) => void
 };
 
 const initialState = {
@@ -53,7 +58,11 @@ class LayerServiceList extends React.Component<LayerSelectorProps> {
      return true;
   }
 
-
+  handleChange(e:Event,check:boolean,id:string)
+  {
+      console.log("hC",e,check,id)
+      this.props.onToggleCollection(id,check)
+  }
 
   render() {
      console.log("LSLprops",this.props);
@@ -69,8 +78,21 @@ class LayerServiceList extends React.Component<LayerSelectorProps> {
                if(label) label = label["@value"]
                else label = "Collection "+id
 
-               return ( [<a key={i} href="#">{label}</a>,<br/>] ) }
-            )}
+               //return ( [<a key={i} href="#">{label}</a>,<br/>] ) }
+               return (
+                 <FormControlLabel
+                   style={{marginRight:"30px"}}
+                   control={
+                     <Checkbox
+                       checked={this.props.showCollections[id]}
+                       onChange={ (e,check) => this.handleChange(e,check,id)}
+                       value={id}
+                       color={green[500]}
+                     />
+                   }
+                   label={label}
+                /> )
+            })}
          </div>;
         return res;
   };
@@ -78,7 +100,13 @@ class LayerServiceList extends React.Component<LayerSelectorProps> {
 
 const mapStateToProps = (state = initialState, ownProps: Object): Object => {
     let props = { ...ownProps } //, collections: state.collections }
-    props = { ...props, collections: state.data.services.map( s => Object.keys(s.collectionsById).map( k => s.collectionsById[k].collectionInfo ) ) }
+
+    let showCollections = state.data.showCollections
+
+    props = { ...props,
+      collections: state.data.services.map( s => Object.keys(s.collectionsById).map( k => s.collectionsById[k].collectionInfo ) ),
+      showCollections
+   }
     return props ;
 }
 
@@ -86,6 +114,9 @@ const mapDispatchToProps = (dispatch: Dispatch<Action>) => {
   return {
       onSyncService:(service:URL,range:NumericRange) => {
          dispatch(syncService(service,range));
+      },
+      onToggleCollection:(id:URL,check:boolean) => {
+         dispatch(toggleCollection(id,check));
       }
   };
 };

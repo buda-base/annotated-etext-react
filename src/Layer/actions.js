@@ -58,6 +58,7 @@ export const addCollection = (collectionUrl: URL): CollectionAction => {
   };
 };
 
+
 export const toggleCollection = (collectionUrl: URL): CollectionAction => {
   return {
     type: TOGGLE_COLLECTION,
