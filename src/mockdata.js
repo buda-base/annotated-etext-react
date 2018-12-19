@@ -1223,7 +1223,7 @@ const mockdata: Object = {
     },
     "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange?range=1-1560": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
-      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1104",
+      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-1560",
       "type" : "AnnotationPage",
       "items" : [ {
         "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_NER001_001",
@@ -1408,7 +1408,7 @@ const mockdata: Object = {
       "@id":"http://api.bdrc.io/annotations/collectionSearch?res=bdr:UTDEMO_01",
       "@type":"CollectionInfoList",
       "collectioninfo": [
-        {
+         {
           "collection": {
             "@id": "bdac:ANCUTDEMO_NER001",
             "@type": ["bdo:AnnotationLayer", "AnnotationCollection"],
@@ -1456,7 +1456,63 @@ const mockdata: Object = {
             "access_hint": "read-only",
             "preselect": true
           }
-        }
+       },
+       {
+          "collection":{
+            "@id": "bdac:ANCUTDEMO_HIG001",
+            "type": "AnnotationLayer",
+            "layerForResource": {
+              "@id": "bdr:UTDEMO_01"
+            },
+            "layerType": [
+              {
+                "@id": "bdr:LayerHighlight"
+              },
+              {
+                "@id": "bdr:LayerUser"
+              }
+            ],
+            "label": {
+              "@language": "en",
+              "@value": "User annotations for user 1"
+            },
+            "http://www.w3.org/ns/activitystreams#totalItems": 22
+         }
+      },
+      {
+         "collection":{
+             "@id" : "bdac:ANCUTDEMO_V01_001",
+             "type" : "AnnotationLayer",
+             "layerForResource" : {
+               "@id" : "bdr:UTDEMO_01"
+             },
+             "layerType" : {
+               "@id" : "bdr:LayerPageMapping"
+             },
+             "rdfs:label" : {
+               "@language" : "en",
+               "@value" : "Page mapping information for bdr:UTDEMO_01"
+             },
+             "http://www.w3.org/ns/activitystreams#totalItems" : 22
+         }
+      },
+      {
+         "collection": {
+           "@id" : "bdac:ANCUTDEMO_V01_002",
+           "type" : "AnnotationLayer",
+           "layerForResource" : {
+             "@id" : "bdr:UTDEMO_01"
+           },
+           "layerType" : {
+             "@id" : "bdr:LayerLineMapping"
+           },
+           "rdfs:label" : {
+             "@language" : "en",
+             "@value" : "Line informations for bdr:UTDEMO_01"
+           },
+           "http://www.w3.org/ns/activitystreams#totalItems" : 22
+         }
+      }
       ]
     }
 

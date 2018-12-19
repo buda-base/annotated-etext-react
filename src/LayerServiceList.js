@@ -58,11 +58,19 @@ class LayerServiceList extends React.Component<LayerSelectorProps> {
   render() {
      console.log("LSLprops",this.props);
 
+
         const res =
          <div>
-            {this.props.service && Object.keys(this.props.service.collectionsById).map( (id,i) => (
-               <a key={i} href="#">{this.props.service.collectionsById[id]["collectionInfo"]["collection"]["label"]["@value"]}</a>
-            ))}
+            {this.props.service && Object.keys(this.props.service.collectionsById).map( (id,i) => {
+
+               let collec = this.props.service.collectionsById[id]["collectionInfo"]["collection"]
+               let label = collec["label"]
+               if(!label) label = collec["rdfs:label"]
+               if(label) label = label["@value"]
+               else label = "Collection "+id
+
+               return ( [<a key={i} href="#">{label}</a>,<br/>] ) }
+            )}
          </div>;
         return res;
   };

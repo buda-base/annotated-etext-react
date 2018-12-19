@@ -486,7 +486,8 @@ class AnnotatedEtext extends Component<Props,State> {
             newState = { ...this.state, annotations:this.state.annotations.filter(a => a.id != this.state.newAnno) }
             delete newState["newAnno"]
             //return newState
-            //this.setState(newState)
+            this.setState(newState)
+            return
             //this.forceUpdate()
          }
          //console.log("newS",JSON.stringify(newState.annotations,null,3))
@@ -566,10 +567,11 @@ class AnnotatedEtext extends Component<Props,State> {
                               {text}
                            </span>)
                         else {
-                           console.log("a.anno",this.state.newAnno&&a.annotations&&a.annotations[this.state.newAnno],a.annotations,a.annotations[this.state.newAnno],this.state.newAnno)
+                           //let tipid = "tip-"+Math.random().toString(36).substr(2, 9)
+                           //console.log("a.anno",this.state.newAnno&&a.annotations&&a.annotations[this.state.newAnno],a.annotations,a.annotations[this.state.newAnno],this.state.newAnno)
                            return (
                            <Tooltip
-                              id={"tip-"+Math.random().toString(36).substr(2, 9)}
+                              //id={tipid}
                               {...(this.state.newAnno&&a.annotations&&a.annotations[this.state.newAnno]?{open:true}:{})}
                               title={
                                   <div id="anno-tooltip" >
