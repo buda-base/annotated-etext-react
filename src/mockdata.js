@@ -469,6 +469,527 @@ const mockdata: Object = {
           }
         ]
     },
+    "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pageForRange?range=1-551": {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pd/1?range=1-551",
+      "type" : "AnnotationPage",
+      "items" :  [ {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0001",
+        "type" : "Annotation",
+        "annInLayer" : {
+          "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+        },
+        "creator" : null,
+        "rights" : null,
+        "audience" : null,
+        "generator" : null,
+        "canonical" : null,
+        "body" : [ {
+          "type" : "WorkLocation",
+          "workLocationPage" : 3,
+          "workLocationVolume" : 1,
+          "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+        }, {
+          "type" : "WorkLocation",
+          "workLocationPage" : 1,
+          "workLocationPageName" : "1a",
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        } ],
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 1,
+          "workLocationEndChar" : 26,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "PageMapping",
+        "via" : null
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0002",
+        "type" : "Annotation",
+        "annInLayer" : {
+          "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+        },
+        "creator" : null,
+        "rights" : null,
+        "audience" : null,
+        "generator" : null,
+        "canonical" : null,
+        "body" : [ {
+          "type" : "WorkLocation",
+          "workLocationPage" : 2,
+          "workLocationPageName" : "1b",
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        }, {
+          "type" : "WorkLocation",
+          "workLocationPage" : 4,
+          "workLocationVolume" : 1,
+          "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+        } ],
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 27,
+          "workLocationEndChar" : 675,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "PageMapping",
+        "via" : null
+      }],
+     "partOf":{
+         "@id" : "bdac:ANCUTDEMO_V01_001",
+         "type" : "AnnotationLayer",
+         "layerForResource" : {
+           "@id" : "bdr:UTDEMO_01"
+         },
+         "layerType" : {
+           "@id" : "bdr:LayerPageMapping"
+         },
+         "rdfs:label" : {
+           "@language" : "en",
+           "@value" : "Page mapping information for bdr:UTDEMO_01"
+         },
+         "http://www.w3.org/ns/activitystreams#totalItems" : 22
+     }
+   },
+   "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pageForRange?range=552-1104": {
+     "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+     "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pd/1?range=552-1104",
+     "type" : "AnnotationPage",
+     "items" :  [ {
+      "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0002",
+      "type" : "Annotation",
+      "annInLayer" : {
+         "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+      },
+      "creator" : null,
+      "rights" : null,
+      "audience" : null,
+      "generator" : null,
+      "canonical" : null,
+      "body" : [ {
+         "type" : "WorkLocation",
+         "workLocationPage" : 2,
+         "workLocationPageName" : "1b",
+         "workLocationVolume" : 1,
+         "workLocationWork" : "bdr:WUTDEMO"
+      }, {
+         "type" : "WorkLocation",
+         "workLocationPage" : 4,
+         "workLocationVolume" : 1,
+         "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+      } ],
+      "target" : {
+         "type" : "WorkLocation",
+         "workLocationChar" : 27,
+         "workLocationEndChar" : 675,
+         "workLocationVolume" : 1,
+         "workLocationWork" : "bdr:WUTDEMO"
+      },
+      "motivation" : "PageMapping",
+      "via" : null
+     }, {
+      "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0003",
+      "type" : "Annotation",
+      "annInLayer" : {
+         "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+      },
+      "creator" : null,
+      "rights" : null,
+      "audience" : null,
+      "generator" : null,
+      "canonical" : null,
+      "body" : [ {
+         "type" : "WorkLocation",
+         "workLocationPage" : 5,
+         "workLocationVolume" : 1,
+         "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+      }, {
+         "type" : "WorkLocation",
+         "workLocationPage" : 3,
+         "workLocationPageName" : "2a",
+         "workLocationVolume" : 1,
+         "workLocationWork" : "bdr:WUTDEMO"
+      } ],
+      "target" : {
+         "type" : "WorkLocation",
+         "workLocationChar" : 676,
+         "workLocationEndChar" : 1847,
+         "workLocationVolume" : 1,
+         "workLocationWork" : "bdr:WUTDEMO"
+      },
+      "motivation" : "PageMapping",
+      "via" : null
+    } ],
+    "partOf":{
+        "@id" : "bdac:ANCUTDEMO_V01_001",
+        "type" : "AnnotationLayer",
+        "layerForResource" : {
+          "@id" : "bdr:UTDEMO_01"
+        },
+        "layerType" : {
+          "@id" : "bdr:LayerPageMapping"
+        },
+        "rdfs:label" : {
+          "@language" : "en",
+          "@value" : "Page mapping information for bdr:UTDEMO_01"
+        },
+        "http://www.w3.org/ns/activitystreams#totalItems" : 22
+    }
+  },
+    "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pageForRange?range=1-1104": {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pd/1?range=1-1104",
+      "type" : "AnnotationPage",
+      "items" :  [ {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0001",
+        "type" : "Annotation",
+        "annInLayer" : {
+          "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+        },
+        "creator" : null,
+        "rights" : null,
+        "audience" : null,
+        "generator" : null,
+        "canonical" : null,
+        "body" : [ {
+          "type" : "WorkLocation",
+          "workLocationPage" : 3,
+          "workLocationVolume" : 1,
+          "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+        }, {
+          "type" : "WorkLocation",
+          "workLocationPage" : 1,
+          "workLocationPageName" : "1a",
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        } ],
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 1,
+          "workLocationEndChar" : 26,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "PageMapping",
+        "via" : null
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0002",
+        "type" : "Annotation",
+        "annInLayer" : {
+          "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+        },
+        "creator" : null,
+        "rights" : null,
+        "audience" : null,
+        "generator" : null,
+        "canonical" : null,
+        "body" : [ {
+          "type" : "WorkLocation",
+          "workLocationPage" : 2,
+          "workLocationPageName" : "1b",
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        }, {
+          "type" : "WorkLocation",
+          "workLocationPage" : 4,
+          "workLocationVolume" : 1,
+          "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+        } ],
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 27,
+          "workLocationEndChar" : 675,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "PageMapping",
+        "via" : null
+      }, {
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0003",
+        "type" : "Annotation",
+        "annInLayer" : {
+          "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+        },
+        "creator" : null,
+        "rights" : null,
+        "audience" : null,
+        "generator" : null,
+        "canonical" : null,
+        "body" : [ {
+          "type" : "WorkLocation",
+          "workLocationPage" : 5,
+          "workLocationVolume" : 1,
+          "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+        }, {
+          "type" : "WorkLocation",
+          "workLocationPage" : 3,
+          "workLocationPageName" : "2a",
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        } ],
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 676,
+          "workLocationEndChar" : 1847,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "motivation" : "PageMapping",
+        "via" : null
+     } ],
+     "partOf":{
+         "@id" : "bdac:ANCUTDEMO_V01_001",
+         "type" : "AnnotationLayer",
+         "layerForResource" : {
+           "@id" : "bdr:UTDEMO_01"
+         },
+         "layerType" : {
+           "@id" : "bdr:LayerPageMapping"
+         },
+         "rdfs:label" : {
+           "@language" : "en",
+           "@value" : "Page mapping information for bdr:UTDEMO_01"
+         },
+         "http://www.w3.org/ns/activitystreams#totalItems" : 22
+     }
+   },
+     "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pageForRange?range=1-1560": {
+       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pd/1?range=1-1560",
+       "type" : "AnnotationPage",
+       "items" :  [ {
+         "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0001",
+         "type" : "Annotation",
+         "annInLayer" : {
+           "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+         },
+         "creator" : null,
+         "rights" : null,
+         "audience" : null,
+         "generator" : null,
+         "canonical" : null,
+         "body" : [ {
+           "type" : "WorkLocation",
+           "workLocationPage" : 3,
+           "workLocationVolume" : 1,
+           "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+         }, {
+           "type" : "WorkLocation",
+           "workLocationPage" : 1,
+           "workLocationPageName" : "1a",
+           "workLocationVolume" : 1,
+           "workLocationWork" : "bdr:WUTDEMO"
+         } ],
+         "target" : {
+           "type" : "WorkLocation",
+           "workLocationChar" : 1,
+           "workLocationEndChar" : 26,
+           "workLocationVolume" : 1,
+           "workLocationWork" : "bdr:WUTDEMO"
+         },
+         "motivation" : "PageMapping",
+         "via" : null
+       }, {
+         "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0002",
+         "type" : "Annotation",
+         "annInLayer" : {
+           "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+         },
+         "creator" : null,
+         "rights" : null,
+         "audience" : null,
+         "generator" : null,
+         "canonical" : null,
+         "body" : [ {
+           "type" : "WorkLocation",
+           "workLocationPage" : 2,
+           "workLocationPageName" : "1b",
+           "workLocationVolume" : 1,
+           "workLocationWork" : "bdr:WUTDEMO"
+         }, {
+           "type" : "WorkLocation",
+           "workLocationPage" : 4,
+           "workLocationVolume" : 1,
+           "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+         } ],
+         "target" : {
+           "type" : "WorkLocation",
+           "workLocationChar" : 27,
+           "workLocationEndChar" : 675,
+           "workLocationVolume" : 1,
+           "workLocationWork" : "bdr:WUTDEMO"
+         },
+         "motivation" : "PageMapping",
+         "via" : null
+       }, {
+         "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0003",
+         "type" : "Annotation",
+         "annInLayer" : {
+           "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+         },
+         "creator" : null,
+         "rights" : null,
+         "audience" : null,
+         "generator" : null,
+         "canonical" : null,
+         "body" : [ {
+           "type" : "WorkLocation",
+           "workLocationPage" : 5,
+           "workLocationVolume" : 1,
+           "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+         }, {
+           "type" : "WorkLocation",
+           "workLocationPage" : 3,
+           "workLocationPageName" : "2a",
+           "workLocationVolume" : 1,
+           "workLocationWork" : "bdr:WUTDEMO"
+         } ],
+         "target" : {
+           "type" : "WorkLocation",
+           "workLocationChar" : 676,
+           "workLocationEndChar" : 1847,
+           "workLocationVolume" : 1,
+           "workLocationWork" : "bdr:WUTDEMO"
+         },
+         "motivation" : "PageMapping",
+         "via" : null
+      } ],
+      "partOf":{
+          "@id" : "bdac:ANCUTDEMO_V01_001",
+          "type" : "AnnotationLayer",
+          "layerForResource" : {
+            "@id" : "bdr:UTDEMO_01"
+          },
+          "layerType" : {
+            "@id" : "bdr:LayerPageMapping"
+          },
+          "rdfs:label" : {
+            "@language" : "en",
+            "@value" : "Page mapping information for bdr:UTDEMO_01"
+          },
+          "http://www.w3.org/ns/activitystreams#totalItems" : 22
+      }
+    },
+      "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pageForRange?range=1-1847": {
+        "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+        "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001/pd/1?range=1-1104",
+        "type" : "AnnotationPage",
+        "items" :  [ {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0001",
+          "type" : "Annotation",
+          "annInLayer" : {
+            "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+          },
+          "creator" : null,
+          "rights" : null,
+          "audience" : null,
+          "generator" : null,
+          "canonical" : null,
+          "body" : [ {
+            "type" : "WorkLocation",
+            "workLocationPage" : 3,
+            "workLocationVolume" : 1,
+            "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+          }, {
+            "type" : "WorkLocation",
+            "workLocationPage" : 1,
+            "workLocationPageName" : "1a",
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          } ],
+          "target" : {
+            "type" : "WorkLocation",
+            "workLocationChar" : 1,
+            "workLocationEndChar" : 26,
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          },
+          "motivation" : "PageMapping",
+          "via" : null
+        }, {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0002",
+          "type" : "Annotation",
+          "annInLayer" : {
+            "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+          },
+          "creator" : null,
+          "rights" : null,
+          "audience" : null,
+          "generator" : null,
+          "canonical" : null,
+          "body" : [ {
+            "type" : "WorkLocation",
+            "workLocationPage" : 2,
+            "workLocationPageName" : "1b",
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          }, {
+            "type" : "WorkLocation",
+            "workLocationPage" : 4,
+            "workLocationVolume" : 1,
+            "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+          } ],
+          "target" : {
+            "type" : "WorkLocation",
+            "workLocationChar" : 27,
+            "workLocationEndChar" : 675,
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          },
+          "motivation" : "PageMapping",
+          "via" : null
+        }, {
+          "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_V01_001_0003",
+          "type" : "Annotation",
+          "annInLayer" : {
+            "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_V01_001"
+          },
+          "creator" : null,
+          "rights" : null,
+          "audience" : null,
+          "generator" : null,
+          "canonical" : null,
+          "body" : [ {
+            "type" : "WorkLocation",
+            "workLocationPage" : 5,
+            "workLocationVolume" : 1,
+            "workLocationWork" : [ "bdr:W22084", "bdr:W30532", "bdr:W4CZ5369" ]
+          }, {
+            "type" : "WorkLocation",
+            "workLocationPage" : 3,
+            "workLocationPageName" : "2a",
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          } ],
+          "target" : {
+            "type" : "WorkLocation",
+            "workLocationChar" : 676,
+            "workLocationEndChar" : 1847,
+            "workLocationVolume" : 1,
+            "workLocationWork" : "bdr:WUTDEMO"
+          },
+          "motivation" : "PageMapping",
+          "via" : null
+       } ],
+       "partOf":{
+           "@id" : "bdac:ANCUTDEMO_V01_001",
+           "type" : "AnnotationLayer",
+           "layerForResource" : {
+             "@id" : "bdr:UTDEMO_01"
+           },
+           "layerType" : {
+             "@id" : "bdr:LayerPageMapping"
+           },
+           "rdfs:label" : {
+             "@language" : "en",
+             "@value" : "Page mapping information for bdr:UTDEMO_01"
+           },
+           "http://www.w3.org/ns/activitystreams#totalItems" : 22
+       }
+     },
     "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pageForRange?range=1-551": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pd/1?range=1-551",
@@ -1671,7 +2192,8 @@ const mockdata: Object = {
              },
              "http://www.w3.org/ns/activitystreams#totalItems" : 22
          }
-      },
+      }
+      /* ,
       {
          "collection": {
            "@id" : "bdac:ANCUTDEMO_V01_002",
@@ -1688,7 +2210,7 @@ const mockdata: Object = {
            },
            "http://www.w3.org/ns/activitystreams#totalItems" : 22
          }
-      }
+      } */
       ]
     }
 

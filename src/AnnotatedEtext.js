@@ -156,7 +156,7 @@ class AnnotatedEtext extends Component<Props,State> {
             }
             if(annoList.length > 0)
             {
-               let tmp = annoList.reduce( (acc,e,i) => {
+               let tmp = annoList.filter(e => (!e.collection || props.showCollections[e.collection])).reduce( (acc,e,i) => {
                   let a = e.startChar
                   let z = e.endChar
                   if(a < chunk.start) a = chunk.start
@@ -316,6 +316,8 @@ class AnnotatedEtext extends Component<Props,State> {
             if(!anno.target) newAnno.push(<h4>{anno.text}</h4>)
             newAnno.push(
                <span id="anno-tooltip-span" className={anno.motivation}>
+                  { anno.motivation === "PageMapping" && <span><u>PageMapping</u></span> }
+                  { anno.motivation === "highlighting" && <span><u>highlighting</u></span> }
                   { anno.motivation === "identifying" && <span><u>identifying</u>: {this.identifying(anno.body)}</span> }
                   { anno.motivation === "questioning" && <span><u>questioning</u>: {this.questioning(anno.body)}</span> }
                   { anno.motivation === "replying"    && <span><u>replying</u>:    {this.replying(anno.body)}</span> }
@@ -565,6 +567,9 @@ class AnnotatedEtext extends Component<Props,State> {
                      {!c.pieces && c.value}
                      {c.pieces && c.pieces.map( (a,j) => {
                         let text = c.value.substring(a.start-c.start,a.end-c.start)
+
+                        console.log("a",a,c)
+
                         if(a.nb == 0 || Object.keys(a.annotations).filter(k => !a.annotations[k].collection||this.props.showCollections[a.annotations[k].collection]).length === 0) return (
                            <span key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}>
                               {text}
@@ -621,7 +626,7 @@ class AnnotatedEtext extends Component<Props,State> {
                               }
                               interactive classes={{ tooltip: this.props.classes.lightTooltip }} PopperProps={{style:{ opacity:1 } }}>
                               <span onClick={this.onAnnoClick.bind(this)} className={"annotated"} key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}
-                                 style={ { backgroundColor:"rgba(128,255,0,"+0.35*a.nb+")" } }>
+                                 style={ { backgroundColor:"rgba(128,255,0,"+0.35* a.nb +")" } }>
                                     {text}
                               </span>
                            </Tooltip> )

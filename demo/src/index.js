@@ -30,6 +30,12 @@ mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_HIG001/pageForRange",
 mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_HIG001/pageForRange", {range: "1-1104"});
 mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_HIG001/pageForRange", {range: "1-1560"});
 mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_HIG001/pageForRange", {range: "1-1847"});
+//
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_V01_001/pageForRange", {range: "1-551"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_V01_001/pageForRange", {range: "552-1104"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_V01_001/pageForRange", {range: "1-1104"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_V01_001/pageForRange", {range: "1-1560"});
+mock_data("http://purl.bdrc.io", "/anncollection/ANCUTDEMO_V01_001/pageForRange", {range: "1-1847"});
 
 const logger = store => next => action => {
   console.group(action.type)
