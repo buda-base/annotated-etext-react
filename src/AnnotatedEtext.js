@@ -295,7 +295,7 @@ class AnnotatedEtext extends Component<Props,State> {
       console.group("RENDER_ANNO")
       console.log("rendering",inDiv,annotations) //JSON.stringify(annotations,null,3))
 
-      let remaining = [ ...Object.keys(annotations).filter(k => this.props.showCollections[annotations[k].collection]).map(k => ({k,motivation:annotations[k].motivation})) ]
+      let remaining = [ ...Object.keys(annotations).filter(k => !annotations[k].collection||this.props.showCollections[annotations[k].collection]).map(k => ({k,motivation:annotations[k].motivation})) ]
       remaining = _.orderBy(remaining,["motivation"],['ASC']).map(e => e.k)
       let next
       let nb = remaining.length
@@ -565,7 +565,7 @@ class AnnotatedEtext extends Component<Props,State> {
                      {!c.pieces && c.value}
                      {c.pieces && c.pieces.map( (a,j) => {
                         let text = c.value.substring(a.start-c.start,a.end-c.start)
-                        if(a.nb == 0 || Object.keys(a.annotations).filter(k => this.props.showCollections[a.annotations[k].collection]).length === 0) return (
+                        if(a.nb == 0 || Object.keys(a.annotations).filter(k => !a.annotations[k].collection||this.props.showCollections[a.annotations[k].collection]).length === 0) return (
                            <span key={j} data-seq={c.seq} data-start={a.start} data-end={a.end}>
                               {text}
                            </span>)

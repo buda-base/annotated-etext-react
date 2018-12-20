@@ -469,6 +469,182 @@ const mockdata: Object = {
           }
         ]
     },
+    "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pageForRange?range=1-551": {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pd/1?range=1-551",
+      "type" : "AnnotationPage",
+      "items" : [
+      {
+        "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_HIG001_001",
+        "type" : "Annotation",
+        "annInLayer" : {
+          "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001"
+        },
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 328,
+          "workLocationEndChar" : 347,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "body":{},
+        "motivation" : "highlighting",
+        "via" : null
+     },
+     "partOf":{
+         "@id": "bdac:ANCUTDEMO_HIG001",
+         "type": "AnnotationLayer",
+         "layerForResource": {
+            "@id": "bdr:UTDEMO_01"
+         },
+         "layerType": [
+            {
+             "@id": "bdr:LayerHighlight"
+            },
+            {
+             "@id": "bdr:LayerUser"
+            }
+         ],
+         "label": {
+            "@language": "en",
+            "@value": "User annotations for user 1"
+         },
+         "http://www.w3.org/ns/activitystreams#totalItems": 22
+      } ]
+   },
+    "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pageForRange?range=1-1104": {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pd/1?range=1-1104",
+      "type" : "AnnotationPage",
+      "items" : [
+      {
+        "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+        "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_HIG001_001",
+        "type" : "Annotation",
+        "annInLayer" : {
+          "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001"
+        },
+        "target" : {
+          "type" : "WorkLocation",
+          "workLocationChar" : 328,
+          "workLocationEndChar" : 347,
+          "workLocationVolume" : 1,
+          "workLocationWork" : "bdr:WUTDEMO"
+        },
+        "body":{},
+        "motivation" : "highlighting",
+        "via" : null
+     },
+     "partOf":{
+         "@id": "bdac:ANCUTDEMO_HIG001",
+         "type": "AnnotationLayer",
+         "layerForResource": {
+            "@id": "bdr:UTDEMO_01"
+         },
+         "layerType": [
+            {
+             "@id": "bdr:LayerHighlight"
+            },
+            {
+             "@id": "bdr:LayerUser"
+            }
+         ],
+         "label": {
+            "@language": "en",
+            "@value": "User annotations for user 1"
+         },
+         "http://www.w3.org/ns/activitystreams#totalItems": 22
+      } ]
+   },
+   "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pageForRange?range=1-1560": {
+     "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+     "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pd/1?range=1-1560",
+     "type" : "AnnotationPage",
+     "items" : [
+     {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_HIG001_001",
+      "type" : "Annotation",
+      "annInLayer" : {
+         "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001"
+      },
+      "target" : {
+         "type" : "WorkLocation",
+         "workLocationChar" : 328,
+         "workLocationEndChar" : 347,
+         "workLocationVolume" : 1,
+         "workLocationWork" : "bdr:WUTDEMO"
+      },
+      "body":{},
+      "motivation" : "highlighting",
+      "via" : null
+    },
+    "partOf":{
+        "@id": "bdac:ANCUTDEMO_HIG001",
+        "type": "AnnotationLayer",
+        "layerForResource": {
+           "@id": "bdr:UTDEMO_01"
+        },
+        "layerType": [
+           {
+            "@id": "bdr:LayerHighlight"
+           },
+           {
+            "@id": "bdr:LayerUser"
+           }
+        ],
+        "label": {
+           "@language": "en",
+           "@value": "User annotations for user 1"
+        },
+        "http://www.w3.org/ns/activitystreams#totalItems": 22
+     } ]
+  },
+  "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pageForRange?range=1-1847": {
+    "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+    "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001/pd/1?range=1-1847",
+    "type" : "AnnotationPage",
+    "items" : [
+    {
+      "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
+      "id" : "http://purl.bdrc.io/annotation/ANUTDEMO_HIG001_001",
+      "type" : "Annotation",
+      "annInLayer" : {
+        "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_HIG001"
+      },
+      "target" : {
+        "type" : "WorkLocation",
+        "workLocationChar" : 328,
+        "workLocationEndChar" : 347,
+        "workLocationVolume" : 1,
+        "workLocationWork" : "bdr:WUTDEMO"
+      },
+      "body":{},
+      "motivation" : "highlighting",
+      "via" : null
+   },
+   "partOf":{
+       "@id": "bdac:ANCUTDEMO_HIG001",
+       "type": "AnnotationLayer",
+       "layerForResource": {
+          "@id": "bdr:UTDEMO_01"
+       },
+       "layerType": [
+          {
+           "@id": "bdr:LayerHighlight"
+          },
+          {
+           "@id": "bdr:LayerUser"
+          }
+       ],
+       "label": {
+          "@language": "en",
+          "@value": "User annotations for user 1"
+       },
+       "http://www.w3.org/ns/activitystreams#totalItems": 22
+    } ]
+ },
    "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pageForRange?range=1-551": {
       "@context" : [ "http://purl.bdrc.io/context.jsonld", "http://www.w3.org/ns/anno.jsonld" ],
       "id" : "http://purl.bdrc.io/anncollection/ANCUTDEMO_NER001/pd/1?range=1-551",
