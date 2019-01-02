@@ -45,3 +45,4 @@ yarn test
 ## Copyright and License
 
 Copyright (c) 2018 Buddhist Digital Resource Center, distributed under the [MIT License](LICENSE).
+
